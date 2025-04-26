@@ -1,0 +1,87 @@
+﻿@page "/login"
+@using Blazor_WebAssembly.DTOs
+@using Newtonsoft.Json
+@using System.Text
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+
+
+<h1>Login</h1>
+
+<EditForm Model="@UsuarioLoginDTO" OnValidSubmit="@HandleSubmit">
+    <DataAnnotationsValidator />
+    @* <ValidationSummary /> *@
+
+    <div class="live-preview">
+        <div class="row g-3">
+
+            <p class="text-muted">Usuário</p>
+
+            <div class="col-lg-6">
+                <div class="form-floating">
+                    <InputText @bind-Value="UsuarioLoginDTO.login" class="form-control" />
+                    <label>Usuário</label>
+                    <ValidationMessage For="@(() => UsuarioLoginDTO.login)" />
+                </div>
+            </div>
+
+            <p class="text-muted">Senha</p>
+
+            <div class="col-lg-4">
+                <div class="form-floating">
+                    <InputText type="password" @bind-Value="UsuarioLoginDTO.senha" class="form-control" />
+                    <label>Senha</label>
+                    <ValidationMessage For="@(() => UsuarioLoginDTO.senha)" />
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Logar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+@code {
+
+
+    private UsuarioLoginDTO UsuarioLoginDTO = new();
+
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            var json = JsonConvert.SerializeObject(UsuarioLoginDTO);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await Http.PostAsync("Usuario/login", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
+
+                // Armazenando o token
+                await localStorage.SetItemAsync("authToken", result.Token);
+
+                await localStorage.SetItemAsync("idUsuario", result.idUsuario);
+
+                Console.WriteLine("Login realizado com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine($"Erro ao fazer login: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+    }
+
+}
