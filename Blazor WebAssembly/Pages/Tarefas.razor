@@ -1,0 +1,167 @@
+﻿@page "/tarefas"
+@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.Interfaces
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager Navigation
+@inject ITarefaService ITarefaService
+@inject IJSRuntime JS
+
+<PageTitle>Tarefas</PageTitle>
+
+<h1>Tarefas</h1>
+
+@if (listaTarefas == null)
+{
+    <p>Carregando...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Descricao</th>
+                <th>Prioridade</th>
+                <th>Prazo</th>
+                <th>Status</th>
+                <th>Data</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!listaTarefas.Any())
+            {
+                <tr>
+                    <td colspan="5" class="text-center">Nenhum tarefa cadastrada</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var tarefa in listaTarefas)
+                {
+                    <tr>
+                        <td>@tarefa.id</td>
+                        <td>@tarefa.titulo</td>
+                        <td>@tarefa.descricao</td>
+                        <td>@tarefa.prioridade</td>
+                        <td>@tarefa.prazo</td>
+                        <td>@tarefa.status</td>
+                        <td>@tarefa.data</td>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                        id="dropdownMenuButton_@tarefa.id"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    Ações
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton_@tarefa.id">
+
+                                    <li>
+                                        <button class="dropdown-item" @onclick="() => VisualizarTarefa(tarefa.id)">Visualizar</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" @onclick="() => EditarTarefa(tarefa.id)">Editar</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item" @onclick="() => ConfirmarExclusao(tarefa.id)">Excluir</button>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+} 
+
+
+
+
+@code {
+
+    private List<TarefaConsultaDTO> listaTarefas = new List<TarefaConsultaDTO>();
+    private bool tarefasCarregadas = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarTarefasAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (tarefasCarregadas)
+        {
+            tarefasCarregadas = false; // Reseta a flag pra não ficar chamando toda hora
+            await JS.InvokeVoidAsync("bootstrapDropdownInit");
+        }
+    }
+
+    private async Task CarregarTarefasAsync()
+    {
+        try
+        {
+            var tarefas = await ITarefaService.ObterTarefasAsync();
+            listaTarefas = tarefas;
+
+            tarefasCarregadas = true; // Marca que carregou e precisa inicializar o dropdown
+            StateHasChanged(); // Força o Blazor a re-renderizar depois de carregar
+        }
+        catch (UnauthorizedAccessException)
+        {
+            await JS.InvokeVoidAsync("alert", "Sua sessão expirou ou o acesso não é autorizado.\nVocê será redirecionado para a tela de login.");
+            Navigation.NavigateTo("/login", true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao obter tarefas: {ex.Message}");
+        }
+    }
+
+    private void VisualizarTarefa(int id)
+    {
+        Navigation.NavigateTo($"/exibir-tarefa/{id}");
+    }
+
+    private void EditarTarefa(int id)
+    {
+        Navigation.NavigateTo($"/editar-tarefa/{id}");
+
+    }
+
+    private async Task ConfirmarExclusao(int _id)
+    {
+        bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esta tarefa?");
+
+        if (confirmado)
+        {
+            try
+            {
+                await ITarefaService.DeletarTarefaAsync(_id);
+
+                bool isUsuarioDeletado = true;
+
+                if (isUsuarioDeletado)
+                {
+                    await CarregarTarefasAsync();
+                    await JS.InvokeVoidAsync("alert", "Tarefa excluída com sucesso!");
+                    await CarregarTarefasAsync();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                await JS.InvokeVoidAsync("alert", $"Erro ao excluir: {ex.Message}");
+            }
+        }
+    }
+}

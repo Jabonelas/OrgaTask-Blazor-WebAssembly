@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/editar-tarefa/{id}"
 @using Blazor_WebAssembly.DTOs
 @using Newtonsoft.Json
 @using System.Text
@@ -8,7 +8,7 @@
 
 
 
-<h1>Login</h1>
+<h1>Login alterar</h1>
 
 <EditForm Model="@UsuarioLoginDTO" OnValidSubmit="@HandleSubmit">
     <DataAnnotationsValidator />
@@ -49,6 +49,8 @@
 
 @code {
 
+    [Parameter]
+    public int id { get; set; }
 
       private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
 

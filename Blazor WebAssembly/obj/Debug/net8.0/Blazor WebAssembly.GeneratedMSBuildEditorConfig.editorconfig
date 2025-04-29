@@ -26,8 +26,8 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/AlterarTarefa.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx0ZXJhclRhcmVmYS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Home.razor]
@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Tarefas.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Weather.razor]

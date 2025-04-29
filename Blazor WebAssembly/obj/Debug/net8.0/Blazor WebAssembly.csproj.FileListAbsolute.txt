@@ -621,6 +621,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.AssemblyInfo.cs
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.csproj.CoreCompileInputs.cache
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.sourcelink.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\webcil\Blazored.LocalStorage.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Authorization.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Components.wasm
