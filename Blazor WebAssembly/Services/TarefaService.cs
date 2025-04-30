@@ -11,6 +11,8 @@ using Blazored.LocalStorage;
 
 using Blazor_WebAssembly.Pages;
 using Blazor_WebAssembly.DTOs.Tarefa;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace Blazor_WebAssembly.Services
 {
@@ -31,7 +33,139 @@ namespace Blazor_WebAssembly.Services
 
             dadosToken = await PegarDadosToken();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/{dadosToken.idUsuario}/lista");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+            var response = await _http.SendAsync(request);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Sessão expirada.");
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Erro ao buscar lista de tarefas: {response.StatusCode} - {errorContent}");
+            }
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<List<TarefaConsultaDTO>>(content);
+        }
+
+        public async Task<bool> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
+        {
+            try
+            {
+                UserToken dadosToken = await PegarDadosToken();
+
+                // 1. Serializa os dados para JSON
+                var json = JsonConvert.SerializeObject(_dadosTarefa);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // 2. Cria a requisição com a URL correta (ajuste conforme sua API)
+                var request = new HttpRequestMessage(HttpMethod.Post, $"Tarefa/cadastrar")
+                {
+                    Content = content
+                };
+
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+                // 3. Envia a requisição
+                var response = await _http.SendAsync(request);
+
+                // 4. Trata os possíveis responses
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new UnauthorizedAccessException("Sessão expirada.");
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Erro ao cadastrar tarefa: {response.StatusCode} - {errorContent}");
+                }
+
+                // 5. Retorna true se foi bem sucedido
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log do erro (implemente conforme sua necessidade)
+                Console.WriteLine($"Erro em CadastrarTarefaAsync: {ex.Message}");
+                throw; // Re-lança a exceção para ser tratada pelo chamador
+            }
+        }
+
+        public async Task<bool> AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
+        {
+            try
+            {
+                UserToken dadosToken = await PegarDadosToken();
+
+                // 1. Serializa os dados para JSON
+                var json = JsonConvert.SerializeObject(_dadosTarefa);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // 2. Cria a requisição com a URL correta (ajuste conforme sua API)
+                var request = new HttpRequestMessage(HttpMethod.Put, $"Tarefa/alterar")
+                {
+                    Content = content
+                };
+
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+                // 3. Envia a requisição
+                var response = await _http.SendAsync(request);
+
+                // 4. Trata os possíveis responses
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new UnauthorizedAccessException("Sessão expirada.");
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Erro ao alterar tarefa: {response.StatusCode} - {errorContent}");
+                }
+
+                // 5. Retorna true se foi bem sucedido
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log do erro (implemente conforme sua necessidade)
+                Console.WriteLine($"Erro em AlterarTarefaAsync: {ex.Message}");
+                throw; // Re-lança a exceção para ser tratada pelo chamador
+            }
+
+            //UserToken dadosToken = new UserToken();
+
+            //dadosToken = await PegarDadosToken();
+
+            //var request = new HttpRequestMessage(HttpMethod.Put, $"Tarefa/alterar/{_dadosTarefa.id}");
+            //request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+            //var response = await _http.SendAsync(request);
+
+            //if (response.StatusCode == HttpStatusCode.Unauthorized)
+            //{
+            //    throw new UnauthorizedAccessException("Sessão expirada.");
+            //}
+
+            //response.EnsureSuccessStatusCode();
+        }
+
+        public async Task<TarefaAlterarDTO> BuscarTarefaAsync(int _id)
+        {
+            UserToken dadosToken = new UserToken();
+
+            dadosToken = await PegarDadosToken();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/{_id}/buscar");
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await _http.SendAsync(request);
@@ -45,26 +179,7 @@ namespace Blazor_WebAssembly.Services
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<List<TarefaConsultaDTO>>(content);
-        }
-
-        public async Task AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
-        {
-            UserToken dadosToken = new UserToken();
-
-            dadosToken = await PegarDadosToken();
-
-            var request = new HttpRequestMessage(HttpMethod.Put, $"Tarefa/alterar/{dadosToken.idUsuario}");
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
-
-            var response = await _http.SendAsync(request);
-
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                throw new UnauthorizedAccessException("Sessão expirada.");
-            }
-
-            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<TarefaAlterarDTO>(content);
         }
 
         private async Task<UserToken> PegarDadosToken()
@@ -73,9 +188,6 @@ namespace Blazor_WebAssembly.Services
 
             //Pegando o token que foi gerado
             dadosToken.Token = await _localStorage.GetItemAsync<string>("authToken");
-
-            //Pegando o id do usuario logado
-            dadosToken.idUsuario = await _localStorage.GetItemAsync<int>("idUsuario");
 
             return dadosToken;
         }
@@ -87,7 +199,6 @@ namespace Blazor_WebAssembly.Services
             dadosToken = await PegarDadosToken();
 
             var request = new HttpRequestMessage(HttpMethod.Delete, $"Tarefa/deletar/{_id}");
-            //var request = new HttpRequestMessage(HttpMethod.Delete, $"Tarefa/deletar?_idTarefa={_id}");
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await _http.SendAsync(request);

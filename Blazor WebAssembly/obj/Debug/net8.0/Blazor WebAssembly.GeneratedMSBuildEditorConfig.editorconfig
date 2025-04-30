@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx0ZXJhclRhcmVmYS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/CadastrarTarefa.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyVGFyZWZhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,8 +46,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/VisualizarTarefa.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlzdWFsaXphclRhcmVmYS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/_Imports.razor]

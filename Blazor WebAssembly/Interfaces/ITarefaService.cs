@@ -9,6 +9,10 @@ namespace Blazor_WebAssembly.Interfaces
 
         Task DeletarTarefaAsync(int _id);
 
-        Task AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa);
+        Task<bool> AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa);
+
+        Task<bool> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa);
+
+        Task<TarefaAlterarDTO> BuscarTarefaAsync(int _id);
     }
 }

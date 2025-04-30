@@ -1,4 +1,4 @@
-﻿@page "/editar-tarefa/{id:int}"
+﻿@page "/cadastrar-tarefa"
 @using Blazor_WebAssembly.DTOs
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
@@ -17,7 +17,7 @@
 
     <div class="card edit-form">
         <div class="card-header bg-primary text-white">
-            <h3>Editar Tarefa</h3>
+            <h3>Cadastrar Nova Tarefa</h3>
         </div>
         <div class="card-body">
             <!-- Campos organizados em grid -->
@@ -75,38 +75,21 @@
 
 @code {
 
-    [Parameter]
-    public int id { get; set; }
-
     private TarefaAlterarDTO TarefaAlterarDTO = new TarefaAlterarDTO();
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            TarefaAlterarDTO = await ITarefaService.BuscarTarefaAsync(id);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro: {ex.Message}");
-        }
-    }
 
     private async Task HandleSubmit()
     {
         try
         {
-            bool sucesso = await ITarefaService.AlterarTarefaAsync(TarefaAlterarDTO);
-
-            if (sucesso)
-            {
-                Navigation.NavigateTo($"/tarefas");
-            }
+            await ITarefaService.CadastrarTarefaAsync(TarefaAlterarDTO);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Erro: {ex.Message}");
         }
+
+  
     }
 
     private async void CancelarAlteracao()

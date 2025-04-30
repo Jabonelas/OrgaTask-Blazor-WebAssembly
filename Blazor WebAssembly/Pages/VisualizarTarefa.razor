@@ -1,0 +1,91 @@
+﻿@page "/exibir-tarefa/{id:int}"
+@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.DTOs.Tarefa
+@using Blazor_WebAssembly.Interfaces
+@using Newtonsoft.Json
+@using System.Text
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject HttpClient Http
+@inject ITarefaService ITarefaService
+
+
+<EditForm Model="@TarefaAlterarDTO">
+    <DataAnnotationsValidator />
+    @* <ValidationSummary /> *@
+
+    @if (TarefaAlterarDTO.titulo == null)
+    {
+        <div class="alert alert-info text-center">
+            Nenhuma tarefa encontrada
+        </div>
+
+    }
+    else
+    {
+
+        <div class="card edit-form">
+            <div class="card-header bg-primary text-white">
+                <h3>Exibir Tarefa Detalhada</h3>
+            </div>
+            <div class="card-body">
+                <!-- Campos organizados em grid -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Título</label>
+                        <InputText @bind-Value="TarefaAlterarDTO.titulo" class="form-control" disabled />
+                    </div>
+                    <div class="col-md-3">
+                            <label class="form-label fw-bold">Prioridade</label>
+                            <InputText @bind-Value="TarefaAlterarDTO.prioridade" class="form-control" disabled />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Prazo (dias)</label>
+                        <InputNumber @bind-Value="TarefaAlterarDTO.prazo" class="form-control" disabled />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold ">Descrição</label>
+                    <InputTextArea @bind-Value="TarefaAlterarDTO.descricao"
+                                   class="form-control"
+                                   rows="4" disabled />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Status</label>
+                        <InputText @bind-Value="TarefaAlterarDTO.status" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</EditForm>
+
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    private TarefaAlterarDTO TarefaAlterarDTO = new TarefaAlterarDTO();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            TarefaAlterarDTO = await ITarefaService.BuscarTarefaAsync(id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+    }
+
+
+}
