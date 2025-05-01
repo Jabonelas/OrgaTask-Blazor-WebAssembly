@@ -17,7 +17,7 @@ a, .btn-link {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 .content {
@@ -100,4 +100,146 @@ a, .btn-link {
 
 code {
     color: #c02d76;
+}
+
+/*----------------------------------------*/
+
+.tarefas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.tarefas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.tarefas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarefa-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+    .tarefa-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+.tarefa-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.tarefa-content {
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+    .tarefa-content h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+    }
+
+.descricao {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tarefa-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+.tarefa-actions {
+    display: flex;
+    border-top: 1px solid #eee;
+    padding: 0.5rem;
+}
+
+    .tarefa-actions button {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        color: #666;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+        .tarefa-actions button:hover {
+            color: #0d6efd;
+        }
+
+/* Classes de prioridade */
+.prioridade-alta .prioridade {
+    color: #dc3545;
+}
+
+.prioridade-media .prioridade {
+    color: #fd7e14;
+}
+
+.prioridade-baixa .prioridade {
+    color: #198754;
+}
+
+/* Classes de status */
+.status-concluido .status {
+    color: #198754;
+}
+
+.status-progresso .status {
+    color: #0dcaf0;
+}
+
+.status-pendente .status {
+    color: #6c757d;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+.loading-indicator {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+}
+
+.tarefas-grid {
+    height: 80vh; /* ou outro valor adequado */
+    overflow-y: auto;
+    position: relative;
 }

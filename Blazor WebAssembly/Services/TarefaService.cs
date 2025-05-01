@@ -13,18 +13,64 @@ using Blazor_WebAssembly.Pages;
 using Blazor_WebAssembly.DTOs.Tarefa;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Blazor_WebAssembly.Services
 {
     public class TarefaService : ITarefaService
     {
-        private readonly HttpClient _http;
-        private readonly ILocalStorageService _localStorage;
+        private readonly HttpClient http;
+        private readonly ILocalStorageService localStorage;
 
-        public TarefaService(HttpClient http, ILocalStorageService localStorage)
+        public TarefaService(HttpClient _http, ILocalStorageService _localStorage)
         {
-            _http = http;
-            _localStorage = localStorage;
+            http = _http;
+            localStorage = _localStorage;
+        }
+
+        public class PagedResult<T>
+        {
+            public List<T> Items { get; set; }
+            public int TotalCount { get; set; }
+        }
+
+        public async Task<(List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int pageNumber, int pageSize)
+        {
+            try
+            {
+                UserToken dadosToken = new UserToken();
+                dadosToken = await PegarDadosToken();
+
+                // Adiciona os parâmetros de paginação na URL
+                var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista-paginada?pageNumber={pageNumber}&pageSize={pageSize}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+                var response = await http.SendAsync(request);
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new UnauthorizedAccessException("Sessão expirada.");
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Erro ao buscar lista de tarefas: {response.StatusCode} - {errorContent}");
+                }
+
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assumindo que sua API retorna um objeto com Items e TotalCount
+                var result = JsonConvert.DeserializeObject<PagedResult<TarefaConsultaDTO>>(content);
+
+                return (result.Items, result.TotalCount);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<List<TarefaConsultaDTO>> ObterTarefasAsync()
@@ -36,7 +82,7 @@ namespace Blazor_WebAssembly.Services
             var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista");
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
-            var response = await _http.SendAsync(request);
+            var response = await http.SendAsync(request);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -74,7 +120,7 @@ namespace Blazor_WebAssembly.Services
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
                 // 3. Envia a requisição
-                var response = await _http.SendAsync(request);
+                var response = await http.SendAsync(request);
 
                 // 4. Trata os possíveis responses
                 if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -118,7 +164,7 @@ namespace Blazor_WebAssembly.Services
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
                 // 3. Envia a requisição
-                var response = await _http.SendAsync(request);
+                var response = await http.SendAsync(request);
 
                 // 4. Trata os possíveis responses
                 if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -139,24 +185,8 @@ namespace Blazor_WebAssembly.Services
             {
                 // Log do erro (implemente conforme sua necessidade)
                 Console.WriteLine($"Erro em AlterarTarefaAsync: {ex.Message}");
-                throw; // Re-lança a exceção para ser tratada pelo chamador
+                throw;
             }
-
-            //UserToken dadosToken = new UserToken();
-
-            //dadosToken = await PegarDadosToken();
-
-            //var request = new HttpRequestMessage(HttpMethod.Put, $"Tarefa/alterar/{_dadosTarefa.id}");
-            //request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
-
-            //var response = await _http.SendAsync(request);
-
-            //if (response.StatusCode == HttpStatusCode.Unauthorized)
-            //{
-            //    throw new UnauthorizedAccessException("Sessão expirada.");
-            //}
-
-            //response.EnsureSuccessStatusCode();
         }
 
         public async Task<TarefaAlterarDTO> BuscarTarefaAsync(int _id)
@@ -168,7 +198,7 @@ namespace Blazor_WebAssembly.Services
             var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/{_id}/buscar");
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
-            var response = await _http.SendAsync(request);
+            var response = await http.SendAsync(request);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -187,7 +217,7 @@ namespace Blazor_WebAssembly.Services
             UserToken dadosToken = new UserToken();
 
             //Pegando o token que foi gerado
-            dadosToken.Token = await _localStorage.GetItemAsync<string>("authToken");
+            dadosToken.Token = await localStorage.GetItemAsync<string>("authToken");
 
             return dadosToken;
         }
@@ -201,7 +231,7 @@ namespace Blazor_WebAssembly.Services
             var request = new HttpRequestMessage(HttpMethod.Delete, $"Tarefa/deletar/{_id}");
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
-            var response = await _http.SendAsync(request);
+            var response = await http.SendAsync(request);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
                 throw new UnauthorizedAccessException("Sessão expirada.");

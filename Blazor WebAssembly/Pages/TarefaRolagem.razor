@@ -1,0 +1,193 @@
+﻿@page "/tarefa-rolagem"
+@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.Interfaces
+@inject ITarefaService TarefaService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<PageTitle>Tarefas</PageTitle>
+
+<div class="tarefas-container">
+    <div class="tarefas-header">
+        <h3>Minhas Tarefas</h3>
+        <button class="btn btn-primary" @onclick="NovaTarefa">
+            <i class="bi bi-plus-circle"></i> Nova Tarefa
+        </button>
+    </div>
+
+    <div class="tarefas-grid">
+        @if (!tarefas.Any() && !isLoading)
+        {
+            <div class="empty-state">
+                <i class="bi bi-inbox"></i>
+                <p>Nenhuma tarefa encontrada</p>
+                <button class="btn btn-primary" @onclick="NovaTarefa">
+                    Criar primeira tarefa
+                </button>
+            </div>
+        }
+
+        @foreach (var tarefa in tarefas)
+        {
+            <div class="tarefa-card @GetPriorityClass(tarefa.prioridade) @GetStatusClass(tarefa.status)">
+                <div class="tarefa-header">
+                    <span class="prioridade">@tarefa.prioridade</span>
+                    <span class="status">@tarefa.status</span>
+                </div>
+                <div class="tarefa-content">
+                    <h4>@tarefa.id</h4>
+                    <h4>@tarefa.titulo</h4>
+                    @if (!string.IsNullOrEmpty(tarefa.descricao))
+                    {
+                        <p class="descricao">@tarefa.descricao</p>
+                    }
+                    <div class="tarefa-meta">
+                        <span><i class="bi bi-calendar"></i> @FormatDate(tarefa.data)</span>
+                        @if (tarefa.prazo > 0)
+                        {
+                            <span><i class="bi bi-clock"></i> @tarefa.prazo dia(s)</span>
+                        }
+                    </div>
+                </div>
+                <div class="tarefa-actions">
+                    <button @onclick="() => VisualizarTarefa(tarefa.id)" title="Visualizar">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button @onclick="() => EditarTarefa(tarefa.id)" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button @onclick="() => ConfirmarExclusao(tarefa.id)" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        }
+
+        @if (isLoading)
+        {
+            <div class="loading-indicator">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+            </div>
+        }
+
+        <div @ref="sentinel" style="height: 1px;"></div>
+    </div>
+</div>
+
+@code {
+    private List<TarefaConsultaDTO> tarefas = new();
+    private ElementReference sentinel;
+    private DotNetObjectReference<TarefaRolagem>? objRef;
+    private int currentPage = 1;
+    private const int pageSize = 12;
+    private bool isLoading = false;
+    private bool hasMoreItems = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMoreItems();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("infiniteScroll.init", sentinel, objRef);
+            Console.WriteLine("Infinite scroll initialized"); // Adicione para debug
+        }
+
+        // if (firstRender)
+        // {
+        //     objRef = DotNetObjectReference.Create(this);
+        //     await JS.InvokeVoidAsync("tarefasInfiniteScroll.init", sentinel, objRef);
+        // }
+    }
+
+    [JSInvokable]
+    public async Task LoadMoreItems()
+    {
+        if (isLoading || !hasMoreItems) return;
+
+        isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            var (items, totalCount) = await TarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
+            tarefas.AddRange(items);
+            currentPage++;
+            hasMoreItems = tarefas.Count < totalCount;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erro ao carregar tarefas: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private string GetPriorityClass(string prioridade)
+    {
+        return prioridade switch
+        {
+            "Alta" => "prioridade-alta",
+            "Média" => "prioridade-media",
+            "Baixa" => "prioridade-baixa",
+            _ => ""
+        };
+    }
+
+    private string GetStatusClass(string status)
+    {
+        return status switch
+        {
+            "Concluído" => "status-concluido",
+            "Em Progresso" => "status-progresso",
+            "Pendente" => "status-pendente",
+            _ => ""
+        };
+    }
+
+    private string FormatDate(object dateObj)
+    {
+        if (dateObj == null) return "-";
+        if (dateObj is DateTime date) return date.ToString("dd/MM/yyyy");
+        if (DateTime.TryParse(dateObj.ToString(), out var parsedDate)) return parsedDate.ToString("dd/MM/yyyy");
+        return dateObj.ToString();
+    }
+
+    private void VisualizarTarefa(int id) => Navigation.NavigateTo($"/exibir-tarefa/{id}");
+    private void EditarTarefa(int id) => Navigation.NavigateTo($"/editar-tarefa/{id}");
+    private void NovaTarefa() => Navigation.NavigateTo("/cadastrar-tarefa");
+
+    private async Task ConfirmarExclusao(int id)
+    {
+        bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esta tarefa?");
+        if (confirmado)
+        {
+            await TarefaService.DeletarTarefaAsync(id);
+            await ResetPagination();
+        }
+    }
+
+    private async Task ResetPagination()
+    {
+        currentPage = 1;
+        tarefas.Clear();
+        hasMoreItems = true;
+        await LoadMoreItems();
+    }
+
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+}

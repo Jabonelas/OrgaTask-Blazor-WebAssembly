@@ -7,6 +7,8 @@ namespace Blazor_WebAssembly.Interfaces
     {
         Task<List<TarefaConsultaDTO>> ObterTarefasAsync();
 
+        Task<(List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int pageNumber, int pageSize);
+
         Task DeletarTarefaAsync(int _id);
 
         Task<bool> AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa);

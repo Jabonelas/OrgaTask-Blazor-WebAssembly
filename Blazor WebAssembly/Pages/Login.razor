@@ -1,10 +1,12 @@
 ﻿@page "/login"
 @using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.Interfaces
 @using Newtonsoft.Json
 @using System.Text
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUsuarioService iUsuarioService
 
 
 
@@ -50,7 +52,7 @@
 @code {
 
 
-      private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
+    private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
 
     protected override void OnInitialized()
     {
@@ -62,28 +64,14 @@
     {
         try
         {
-            var json = JsonConvert.SerializeObject(UsuarioLoginDTO);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            bool sucesso = await iUsuarioService.LoginAsync(UsuarioLoginDTO);
 
-            var response = await Http.PostAsync("Usuario/login", content);
-
-            if (response.IsSuccessStatusCode)
+            if (sucesso)
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
-
-                // Armazenando o token
-                await localStorage.SetItemAsync("authToken", result.Token);
-
-         
 
                 Console.WriteLine("Login realizado com sucesso!");
 
                 Navigation.NavigateTo($"tarefas");
-            }
-            else
-            {
-                Console.WriteLine($"Erro ao fazer login: {response.StatusCode}");
             }
         }
         catch (Exception ex)

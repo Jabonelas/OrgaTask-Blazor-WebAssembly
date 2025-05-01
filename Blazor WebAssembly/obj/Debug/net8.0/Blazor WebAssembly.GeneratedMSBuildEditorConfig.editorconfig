@@ -42,6 +42,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/TarefaPaginada.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhUGFnaW5hZGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/TarefaRolagem.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhUm9sYWdlbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Tarefas.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

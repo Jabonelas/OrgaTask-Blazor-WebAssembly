@@ -20,6 +20,8 @@ namespace Blazor_WebAssembly
 
             builder.Services.AddScoped<ITarefaService, TarefaService>();
 
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
             builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();

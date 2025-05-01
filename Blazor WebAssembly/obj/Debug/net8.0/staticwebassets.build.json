@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LJ9RDG6jXM7V4OmGcHewv53l35pSvT8LkztlW+kYPNk=",
+  "Hash": "G1Wymka865KvPhooGwul5AZfqxb3w+amQ485cmk/yrA=",
   "Source": "Blazor WebAssembly",
   "BasePath": "/",
   "Mode": "Root",
@@ -7995,6 +7995,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\js\\infiniteScroll.js",
+      "SourceId": "Blazor WebAssembly",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "js/infiniteScroll.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\infiniteScroll.js"
     },
     {
       "Identity": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\sample-data\\weather.json",

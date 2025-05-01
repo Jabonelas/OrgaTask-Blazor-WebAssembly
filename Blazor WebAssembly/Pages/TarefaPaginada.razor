@@ -1,19 +1,20 @@
-﻿@page "/tarefas"
+﻿@page "/tarefas-paginada"
 @using Blazor_WebAssembly.DTOs
 @using Blazor_WebAssembly.Interfaces
-@using Newtonsoft.Json
-@inject HttpClient Http
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject NavigationManager Navigation
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
+@inject NavigationManager Navigation
+@implements IDisposable
 
 <PageTitle>Tarefas</PageTitle>
 
-
 @if (listaTarefas == null)
 {
-    <p>Carregando...</p>
+    <div class="d-flex justify-content-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
 }
 else
 {
@@ -21,33 +22,32 @@ else
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Lista das Tarefas</h5>
             <div>
-                <button class="btn btn-light btn-sm" @onclick="() => NovaTarefa()">
+                <button class="btn btn-light btn-sm" @onclick="NovaTarefa">
                     <i class="bi bi-plus-circle"></i> Nova Tarefa
                 </button>
             </div>
         </div>
         <div class="card-body p-0">
-            <div class="table-responsive">
+            <div class="table-responsive" @ref="tableContainer" style="max-height: 65vh; overflow-y: auto;">
                 <table class="table table-hover mb-0">
-                    <thead class="table-light">
+                    <thead class="table-light" style="position: sticky; top: 0; z-index: 1; background-color: white;">
                         <tr>
-                            @* <th width="5%">ID</th> *@
+                            <th>Id</th>
                             <th>Título</th>
                             <th width="15%">Prioridade</th>
                             <th width="10%">Prazo</th>
                             <th width="12%">Status</th>
-                            @* <th width="12%">Data</th> *@
                             <th width="15%" class="text-end">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (!listaTarefas.Any())
+                        @if (!listaTarefas.Any() && !isLoading)
                         {
                             <tr>
-                                <td colspan="7" class="text-center py-4 text-muted">
+                                <td colspan="5" class="text-center py-4 text-muted">
                                     <i class="bi bi-inbox" style="font-size: 2rem;"></i>
                                     <p class="mt-2 mb-0">Nenhuma tarefa cadastrada</p>
-                                    <button class="btn btn-primary btn-sm mt-2" @onclick="() => NovaTarefa()">
+                                    <button class="btn btn-primary btn-sm mt-2" @onclick="NovaTarefa">
                                         Criar primeira tarefa
                                     </button>
                                 </td>
@@ -58,8 +58,8 @@ else
                             @foreach (var tarefa in listaTarefas)
                             {
                                 <tr class="@GetRowClass(tarefa)">
-                                    @* <td>@tarefa.id</td> *@
                                     <td>
+                                        <div class="fw-semibold">@tarefa.id</div>
                                         <div class="fw-semibold">@tarefa.titulo</div>
                                         @if (!string.IsNullOrEmpty(tarefa.descricao))
                                         {
@@ -69,6 +69,10 @@ else
                                             </div>
                                         }
                                     </td>
+
+
+                               
+
                                     <td>
                                         <span class="badge @GetPriorityBadgeClass(tarefa.prioridade)">
                                             @tarefa.prioridade
@@ -82,27 +86,6 @@ else
                                             @tarefa.status
                                         </span>
                                     </td>
-                                    @* <td>@FormatDate(tarefa.data)</td> *@
-                             @*        <td class="text-end">
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
-                                                    @onclick="() => VisualizarTarefa(tarefa.id)">
-                                                <i class="bi bi-eye"></i>
-                                                <span class="d-none d-sm-inline">Visualizar</span>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1"
-                                                    @onclick="() => EditarTarefa(tarefa.id)">
-                                                <i class="bi bi-pencil"></i>
-                                                <span class="d-none d-sm-inline">Editar</span>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
-                                                    @onclick="() => ConfirmarExclusao(tarefa.id)">
-                                                <i class="bi bi-trash"></i>
-                                                <span class="d-none d-sm-inline">Excluir</span>
-                                            </button>
-                                        </div>
-                                    </td> *@
-
                                     <td class="text-end">
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-sm btn-outline-primary"
@@ -122,81 +105,101 @@ else
                                             </button>
                                         </div>
                                     </td>
-
                                 </tr>
                             }
                         }
                     </tbody>
                 </table>
+
+                @if (isLoading)
+                {
+                    <div class="d-flex justify-content-center my-3">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                    </div>
+                }
+
+                @if (!hasMoreItems && listaTarefas.Any())
+                {
+                    <div class="text-center text-muted py-3">
+                        <small>Todas as tarefas foram carregadas</small>
+                    </div>
+                }
+
+                <div @ref="sentinel" style="height: 1px;"></div>
             </div>
         </div>
-        @if (listaTarefas.Any())
-        {
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <div class="text-muted small">
-                    Mostrando @listaTarefas.Count() itens
-                </div>
-                <nav>
-                    <ul class="pagination pagination-sm mb-0">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Próxima</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        }
     </div>
 }
 
-
 @code {
-
-    private List<TarefaConsultaDTO> listaTarefas = new List<TarefaConsultaDTO>();
-    private bool tarefasCarregadas = false;
+    private List<TarefaConsultaDTO> listaTarefas = new();
+    private ElementReference tableContainer;
+    private ElementReference sentinel;
+    private DotNetObjectReference<TarefaPaginada>? objRef;
+    private int currentPage = 1;
+    private const int pageSize = 20;
+    private bool isLoading = false;
+    private bool hasMoreItems = true;
+    private DateTime lastLoadTime = DateTime.MinValue;
 
     protected override async Task OnInitializedAsync()
     {
-        await CarregarTarefasAsync();
+        await LoadMoreItems();
     }
 
-    //usado para recarregar o boostrap depois que a tela foi carregada
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     if (tarefasCarregadas)
-    //     {
-    //         tarefasCarregadas = false; // Reseta a flag pra não ficar chamando toda hora
-    //         await JS.InvokeVoidAsync("bootstrapDropdownInit");
-
-    //     }
-    // }
-
-    private async Task CarregarTarefasAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("infiniteScroll.initialize", sentinel, objRef);
+        }
+    }
+
+    [JSInvokable]
+    public async Task LoadMoreItems()
+    {
+        // Debounce para evitar chamadas rápidas consecutivas
+        if (DateTime.Now - lastLoadTime < TimeSpan.FromMilliseconds(300) || isLoading || !hasMoreItems)
+            return;
+
+        lastLoadTime = DateTime.Now;
+        isLoading = true;
+        StateHasChanged();
+
         try
         {
-            var tarefas = await ITarefaService.ObterTarefasAsync();
-            listaTarefas = tarefas;
+            var (items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
 
-            tarefasCarregadas = true; // Marca que carregou e precisa inicializar o dropdown
-            StateHasChanged(); // Força o Blazor a re-renderizar depois de carregar
-
-            await InvokeAsync(StateHasChanged);
+            listaTarefas.AddRange(items);
+            currentPage++;
+            hasMoreItems = listaTarefas.Count < totalCount;
         }
         catch (UnauthorizedAccessException)
         {
-            await JS.InvokeVoidAsync("alert", "Sua sessão expirou ou o acesso não é autorizado.\nVocê será redirecionado para a tela de login.");
+            await JS.InvokeVoidAsync("alert", "Sessão expirada. Redirecionando para login...");
             Navigation.NavigateTo("/login", true);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro ao obter tarefas: {ex.Message}");
+            await JS.InvokeVoidAsync("console.error", $"Erro ao carregar tarefas: {ex.Message}");
+            hasMoreItems = false;
         }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ResetPagination()
+    {
+        currentPage = 1;
+        listaTarefas.Clear();
+        hasMoreItems = true;
+        await LoadMoreItems();
     }
 
     private void VisualizarTarefa(int id)
@@ -211,29 +214,19 @@ else
 
     private void NovaTarefa()
     {
-        Navigation.NavigateTo("cadastrar-tarefa");
+        Navigation.NavigateTo("/cadastrar-tarefa");
     }
 
-    private async Task ConfirmarExclusao(int _id)
+    private async Task ConfirmarExclusao(int id)
     {
         bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esta tarefa?");
-
         if (confirmado)
         {
             try
             {
-                await ITarefaService.DeletarTarefaAsync(_id);
-
-                bool isUsuarioDeletado = true;
-
-                if (isUsuarioDeletado)
-                {
-                    await CarregarTarefasAsync();
-                    await JS.InvokeVoidAsync("alert", "Tarefa excluída com sucesso!");
-                    await CarregarTarefasAsync();
-                }
-
-
+                await ITarefaService.DeletarTarefaAsync(id);
+                await ResetPagination();
+                await JS.InvokeVoidAsync("alert", "Tarefa excluída com sucesso!");
             }
             catch (Exception ex)
             {
@@ -277,13 +270,9 @@ else
         return "";
     }
 
-    private string FormatDate(object dateObj)
+    public void Dispose()
     {
-        if (dateObj == null) return "-";
-        if (dateObj is DateTime date) return date.ToString("dd/MM/yyyy");
-        if (DateTime.TryParse(dateObj.ToString(), out var parsedDate)) return parsedDate.ToString("dd/MM/yyyy");
-        return dateObj.ToString(); // Fallback para mostrar o valor original se não for data
+        objRef?.Dispose();
+        GC.SuppressFinalize(this);
     }
-
-
 }
