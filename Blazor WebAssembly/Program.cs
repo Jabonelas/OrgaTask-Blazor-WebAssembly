@@ -18,9 +18,14 @@ namespace Blazor_WebAssembly
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/") });
 
+            // tarefa
             builder.Services.AddScoped<ITarefaService, TarefaService>();
 
+            // usuario
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+            // injetando notivicacao
+            builder.Services.AddScoped<NotificacaoService>();
 
             builder.Services.AddBlazoredLocalStorage();
 

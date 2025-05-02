@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Blazor_WebAssembly.DTOs
+namespace Blazor_WebAssembly.DTOs.Usuario
 {
     public class UsuarioLoginDTO
     {

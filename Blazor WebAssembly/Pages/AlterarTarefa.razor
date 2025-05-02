@@ -9,6 +9,7 @@
 @inject HttpClient Http
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
+@inject NotificacaoService notificacaoService
 
 
 <EditForm Model="@TarefaAlterarDTO" OnValidSubmit="@HandleSubmit">
@@ -84,7 +85,11 @@
     {
         try
         {
-            TarefaAlterarDTO = await ITarefaService.BuscarTarefaAsync(id);
+            (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await ITarefaService.BuscarTarefaAsync(id);
+
+            TarefaAlterarDTO = tarefa;
+
+
         }
         catch (Exception ex)
         {
@@ -96,22 +101,30 @@
     {
         try
         {
-            bool sucesso = await ITarefaService.AlterarTarefaAsync(TarefaAlterarDTO);
+            (bool sucesso, string errorMessage) = await ITarefaService.AlterarTarefaAsync(TarefaAlterarDTO);
 
             if (sucesso)
             {
+                await notificacaoService.MostrarSucesso("Dados da tarefa alterada com sucesso!");
+
                 Navigation.NavigateTo($"/tarefas");
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro: {ex.Message}");
+            Console.WriteLine($"Erro ao alterar tarefas: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
     }
 
     private async void CancelarAlteracao()
     {
-        bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja cancelar a alteração da tarefa?");
+        bool confirmado = await notificacaoService.MostrarConfirmacao("confirm", "Tem certeza que deseja cancelar a alteração da tarefa?");
 
         if (confirmado)
         {

@@ -1,5 +1,5 @@
 ﻿@page "/login"
-@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.DTOs.Usuario
 @using Blazor_WebAssembly.Interfaces
 @using Newtonsoft.Json
 @using System.Text
@@ -7,6 +7,8 @@
 @inject NavigationManager Navigation
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IUsuarioService iUsuarioService
+@inject NotificacaoService notificacaoService
+
 
 
 
@@ -64,19 +66,25 @@
     {
         try
         {
-            bool sucesso = await iUsuarioService.LoginAsync(UsuarioLoginDTO);
+            var (sucesso, mensagemErro) = await iUsuarioService.LoginAsync(UsuarioLoginDTO);
 
             if (sucesso)
             {
+                await notificacaoService.MostrarSucesso("Login realizado com sucesso!");
 
-                Console.WriteLine("Login realizado com sucesso!");
-
-                Navigation.NavigateTo($"tarefas");
+                Navigation.NavigateTo("/tarefas");
             }
+            else
+            {
+                await notificacaoService.MostrarErro(mensagemErro);
+            }
+            
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro: {ex.Message}");
+            Console.WriteLine($"Erro ao realizar login: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
     }
 

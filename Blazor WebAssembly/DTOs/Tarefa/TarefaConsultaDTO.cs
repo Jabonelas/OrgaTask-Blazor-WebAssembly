@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Blazor_WebAssembly.DTOs
+namespace Blazor_WebAssembly.DTOs.Tarefa
 {
     public class TarefaConsultaDTO
     {

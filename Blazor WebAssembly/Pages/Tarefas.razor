@@ -1,5 +1,5 @@
 ﻿@page "/tarefas"
-@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
 @using Newtonsoft.Json
 @inject HttpClient Http
@@ -7,9 +7,9 @@
 @inject NavigationManager Navigation
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
+@inject NotificacaoService notificacaoService
 
 <PageTitle>Tarefas</PageTitle>
-
 
 @if (listaTarefas == null)
 {
@@ -83,25 +83,25 @@ else
                                         </span>
                                     </td>
                                     @* <td>@FormatDate(tarefa.data)</td> *@
-                             @*        <td class="text-end">
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
-                                                    @onclick="() => VisualizarTarefa(tarefa.id)">
-                                                <i class="bi bi-eye"></i>
-                                                <span class="d-none d-sm-inline">Visualizar</span>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1"
-                                                    @onclick="() => EditarTarefa(tarefa.id)">
-                                                <i class="bi bi-pencil"></i>
-                                                <span class="d-none d-sm-inline">Editar</span>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
-                                                    @onclick="() => ConfirmarExclusao(tarefa.id)">
-                                                <i class="bi bi-trash"></i>
-                                                <span class="d-none d-sm-inline">Excluir</span>
-                                            </button>
-                                        </div>
-                                    </td> *@
+                                    @*        <td class="text-end">
+                        <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
+                        @onclick="() => VisualizarTarefa(tarefa.id)">
+                        <i class="bi bi-eye"></i>
+                        <span class="d-none d-sm-inline">Visualizar</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1"
+                        @onclick="() => EditarTarefa(tarefa.id)">
+                        <i class="bi bi-pencil"></i>
+                        <span class="d-none d-sm-inline">Editar</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
+                        @onclick="() => ConfirmarExclusao(tarefa.id)">
+                        <i class="bi bi-trash"></i>
+                        <span class="d-none d-sm-inline">Excluir</span>
+                        </button>
+                        </div>
+                        </td> *@
 
                                     <td class="text-end">
                                         <div class="btn-group" role="group">
@@ -180,22 +180,27 @@ else
     {
         try
         {
-            var tarefas = await ITarefaService.ObterTarefasAsync();
+            var (success, errorMessage, tarefas) = await ITarefaService.ObterTarefasAsync();
             listaTarefas = tarefas;
 
-            tarefasCarregadas = true; // Marca que carregou e precisa inicializar o dropdown
-            StateHasChanged(); // Força o Blazor a re-renderizar depois de carregar
+            if (success)
+            {
+                tarefasCarregadas = true; // Marca que carregou e precisa inicializar o dropdown
+                StateHasChanged(); // Força o Blazor a re-renderizar depois de carregar
 
-            await InvokeAsync(StateHasChanged);
+                await InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
+            }
         }
-        catch (UnauthorizedAccessException)
-        {
-            await JS.InvokeVoidAsync("alert", "Sua sessão expirou ou o acesso não é autorizado.\nVocê será redirecionado para a tela de login.");
-            Navigation.NavigateTo("/login", true);
-        }
+     
         catch (Exception ex)
         {
             Console.WriteLine($"Erro ao obter tarefas: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
     }
 
@@ -216,7 +221,7 @@ else
 
     private async Task ConfirmarExclusao(int _id)
     {
-        bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esta tarefa?");
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja excluir esta tarefa?");
 
         if (confirmado)
         {
@@ -229,7 +234,7 @@ else
                 if (isUsuarioDeletado)
                 {
                     await CarregarTarefasAsync();
-                    await JS.InvokeVoidAsync("alert", "Tarefa excluída com sucesso!");
+                    await notificacaoService.MostrarSucesso("Tarefa excluída com sucesso!");
                     await CarregarTarefasAsync();
                 }
 
@@ -237,7 +242,10 @@ else
             }
             catch (Exception ex)
             {
-                await JS.InvokeVoidAsync("alert", $"Erro ao excluir: {ex.Message}");
+
+                Console.WriteLine($"Erro ao excluir tarefas: {ex.Message}");
+
+                await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
             }
         }
     }

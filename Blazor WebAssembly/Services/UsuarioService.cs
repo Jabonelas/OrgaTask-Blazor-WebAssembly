@@ -1,11 +1,9 @@
 ﻿using Blazor_WebAssembly.DTOs;
 using Newtonsoft.Json;
-using static System.Net.WebRequestMethods;
 using System.Text;
 using Blazored.LocalStorage;
 using Blazor_WebAssembly.Interfaces;
-using System.Net.Http.Headers;
-using System.Net;
+using Blazor_WebAssembly.DTOs.Usuario;
 
 namespace Blazor_WebAssembly.Services
 {
@@ -20,7 +18,7 @@ namespace Blazor_WebAssembly.Services
             localStorage = _localStorage;
         }
 
-        public async Task<bool> LoginAsync(UsuarioLoginDTO _dadosLogin)
+        public async Task<(bool success, string errorMessage)> LoginAsync(UsuarioLoginDTO _dadosLogin)
         {
             try
             {
@@ -41,20 +39,59 @@ namespace Blazor_WebAssembly.Services
 
                     //    // Armazenando o token
                     await localStorage.SetItemAsync("authToken", result.Token);
+                    return (true, null);
                 }
                 else
                 {
                     var errorContent = await response.Content.ReadAsStringAsync();
-                    throw new HttpRequestException($"Erro ao cadastrar tarefa: {response.StatusCode} - {errorContent}");
-                }
 
-                return true;
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erro em LoginAsync: {ex.Message}");
 
                 throw;
+            }
+        }
+
+        public async Task<(bool success, string errorMessage)> CadastrarUsuarioAsync(UsuarioCadastrarDTO _dadosUsuario)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(_dadosUsuario);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var request = new HttpRequestMessage(HttpMethod.Post, $"Usuario/cadastrar")
+                {
+                    Content = content
+                };
+
+                var response = await http.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
+
+                    //    // Armazenando o token
+                    await localStorage.SetItemAsync("authToken", result.Token);
+                    return (true, null);
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro em CadastrarUsuarioAsync: {ex.Message}");
+                return (false, ex.Message);
             }
         }
     }

@@ -8,6 +8,7 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject HttpClient Http
 @inject ITarefaService ITarefaService
+@inject NotificacaoService notificacaoService
 
 
 <EditForm Model="@TarefaAlterarDTO">
@@ -36,8 +37,8 @@
                         <InputText @bind-Value="TarefaAlterarDTO.titulo" class="form-control" disabled />
                     </div>
                     <div class="col-md-3">
-                            <label class="form-label fw-bold">Prioridade</label>
-                            <InputText @bind-Value="TarefaAlterarDTO.prioridade" class="form-control" disabled />
+                        <label class="form-label fw-bold">Prioridade</label>
+                        <InputText @bind-Value="TarefaAlterarDTO.prioridade" class="form-control" disabled />
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-bold">Prazo (dias)</label>
@@ -79,11 +80,24 @@
     {
         try
         {
-            TarefaAlterarDTO = await ITarefaService.BuscarTarefaAsync(id);
+            (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await ITarefaService.BuscarTarefaAsync(id);
+
+            if (success)
+            {
+
+                TarefaAlterarDTO = tarefa;
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
+            }
+
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro: {ex.Message}");
+            Console.WriteLine($"Erro ao visualizar tarefas: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
     }
 

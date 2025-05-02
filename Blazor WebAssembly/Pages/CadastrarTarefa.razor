@@ -9,6 +9,7 @@
 @inject HttpClient Http
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
+@inject NotificacaoService notificacaoService
 
 
 <EditForm Model="@TarefaAlterarDTO" OnValidSubmit="@HandleSubmit">
@@ -82,19 +83,30 @@
     {
         try
         {
-            await ITarefaService.CadastrarTarefaAsync(TarefaAlterarDTO);
+            var (sucesso, errorMessage) = await ITarefaService.CadastrarTarefaAsync(TarefaAlterarDTO);
+
+            if (sucesso)
+            {
+                await notificacaoService.MostrarSucesso("Tarefa cadastrada com sucesso!");
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro: {ex.Message}");
+            Console.WriteLine($"Erro ao cadastrar tarefas: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
 
-  
+
     }
 
     private async void CancelarAlteracao()
     {
-        bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja cancelar a alteração da tarefa?");
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar a alteração da tarefa?");
 
         if (confirmado)
         {

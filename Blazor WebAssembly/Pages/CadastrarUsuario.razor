@@ -1,0 +1,113 @@
+﻿@page "/cadastrar-usuario"
+@using Blazor_WebAssembly.DTOs.Usuario
+@using Blazor_WebAssembly.Interfaces
+@using Newtonsoft.Json
+@using System.Text
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject HttpClient Http
+@inject IUsuarioService iUsuarioService
+@inject NotificacaoService notificacaoService
+@inject IJSRuntime JS
+
+
+<EditForm Model="@UsuarioCadastrarDTO" OnValidSubmit="@HandleSubmit">
+    <DataAnnotationsValidator />
+    @* <ValidationSummary /> *@
+
+    <div class="card edit-form">
+        <div class="card-header bg-primary text-white">
+            <h3>Cadastrar Novo Usuário</h3>
+        </div>
+        <div class="card-body">
+            <!-- Campos organizados em grid -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Nome</label>
+                    <InputText @bind-Value="UsuarioCadastrarDTO.nome" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.nome)" class="text-danger" />
+                </div>
+            
+                  <div class="col-md-6">
+                    <label class="form-label fw-bold">Login</label>
+                    <InputText @bind-Value="UsuarioCadastrarDTO.login" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.login)" class="text-danger" />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Senha</label>
+                    <InputText type="password" @bind-Value="UsuarioCadastrarDTO.senha" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.senha)" class="text-danger" />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Confimar Senha</label>
+                    <InputText type="password" @bind-Value="UsuarioCadastrarDTO.confirmarSenha" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.confirmarSenha)" class="text-danger" />
+                </div>
+
+
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="button" class="btn btn-secondary me-2" @onclick="() => CancelarCadastro()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+</EditForm>
+
+
+@code {
+
+    private UsuarioCadastrarDTO UsuarioCadastrarDTO = new UsuarioCadastrarDTO();
+
+    private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (UsuarioCadastrarDTO.senha != UsuarioCadastrarDTO.confirmarSenha)
+            {
+                await notificacaoService.MostrarErro("As senhas não coincidem!");
+
+                return;
+            }
+
+            var (sucesso, errorMessage) = await iUsuarioService.CadastrarUsuarioAsync(UsuarioCadastrarDTO);
+
+            if (sucesso)
+            {
+                await notificacaoService.MostrarSucesso("Usuário cadastrado com sucesso!");
+
+                UsuarioLoginDTO.login = UsuarioCadastrarDTO.login;
+                UsuarioLoginDTO.senha = UsuarioCadastrarDTO.senha;
+
+                await iUsuarioService.LoginAsync(UsuarioLoginDTO);
+
+                Navigation.NavigateTo("/tarefas");
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
+            }
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine($"Erro ao cadastrar usuario: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
+        }
+    }
+
+    private async void CancelarCadastro()
+    {
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar o cadastro do usuário?");
+        
+        if (confirmado)
+        {
+            Navigation.NavigateTo($"/tarefas");
+        }
+    }
+}

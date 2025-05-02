@@ -1,10 +1,11 @@
 ﻿@page "/tarefa-rolagem"
-@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
-@inject ITarefaService TarefaService
+@inject ITarefaService ITarefaService
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 @implements IDisposable
+@inject NotificacaoService notificacaoService
 
 <PageTitle>Tarefas</PageTitle>
 
@@ -100,12 +101,6 @@
             await JS.InvokeVoidAsync("infiniteScroll.init", sentinel, objRef);
             Console.WriteLine("Infinite scroll initialized"); // Adicione para debug
         }
-
-        // if (firstRender)
-        // {
-        //     objRef = DotNetObjectReference.Create(this);
-        //     await JS.InvokeVoidAsync("tarefasInfiniteScroll.init", sentinel, objRef);
-        // }
     }
 
     [JSInvokable]
@@ -118,14 +113,24 @@
 
         try
         {
-            var (items, totalCount) = await TarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
-            tarefas.AddRange(items);
-            currentPage++;
-            hasMoreItems = tarefas.Count < totalCount;
+            var (success, errorMessage, items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
+
+            if (success)
+            {
+                tarefas.AddRange(items);
+                currentPage++;
+                hasMoreItems = tarefas.Count < totalCount;
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
+            }
         }
         catch (Exception ex)
         {
-            Console.Error.WriteLine($"Erro ao carregar tarefas: {ex.Message}");
+            Console.WriteLine($"Erro ao caregar tarefas: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
         finally
         {
@@ -170,11 +175,22 @@
 
     private async Task ConfirmarExclusao(int id)
     {
-        bool confirmado = await JS.InvokeAsync<bool>("confirm", "Tem certeza que deseja excluir esta tarefa?");
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja excluir esta tarefa?");
+
         if (confirmado)
         {
-            await TarefaService.DeletarTarefaAsync(id);
-            await ResetPagination();
+            try
+            {
+                await ITarefaService.DeletarTarefaAsync(id);
+                await ResetPagination();
+                await notificacaoService.MostrarSucesso("Tarefa excluída com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao excluir tarefas: {ex.Message}");
+
+                await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
+            }
         }
     }
 
