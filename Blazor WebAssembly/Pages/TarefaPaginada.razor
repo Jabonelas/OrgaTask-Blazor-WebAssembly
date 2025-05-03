@@ -1,11 +1,13 @@
 ﻿@page "/tarefas-paginada"
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Components.Authorization
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 @implements IDisposable
 @inject NotificacaoService notificacaoService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Tarefas</PageTitle>
 
@@ -147,7 +149,22 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+
+            Navigation.NavigateTo("/login");
+        }
+
+
         await LoadMoreItems();
+
+
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -183,6 +200,11 @@ else
             }else
             {
                 await notificacaoService.MostrarErro(errorMessage);
+
+                if (errorMessage == "Sessão expirada. Por favor, faça login novamente.")
+                {
+                    Navigation.NavigateTo($"/login");
+                }
             }
         }
         catch (Exception ex)

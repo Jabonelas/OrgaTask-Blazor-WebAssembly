@@ -3,20 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\dtos\\tarefa\\tarefaalterardto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\dtos\\tarefa\\tarefaalterardto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\visualizartarefa.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\visualizartarefa.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\tarefapaginada.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\tarefapaginada.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\tarefarolagem.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\tarefarolagem.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\cadastrarusuario.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\cadastrarusuario.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\wwwroot\\js\\infinitescroll.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\wwwroot\\js\\infinitescroll.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\dtos\\notificacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\dtos\\notificacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\tarefas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\tarefas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,21 +50,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TarefaAlterarDTO.cs",
-              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\Tarefa\\TarefaAlterarDTO.cs",
-              "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaAlterarDTO.cs",
-              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\Tarefa\\TarefaAlterarDTO.cs",
-              "RelativeToolTip": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaAlterarDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:18:26.433Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -51,41 +62,132 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "VisualizarTarefa.razor",
-              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\VisualizarTarefa.razor",
-              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\VisualizarTarefa.razor",
-              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\VisualizarTarefa.razor",
-              "RelativeToolTip": "Blazor WebAssembly\\Pages\\VisualizarTarefa.razor",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAUwGkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-01T22:57:07.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TarefaPaginada.razor",
-              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\TarefaPaginada.razor",
-              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\TarefaPaginada.razor",
-              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\TarefaPaginada.razor",
-              "RelativeToolTip": "Blazor WebAssembly\\Pages\\TarefaPaginada.razor",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAAL0AAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-01T22:45:46.526Z",
+              "DocumentIndex": 0,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",
+              "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-05-03T03:01:05.046Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CadastrarUsuario.razor",
-              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\CadastrarUsuario.razor",
-              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\CadastrarUsuario.razor",
-              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\CadastrarUsuario.razor",
-              "RelativeToolTip": "Blazor WebAssembly\\Pages\\CadastrarUsuario.razor",
-              "ViewState": "AgIAACwAAAAAAAAAAAAIwFMAAABCAAAAAAAAAA==",
+              "Title": "infiniteScroll.js",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\js\\infiniteScroll.js",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\wwwroot\\js\\infiniteScroll.js",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\js\\infiniteScroll.js",
+              "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\js\\infiniteScroll.js",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-03T02:52:22.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\css\\app.css",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\wwwroot\\css\\app.css",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\css\\app.css",
+              "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\css\\app.css",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAAAAABAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-03T02:50:08.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\App.razor",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\App.razor",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\App.razor",
+              "RelativeToolTip": "Blazor WebAssembly\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-01T22:26:20.359Z",
+              "WhenOpened": "2025-05-03T02:48:15.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TarefaRolagem.razor",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
+              "RelativeToolTip": "Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAmwJMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-03T02:45:57.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Program.cs",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\Program.cs",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Program.cs",
+              "RelativeToolTip": "Blazor WebAssembly\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T02:31:46.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Login.razor",
+              "RelativeToolTip": "Blazor WebAssembly\\Pages\\Login.razor",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-03T02:11:23.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NotificacaoService.cs",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
+              "RelativeToolTip": "Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAgwDYAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T02:07:26.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Blazor WebAssembly\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-03T02:06:04.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Tarefas.razor",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Tarefas.razor",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\Tarefas.razor",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Tarefas.razor",
+              "RelativeToolTip": "Blazor WebAssembly\\Pages\\Tarefas.razor",
+              "ViewState": "AgIAANgAAAAAAAAAAAAAAPEAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-02T17:14:06.915Z",
               "EditorCaption": ""
             }
           ]

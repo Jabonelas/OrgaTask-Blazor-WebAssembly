@@ -2,19 +2,34 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\CadastrarUsuario.razor</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\Tarefas.razor</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\TarefaPaginada.razor</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Layout\MainLayout.razor</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\VisualizarTarefa.razor</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\DTOs\NotificacaoService.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\DTOs\Tarefa\TarefaAlterarDTO.cs</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\Login.razor</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\DTOs\Tarefa\TarefaConsultaDTO.cs</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Program.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\TarefaRolagem.razor</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\App.razor</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\css\app.css</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\js\infiniteScroll.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\index.html</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

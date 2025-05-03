@@ -1,6 +1,7 @@
 ﻿@page "/tarefas"
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
@@ -8,6 +9,7 @@
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
 @inject NotificacaoService notificacaoService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Tarefas</PageTitle>
 
@@ -162,6 +164,17 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+
+            Navigation.NavigateTo("/login");
+        }
+
         await CarregarTarefasAsync();
     }
 
@@ -193,6 +206,11 @@ else
             else
             {
                 await notificacaoService.MostrarErro(errorMessage);
+
+                if (errorMessage == "Sessão expirada. Por favor, faça login novamente.")
+                {
+                    Navigation.NavigateTo($"/login");
+                }
             }
         }
      

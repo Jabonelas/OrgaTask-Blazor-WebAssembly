@@ -1,19 +1,11 @@
 ﻿using Blazor_WebAssembly.DTOs;
 using Blazor_WebAssembly.Interfaces;
 using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using System.Net;
-using static System.Net.WebRequestMethods;
-
-using Blazored.LocalStorage;
-
-using Blazor_WebAssembly.Pages;
 using Blazor_WebAssembly.DTOs.Tarefa;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Blazor_WebAssembly.Services
 {
@@ -36,41 +28,35 @@ namespace Blazor_WebAssembly.Services
 
         public async Task<(bool success, string errorMessage, List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int pageNumber, int pageSize)
         {
-            try
+            UserToken dadosToken = new UserToken();
+            dadosToken = await PegarDadosToken();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista-paginada?pageNumber={pageNumber}&pageSize={pageSize}");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+            var response = await http.SendAsync(request);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                UserToken dadosToken = new UserToken();
-                dadosToken = await PegarDadosToken();
-
-                // Adiciona os parâmetros de paginação na URL
-                var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista-paginada?pageNumber={pageNumber}&pageSize={pageSize}");
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
-
-                var response = await http.SendAsync(request);
-
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    throw new UnauthorizedAccessException("Sessão expirada.");
-                }
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    throw new HttpRequestException($"Erro ao buscar lista de tarefas: {response.StatusCode} - {errorContent}");
-                }
-
-                response.EnsureSuccessStatusCode();
-
-                var content = await response.Content.ReadAsStringAsync();
-
-                // Assumindo que sua API retorna um objeto com Items e TotalCount
-                var result = JsonConvert.DeserializeObject<PagedResult<TarefaConsultaDTO>>(content);
-
-                return (true, "", result.Items, result.TotalCount);
+                return (false, "Sessão expirada. Por favor, faça login novamente.", null, 0);
             }
-            catch (Exception ex)
+
+            if (!response.IsSuccessStatusCode)
             {
-                throw;
+                var errorContent = await response.Content.ReadAsStringAsync();
+
+                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+
+                return (false, errorResponse?.message ?? "Erro desconhecido", null, 0);
             }
+
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<PagedResult<TarefaConsultaDTO>>(content);
+
+            return (true, "", result.Items, result.TotalCount);
         }
 
         public async Task<(bool success, string errorMessage, List<TarefaConsultaDTO>)> ObterTarefasAsync()
@@ -104,17 +90,6 @@ namespace Blazor_WebAssembly.Services
             var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
 
             return (false, errorResponse?.message ?? "Erro desconhecido", null);
-
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    var errorContent = await response.Content.ReadAsStringAsync();
-            //    throw new HttpRequestException($"Erro ao buscar lista de tarefas: {response.StatusCode} - {errorContent}");
-            //}
-            //response.EnsureSuccessStatusCode();
-
-            //var content = await response.Content.ReadAsStringAsync();
-
-            //return JsonConvert.DeserializeObject<List<TarefaConsultaDTO>>(content);
         }
 
         public async Task<(bool success, string errorMessage)> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa)

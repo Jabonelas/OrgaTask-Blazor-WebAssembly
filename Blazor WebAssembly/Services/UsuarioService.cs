@@ -4,6 +4,8 @@ using System.Text;
 using Blazored.LocalStorage;
 using Blazor_WebAssembly.Interfaces;
 using Blazor_WebAssembly.DTOs.Usuario;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Blazor_WebAssembly.Services
 {
@@ -11,11 +13,13 @@ namespace Blazor_WebAssembly.Services
     {
         private readonly HttpClient http;
         private readonly ILocalStorageService localStorage;
+        private readonly AuthenticationStateProvider authStateProvider;
 
-        public UsuarioService(HttpClient _http, ILocalStorageService _localStorage)
+        public UsuarioService(HttpClient _http, ILocalStorageService _localStorage, AuthenticationStateProvider _authStateProvider)
         {
             http = _http;
             localStorage = _localStorage;
+            authStateProvider = _authStateProvider;
         }
 
         public async Task<(bool success, string errorMessage)> LoginAsync(UsuarioLoginDTO _dadosLogin)
@@ -37,8 +41,14 @@ namespace Blazor_WebAssembly.Services
                     var responseContent = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
 
-                    //    // Armazenando o token
+                    // Armazenando o token
                     await localStorage.SetItemAsync("authToken", result.Token);
+
+                    // Armazenando o usuario
+                    await localStorage.SetItemAsync("usuario", _dadosLogin.login);
+
+                    (authStateProvider as CustomAuthenticationStateProvider)?.NotifyUserLogout();
+
                     return (true, null);
                 }
                 else

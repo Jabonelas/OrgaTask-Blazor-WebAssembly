@@ -3,6 +3,9 @@ using Blazor_WebAssembly.Services;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Components.Authorization;
+using Blazor_WebAssembly.Layout;
+using Blazor_WebAssembly.Pages;
 
 namespace Blazor_WebAssembly
 {
@@ -26,6 +29,9 @@ namespace Blazor_WebAssembly
 
             // injetando notivicacao
             builder.Services.AddScoped<NotificacaoService>();
+
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
             builder.Services.AddBlazoredLocalStorage();
 

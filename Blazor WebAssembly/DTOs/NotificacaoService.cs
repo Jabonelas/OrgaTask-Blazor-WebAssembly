@@ -36,16 +36,23 @@ public class NotificacaoService
         });
     }
 
+    public class SwalResult
+    {
+        public bool isConfirmed { get; set; }
+        public bool isDismissed { get; set; }
+        public bool isDenied { get; set; }
+    }
+
     public async Task<bool> MostrarConfirmacao(string titulo, string mensagem)
     {
-        bool confirmado = await jsRuntime.InvokeAsync<bool>("Swal.fire", new
+        var resultado = await jsRuntime.InvokeAsync<SwalResult>("Swal.fire", new
         {
             title = titulo,
             text = mensagem,
             icon = "warning",
             showCancelButton = true,
-            confirmButtonText = "Sim, cancelar",
-            cancelButtonText = "Não, continuar",
+            confirmButtonText = "Sim, continuar",
+            cancelButtonText = "Não, cancelar",
             reverseButtons = true,
             focusConfirm = false,
             customClass = new
@@ -55,6 +62,25 @@ public class NotificacaoService
             }
         });
 
-        return confirmado;
+        return resultado.isConfirmed;
+
+        //bool confirmado = await jsRuntime.InvokeAsync<bool>("Swal.fire", new
+        //{
+        //    title = titulo,
+        //    text = mensagem,
+        //    icon = "warning",
+        //    showCancelButton = true,
+        //    confirmButtonText = "Sim, cancelar",
+        //    cancelButtonText = "Não, continuar",
+        //    reverseButtons = true,
+        //    focusConfirm = false,
+        //    customClass = new
+        //    {
+        //        confirmButton = "btn btn-danger",
+        //        cancelButton = "btn btn-secondary"
+        //    }
+        //});
+
+        //return confirmado;
     }
 }

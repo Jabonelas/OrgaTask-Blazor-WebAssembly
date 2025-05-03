@@ -2,6 +2,7 @@
 @using Blazor_WebAssembly.DTOs
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
 @inject NavigationManager Navigation
@@ -10,6 +11,9 @@
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
 @inject NotificacaoService notificacaoService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
 
 
 <EditForm Model="@TarefaAlterarDTO" OnValidSubmit="@HandleSubmit">
@@ -85,6 +89,20 @@
     {
         try
         {
+
+
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+            var user = authState.User;
+
+            if (!user.Identity.IsAuthenticated)
+            {
+                await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+
+                Navigation.NavigateTo("/login");
+            }
+
+
             (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await ITarefaService.BuscarTarefaAsync(id);
 
             TarefaAlterarDTO = tarefa;

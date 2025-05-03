@@ -1,6 +1,7 @@
 ﻿@page "/cadastrar-usuario"
 @using Blazor_WebAssembly.DTOs.Usuario
 @using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
 @inject NavigationManager Navigation
@@ -9,6 +10,8 @@
 @inject IUsuarioService iUsuarioService
 @inject NotificacaoService notificacaoService
 @inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 
 <EditForm Model="@UsuarioCadastrarDTO" OnValidSubmit="@HandleSubmit">
@@ -62,6 +65,20 @@
     private UsuarioCadastrarDTO UsuarioCadastrarDTO = new UsuarioCadastrarDTO();
 
     private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+          
+            Navigation.NavigateTo("/login");
+        }
+    }
 
     private async Task HandleSubmit()
     {

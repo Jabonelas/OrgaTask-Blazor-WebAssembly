@@ -243,3 +243,15 @@ code {
     overflow-y: auto;
     position: relative;
 }
+
+.tarefas-grid {
+    position: relative;
+}
+
+/* O sentinela deve estar no final do grid */
+[ref=sentinel] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+}

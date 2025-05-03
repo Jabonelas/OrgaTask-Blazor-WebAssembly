@@ -2,13 +2,7 @@
 <ArrayOfTabHighlightState xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <TabHighlightState>
     <extensions>
-      <string>Blazor WebAssembly\Pages\CadastrarUsuario.razor</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Blazor WebAssembly\Pages\TarefaPaginada.razor</string>
+      <string>Blazor WebAssembly\Pages\Tarefas.razor</string>
     </extensions>
     <highlightIndex>1</highlightIndex>
   </TabHighlightState>

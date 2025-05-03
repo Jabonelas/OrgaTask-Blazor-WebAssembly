@@ -9,9 +9,6 @@
 @inject IUsuarioService iUsuarioService
 @inject NotificacaoService notificacaoService
 
-
-
-
 <h1>Login</h1>
 
 <EditForm Model="@UsuarioLoginDTO" OnValidSubmit="@HandleSubmit">
@@ -72,7 +69,9 @@
             {
                 await notificacaoService.MostrarSucesso("Login realizado com sucesso!");
 
-                Navigation.NavigateTo("/tarefas");
+                Navigation.NavigateTo("/", forceLoad: true);
+
+                // Navigation.NavigateTo("/tarefas");
             }
             else
             {

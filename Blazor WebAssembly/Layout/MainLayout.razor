@@ -1,16 +1,92 @@
-﻿@inherits LayoutComponentBase
+﻿@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Components.Authorization
+@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+@inject NotificacaoService notificacaoService
+@inject ILocalStorageService localStorage
+
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
 
     <main>
-    @*     <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div> *@
+
+        @if (!string.IsNullOrEmpty(usuario))
+        {
+            <div class="top-row px-4">
+                <div style="display: flex; align-items: center; gap: 10px;">
+
+                    <p>@usuario</p>
+
+                    <button class="btn btn-sm btn-outline-danger"
+                            @onclick="() => Sair()">
+                            Sair
+                    </button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="top-row px-4">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  
+                </div>
+
+                <button class="btn btn-sm btn-outline-primary" @onclick="() => Login()">
+                    Login
+                </button>
+
+            </div>
+        }
 
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+
+
+@code {
+
+
+    string usuario = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            string asd = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "usuario");
+
+            usuario = "Usuário: " + asd.Replace("\"", "");
+        }
+    }
+
+
+    private void Login()
+    {
+        Navigation.NavigateTo($"/login");
+    }
+
+    private async Task Sair()
+    {
+        var confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Deseja deslogar o usuário?");
+
+        if (confirmado)
+        {
+            // Remover o token
+            await localStorage.RemoveItemAsync("authToken");
+            // Remover o usuário
+            await localStorage.RemoveItemAsync("usuario");
+
+            Navigation.NavigateTo("/login", forceLoad: true); // forceLoad pode ajudar se o redirecionamento não estiver funcionando direito
+        }
+    }
+}
