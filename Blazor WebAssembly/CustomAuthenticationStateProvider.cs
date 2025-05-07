@@ -36,7 +36,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
         if (jwtToken.ValidTo < DateTime.UtcNow)
         {
             await _localStorage.RemoveItemAsync("authToken");
-            await _localStorage.RemoveItemAsync("usuario");
+            //await _localStorage.RemoveItemAsync("usuario");
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
 

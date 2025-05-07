@@ -52,7 +52,6 @@
 
 @code {
 
-
     string usuario = "";
 
     protected override async Task OnInitializedAsync()
@@ -63,12 +62,16 @@
 
         if (user.Identity.IsAuthenticated)
         {
-            string asd = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "usuario");
+            string usuarioLogado = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "usuario");
 
-            usuario = "Usuário: " + asd.Replace("\"", "");
+            usuario = "Usuário: " + usuarioLogado.Replace("\"", "");
+
+        }else
+        {
+            usuario = "";
+
         }
     }
-
 
     private void Login()
     {
@@ -84,7 +87,7 @@
             // Remover o token
             await localStorage.RemoveItemAsync("authToken");
             // Remover o usuário
-            await localStorage.RemoveItemAsync("usuario");
+            // await localStorage.RemoveItemAsync("usuario");
 
             Navigation.NavigateTo("/login", forceLoad: true); // forceLoad pode ajudar se o redirecionamento não estiver funcionando direito
         }

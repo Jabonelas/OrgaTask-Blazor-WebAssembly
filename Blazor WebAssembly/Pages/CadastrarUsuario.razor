@@ -10,7 +10,7 @@
 @inject IUsuarioService iUsuarioService
 @inject NotificacaoService notificacaoService
 @inject IJSRuntime JS
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@* @inject AuthenticationStateProvider AuthenticationStateProvider *@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 
@@ -69,15 +69,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+        // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        // var user = authState.User;
 
-        if (!user.Identity.IsAuthenticated)
-        {
-            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+        // if (!user.Identity.IsAuthenticated)
+        // {
+        //     await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
           
-            Navigation.NavigateTo("/login");
-        }
+        //     Navigation.NavigateTo("/login");
+        // }
     }
 
     private async Task HandleSubmit()

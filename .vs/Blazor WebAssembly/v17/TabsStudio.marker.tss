@@ -6,4 +6,10 @@
     </extensions>
     <highlightIndex>1</highlightIndex>
   </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Blazor WebAssembly\CustomAuthenticationStateProvider.cs</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
 </ArrayOfTabHighlightState>

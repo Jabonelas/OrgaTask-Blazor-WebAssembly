@@ -1,14 +1,37 @@
 ﻿// wwwroot/js/infiniteScroll.js
-
 window.infiniteScroll = {
-    init: function (element, dotNetObject) {
-        const observer = new IntersectionObserver(async (entries) => {
-            if (entries[0].isIntersecting) {
-                await dotNetObject.invokeMethodAsync('LoadMoreItems');
-            }
-        }, { threshold: 0.1 });
+    init: function (sentinel, dotNetHelper) {
+        console.log('[Scroll] Iniciando observer...');
 
-        observer.observe(element);
+        // Variável para controlar o estado de carregamento
+        let isLoading = false;
+
+        const observer = new IntersectionObserver(async (entries) => {
+            // Verifica se o sentinela está visível E não está em processo de carregamento
+            if (entries[0].isIntersecting && !isLoading) {
+                console.log('[Scroll] Sentinela visível - carregando mais itens');
+                isLoading = true;
+
+                try {
+                    await dotNetHelper.invokeMethodAsync('LoadMoreItems');
+                } catch (error) {
+                    console.error('[Scroll] Erro ao carregar itens:', error);
+                } finally {
+                    // Adiciona um pequeno delay antes de permitir nova carga
+                    setTimeout(() => isLoading = false, 500);
+                }
+            }
+        }, {
+            root: null,
+            rootMargin: '500px', // Dispara 500px antes de chegar no final
+            threshold: 0.01
+        });
+
+        observer.observe(sentinel);
+        console.log('[Scroll] Observer configurado com sucesso');
+
+        // Para debug (pode acessar via console do navegador)
+        window.scrollObserver = observer;
     }
 };
 

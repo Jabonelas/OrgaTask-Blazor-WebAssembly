@@ -90,7 +90,9 @@
         {
             await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
 
-            Navigation.NavigateTo("/login");
+            Navigation.NavigateTo("/", forceLoad: true);
+
+            // Navigation.NavigateTo("/login");
         }
     }
 

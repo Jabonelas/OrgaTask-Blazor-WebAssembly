@@ -31,9 +31,10 @@
             </div>
         }
 
+
         @foreach (var tarefa in tarefas)
         {
-            <div class="tarefa-card @GetPriorityClass(tarefa.prioridade) @GetStatusClass(tarefa.status)">
+            <div class="tarefa-card @GetPriorityClass(tarefa.prioridade) @GetStatusClass(tarefa.status)" @onclick="() => VisualizarTarefa(tarefa.id)">
                 <div class="tarefa-header">
                     <span class="prioridade">@tarefa.prioridade</span>
                     <span class="status">@tarefa.status</span>
@@ -67,6 +68,8 @@
             </div>
         }
 
+        
+
         @if (isLoading)
         {
             <div class="loading-indicator">
@@ -76,7 +79,21 @@
             </div>
         }
 
-        <div @ref="sentinel" style="height: 1px;"></div>
+      @*   <div @ref="sentinel" style="height: 1px;"></div> *@
+        <!-- Substitua a div atual por: -->
+        <div @ref="sentinel" tarefa-sentinela></div>
+
+    @*     <button @onclick="LoadMoreItems" class="btn btn-secondary mt-3">
+            Carregar Mais Manualmente
+        </button> *@
+
+ @*        <div style="position: fixed; bottom: 20px; left: 0; right: 0; text-align: center;">
+            <button @onclick="LoadMoreItems" class="btn btn-secondary">
+                Carregar Mais Manualmente
+            </button>
+        </div> *@
+
+
     </div>
 </div>
 
@@ -108,103 +125,71 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-
-        if (firstRender && hasMoreItems)
+        if (firstRender)
         {
             objRef = DotNetObjectReference.Create(this);
-            await JS.InvokeVoidAsync("infiniteScroll.init", sentinel, objRef);
-            Console.WriteLine("Infinite scroll initialized");
-        }
 
-        // if (firstRender)
-        // {
-        //     objRef = DotNetObjectReference.Create(this);
-        //     await JS.InvokeVoidAsync("infiniteScroll.init", sentinel, objRef);
-        //     Console.WriteLine("Infinite scroll initialized"); // Adicione para debug
-        // }
+            try
+            {
+                await Task.Delay(500); // Garante que o DOM está pronto
+                await JS.InvokeVoidAsync("infiniteScroll.init", sentinel, objRef);
+                Console.WriteLine("Scroll infinito iniciado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao iniciar scroll infinito: {ex.Message}");
+            }
+        }
     }
 
     [JSInvokable]
     public async Task LoadMoreItems()
     {
+        Console.WriteLine($"Tentando carregar página {currentPage}...");
 
-        Console.WriteLine("LoadMoreItems chamado"); // Debug
         if (isLoading || !hasMoreItems)
         {
-            Console.WriteLine($"Cancelado - isLoading: {isLoading}, hasMoreItems: {hasMoreItems}"); // Debug
+            Console.WriteLine("Cancelado - já em progresso ou sem mais itens");
             return;
         }
 
         isLoading = true;
         try
         {
-            Console.WriteLine($"Carregando página {currentPage}"); // Debug
             var (success, errorMessage, items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
 
-            if (success)
+            if (success && items?.Count > 0)
             {
                 tarefas.AddRange(items);
                 currentPage++;
-                hasMoreItems = items.Count == pageSize; // Modificado para verificar se a página está cheia
-                Console.WriteLine($"Carregado. Total itens: {tarefas.Count}, Tem mais: {hasMoreItems}"); // Debug
+                hasMoreItems = items.Count >= pageSize;
+
+                Console.WriteLine($"Página {currentPage - 1} carregada. Itens: {items.Count}, Total: {tarefas.Count}");
+
+                // Pequeno delay para evitar chamadas muito rápidas
+                await Task.Delay(300);
             }
             else
             {
-                await notificacaoService.MostrarErro(errorMessage);
-                if (errorMessage == "Sessão expirada. Por favor, faça login novamente.")
-                {
-                    Navigation.NavigateTo($"/login");
-                }
+                hasMoreItems = false;
+                Console.WriteLine("Todos os itens foram carregados");
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro: {ex.Message}");
-            await notificacaoService.MostrarErro("Ocorreu um erro ao carregar mais itens.");
+            Console.WriteLine($"Erro ao carregar itens: {ex.Message}");
+            await notificacaoService.MostrarErro("Erro ao carregar mais itens.");
         }
         finally
         {
             isLoading = false;
-            await InvokeAsync(StateHasChanged);
+            StateHasChanged();
         }
+    }
 
-
-        // if (isLoading || !hasMoreItems) return;
-
-        // isLoading = true;
-        // StateHasChanged();
-
-        // try
-        // {
-        //     var (success, errorMessage, items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
-
-        //     if (success)
-        //     {
-        //         tarefas.AddRange(items);
-        //         currentPage++;
-        //         hasMoreItems = tarefas.Count < totalCount;
-        //     }
-        //     else
-        //     {
-        //         await notificacaoService.MostrarErro(errorMessage);
-
-        //         if (errorMessage == "Sessão expirada. Por favor, faça login novamente.")
-        //         {
-        //             Navigation.NavigateTo($"/login");
-        //         }
-        //     }
-        // }
-        // catch (Exception ex)
-        // {
-        //     Console.WriteLine($"Erro ao caregar tarefas: {ex.Message}");
-
-        //     await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        // }
-        // finally
-        // {
-        //     isLoading = false;
-        //     StateHasChanged();
-        // }
+    public void Dispose()
+    {
+        objRef?.Dispose();
     }
 
     private string GetPriorityClass(string prioridade)
@@ -270,8 +255,5 @@
         await LoadMoreItems();
     }
 
-    public void Dispose()
-    {
-        objRef?.Dispose();
-    }
+ 
 }

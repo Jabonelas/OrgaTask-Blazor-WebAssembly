@@ -1,6 +1,7 @@
 ﻿@page "/login"
 @using Blazor_WebAssembly.DTOs.Usuario
 @using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
 @inject HttpClient Http
@@ -8,6 +9,8 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IUsuarioService iUsuarioService
 @inject NotificacaoService notificacaoService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
 
 <h1>Login</h1>
 
@@ -53,10 +56,15 @@
 
     private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        UsuarioLoginDTO.login = "string";
-        UsuarioLoginDTO.senha = "string";
+        string? usuarioLogado = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "usuario");
+
+        if (!string.IsNullOrEmpty(usuarioLogado))
+        {
+            UsuarioLoginDTO.login =  usuarioLogado.Replace("\"", "");
+            
+        }
     }
 
     private async Task HandleSubmit()
