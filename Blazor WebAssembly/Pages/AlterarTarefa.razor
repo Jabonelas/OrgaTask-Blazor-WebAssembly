@@ -29,44 +29,44 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Título</label>
-                    <InputText @bind-Value="TarefaAlterarDTO.titulo" class="form-control" />
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.titulo)" class="text-danger" />
+                    <InputText @bind-Value="TarefaAlterarDTO.Titulo" class="form-control" />
+                    <ValidationMessage For="@(() => TarefaAlterarDTO.Titulo)" class="text-danger" />
                 </div>
                 <div class="col-md-3">
                     <label class="form-label fw-bold">Prioridade</label>
-                    <InputSelect @bind-Value="TarefaAlterarDTO.prioridade" class="form-select">
+                    <InputSelect @bind-Value="TarefaAlterarDTO.Prioridade" class="form-select">
                         <option value=""></option>
                         <option value="Alta">Alta</option>
                         <option value="Média">Média</option>
                         <option value="Baixa">Baixa</option>
                     </InputSelect>
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.prioridade)" class="text-danger" />
+                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prioridade)" class="text-danger" />
                 </div>
                 <div class="col-md-3">
                     <label class="form-label fw-bold">Prazo (dias)</label>
-                    <InputNumber @bind-Value="TarefaAlterarDTO.prazo" class="form-control" />
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.prazo)" class="text-danger" />
+                    <InputNumber @bind-Value="TarefaAlterarDTO.Prazo" class="form-control" />
+                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prazo)" class="text-danger" />
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-bold ">Descrição</label>
-                <InputTextArea @bind-Value="TarefaAlterarDTO.descricao"
+                <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
                                class="form-control"
                                rows="4" />
-                <ValidationMessage For="@(() => TarefaAlterarDTO.descricao)" class="text-danger" />
+                <ValidationMessage For="@(() => TarefaAlterarDTO.Descricao)" class="text-danger" />
             </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Status</label>
-                    <InputSelect @bind-Value="TarefaAlterarDTO.status" class="form-select">
+                    <InputSelect @bind-Value="TarefaAlterarDTO.Status" class="form-select">
                         <option value=""></option>
                         <option value="Pendente">Pendente</option>
                         <option value="Em Progresso">Em Progresso</option>
                         <option value="Concluído">Concluído</option>
                     </InputSelect>
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.status)" class="text-danger" />
+                    <ValidationMessage For="@(() => TarefaAlterarDTO.Status)" class="text-danger" />
                 </div>
             </div>
         </div>
@@ -125,6 +125,8 @@
             {
                 await notificacaoService.MostrarSucesso("Dados da tarefa alterada com sucesso!");
 
+                LimparCampos();
+
                 Navigation.NavigateTo($"/tarefas");
             }
             else
@@ -138,6 +140,16 @@
 
             await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
+    }
+
+
+    private void LimparCampos()
+    {
+        TarefaAlterarDTO.Titulo = "";
+        TarefaAlterarDTO.Prioridade = "";
+        TarefaAlterarDTO.Prazo = 0;
+        TarefaAlterarDTO.Descricao = "";
+        TarefaAlterarDTO.Status = "";
     }
 
     private async void CancelarAlteracao()

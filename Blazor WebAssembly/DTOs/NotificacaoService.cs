@@ -63,24 +63,5 @@ public class NotificacaoService
         });
 
         return resultado.isConfirmed;
-
-        //bool confirmado = await jsRuntime.InvokeAsync<bool>("Swal.fire", new
-        //{
-        //    title = titulo,
-        //    text = mensagem,
-        //    icon = "warning",
-        //    showCancelButton = true,
-        //    confirmButtonText = "Sim, cancelar",
-        //    cancelButtonText = "Não, continuar",
-        //    reverseButtons = true,
-        //    focusConfirm = false,
-        //    customClass = new
-        //    {
-        //        confirmButton = "btn btn-danger",
-        //        cancelButton = "btn btn-secondary"
-        //    }
-        //});
-
-        //return confirmado;
     }
 }

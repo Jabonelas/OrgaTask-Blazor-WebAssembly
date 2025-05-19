@@ -12,9 +12,9 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Blazored.LocalStorage.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.js
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.map
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.8.0.11.r908q1qvex.js
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.8.0.15.natk03k2jw.js
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.wasm
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.8.0.11.kavq5fxgh9.js
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.8.0.15.s6iiltf4vd.js
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js.map
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_CJK.dat
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_EFIGS.dat
@@ -237,6 +237,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.IO.Pipelines.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Binder.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_EFIGS.dat.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.Logging.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Security.Cryptography.Encoding.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.IO.IsolatedStorage.wasm.gz
@@ -268,7 +269,6 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.JSInterop.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.IO.FileSystem.DriveInfo.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.ComponentModel.TypeConverter.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.JSInterop.WebAssembly.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Linq.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.ComponentModel.Primitives.wasm.gz
@@ -285,7 +285,6 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Security.Principal.Windows.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Console.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Threading.ThreadPool.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Collections.Concurrent.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Diagnostics.Contracts.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Diagnostics.Tools.wasm.gz
@@ -322,19 +321,18 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.Requests.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Formats.Tar.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Json.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.map.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_no_CJK.dat.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Reflection.Emit.Lightweight.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\blazor.webassembly.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Configuration.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Dynamic.Runtime.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_no_CJK.dat.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.IO.MemoryMappedFiles.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.Http.Json.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Xml.Serialization.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Web.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Runtime.CompilerServices.VisualC.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.8.0.11.kavq5fxgh9.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Threading.Timer.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.map.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.ServicePoint.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Data.DataSetExtensions.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.Configuration.FileExtensions.wasm.gz
@@ -354,6 +352,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Security.Cryptography.Algorithms.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Blazor WebAssembly.pdb.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Linq.Queryable.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.8.0.15.natk03k2jw.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Globalization.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Xml.Linq.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Reflection.DispatchProxy.wasm.gz
@@ -372,24 +371,25 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Security.Cryptography.Primitives.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.IO.Compression.ZipFile.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Blazor WebAssembly.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_CJK.dat.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Collections.Specialized.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Runtime.InteropServices.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js.map.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Diagnostics.Process.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js.map.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Xml.ReaderWriter.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Diagnostics.TextWriterTraceListener.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.WebProxy.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Threading.Tasks.Extensions.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Text.Encoding.CodePages.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Linq.Expressions.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.8.0.11.r908q1qvex.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Reflection.Metadata.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_CJK.dat.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.DependencyInjection.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Diagnostics.Debug.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.Configuration.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.Quic.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.8.0.15.s6iiltf4vd.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Extensions.FileSystemGlobbing.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Private.DataContractSerialization.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Net.Sockets.wasm.gz
@@ -410,6 +410,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Numerics.Vectors.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.VisualBasic.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Microsoft.Win32.Primitives.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Xml.XmlSerializer.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Resources.ResourceManager.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Reflection.Extensions.wasm.gz
@@ -430,7 +431,6 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Reflection.TypeExtensions.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Reflection.Primitives.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\System.Threading.Tasks.Dataflow.wasm.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\icudt_EFIGS.dat.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\Blazor WebAssembly.staticwebassets.runtime.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\Blazor WebAssembly.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\Blazor WebAssembly.pdb
@@ -1058,15 +1058,15 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\yh7nbqz29p.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\7wjhrg7ygo.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\6867tr1m89.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\c74fofbbkr.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\kh11bp3ux2.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\r908q1qvex.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\87mwanqgx6.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\kavq5fxgh9.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\psbvy67b1h.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\p3pfhfb9rg.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\zjnko9b0pe.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\jq0n4lphzw.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\uzx99988me.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\j32w1lz4fz.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\natk03k2jw.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\rspc2lgu9o.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\s6iiltf4vd.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\q8qxtuk705.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\rjzhfjxh7w.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\30pk3tv08o.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\j67armooab.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\p30mv3ygrs.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\n0mvqgdmjc.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\fveyapdap7.gz

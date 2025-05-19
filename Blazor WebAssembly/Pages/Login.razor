@@ -11,48 +11,52 @@
 @inject NotificacaoService notificacaoService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
-<h1>Login</h1>
 
-<EditForm Model="@UsuarioLoginDTO" OnValidSubmit="@HandleSubmit">
-    <DataAnnotationsValidator />
-    @* <ValidationSummary /> *@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+        <h3 class="text-center mb-4">Acesse sua conta</h3>
 
-    <div class="live-preview">
-        <div class="row g-3">
-
-            <p class="text-muted">Usuário</p>
-
-            <div class="col-lg-6">
-                <div class="form-floating">
-                    <InputText @bind-Value="UsuarioLoginDTO.login" class="form-control" />
-                    <label>Usuário</label>
-                    <ValidationMessage For="@(() => UsuarioLoginDTO.login)" />
+        <EditForm Model="@UsuarioLoginDTO" OnValidSubmit="@HandleSubmit">
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <label class="form-label text-muted">Usuário</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <InputText @bind-Value="UsuarioLoginDTO.login" class="form-control" placeholder="Digite seu usuário" />
                 </div>
+                <ValidationMessage For="@(() => UsuarioLoginDTO.login)" class="text-danger small" />
             </div>
 
-            <p class="text-muted">Senha</p>
-
-            <div class="col-lg-4">
-                <div class="form-floating">
-                    <InputText type="password" @bind-Value="UsuarioLoginDTO.senha" class="form-control" />
-                    <label>Senha</label>
-                    <ValidationMessage For="@(() => UsuarioLoginDTO.senha)" />
+            <div class="mb-4">
+                <label class="form-label text-muted">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <InputText @bind-Value="UsuarioLoginDTO.senha" type="password" class="form-control" placeholder="Digite sua senha" />
                 </div>
+                <ValidationMessage For="@(() => UsuarioLoginDTO.senha)" class="text-danger small" />
             </div>
 
-            <div class="col-lg-12">
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary">Logar</button>
-                </div>
+         
+            <div class="d-grid mb-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                </button>
             </div>
-        </div>
+            <div class="d-grid">
+                <button type="button" class="btn btn-outline-secondary" @onclick="CriarConta">
+                    <i class="bi bi-person-plus me-1"></i> Criar uma conta
+                </button>
+            </div>
+
+
+        </EditForm>
     </div>
-</EditForm>
+</div>
 
 
 @code {
-
 
     private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
 
@@ -65,6 +69,11 @@
             UsuarioLoginDTO.login =  usuarioLogado.Replace("\"", "");
             
         }
+    }
+
+    private void CriarConta()
+    {
+        NavigationManager.NavigateTo("/cadastrar-usuario");
     }
 
     private async Task HandleSubmit()
@@ -85,7 +94,6 @@
             {
                 await notificacaoService.MostrarErro(mensagemErro);
             }
-            
         }
         catch (Exception ex)
         {
@@ -94,5 +102,4 @@
             await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
         }
     }
-
 }

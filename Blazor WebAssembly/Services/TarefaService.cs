@@ -31,7 +31,18 @@ namespace Blazor_WebAssembly.Services
             UserToken dadosToken = new UserToken();
             dadosToken = await PegarDadosToken();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista-paginada?pageNumber={pageNumber}&pageSize={pageSize}");
+            //var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/paginado?pageNumber={pageNumber}&pageSize={pageSize}");
+
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/paginado?pageNumber={pageNumber}&pageSize={pageSize}");
+
+#else
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/paginado?pageNumber={pageNumber}&pageSize={pageSize}");
+
+#endif
+
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await http.SendAsync(request);
@@ -68,7 +79,16 @@ namespace Blazor_WebAssembly.Services
                 return (false, "Token de autenticação inválido", null);
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/lista");
+#if DEBUG
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "tarefas");
+
+#else
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas");
+
+#endif
+
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await http.SendAsync(request);
@@ -106,10 +126,20 @@ namespace Blazor_WebAssembly.Services
                 var json = JsonConvert.SerializeObject(_dadosTarefa);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var request = new HttpRequestMessage(HttpMethod.Post, $"Tarefa/cadastrar")
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Post, "tarefas")
                 {
                     Content = content
                 };
+#else
+
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://blazor-api.onrender.com/api/tarefas")
+                {
+                    Content = content
+                };
+
+#endif
 
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
@@ -152,10 +182,20 @@ namespace Blazor_WebAssembly.Services
                 var json = JsonConvert.SerializeObject(_dadosTarefa);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var request = new HttpRequestMessage(HttpMethod.Put, $"Tarefa/alterar")
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Put, $"tarefas")
                 {
                     Content = content
                 };
+#else
+
+                var request = new HttpRequestMessage(HttpMethod.Put, $"https://blazor-api.onrender.com/api/tarefas")
+                {
+                    Content = content
+                };
+
+#endif
 
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
@@ -195,7 +235,15 @@ namespace Blazor_WebAssembly.Services
                     return (false, "Token de autenticação inválido", null);
                 }
 
-                var request = new HttpRequestMessage(HttpMethod.Get, $"Tarefa/{_id}/buscar");
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/{_id}");
+#else
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/{_id}");
+
+#endif
+
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
                 var response = await http.SendAsync(request);
@@ -226,16 +274,6 @@ namespace Blazor_WebAssembly.Services
             }
         }
 
-        private async Task<UserToken> PegarDadosToken()
-        {
-            UserToken dadosToken = new UserToken();
-
-            //Pegando o token que foi gerado
-            dadosToken.Token = await localStorage.GetItemAsync<string>("authToken");
-
-            return dadosToken;
-        }
-
         public async Task<(bool success, string errorMessage)> DeletarTarefaAsync(int _id)
         {
             UserToken dadosToken = await PegarDadosToken();
@@ -245,7 +283,15 @@ namespace Blazor_WebAssembly.Services
                 return (false, "Token de autenticação inválido");
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"Tarefa/deletar/{_id}");
+#if DEBUG
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"tarefas/{_id}");
+#else
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"https://blazor-api.onrender.com/api/tarefas/{_id}");
+
+#endif
+
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await http.SendAsync(request);
@@ -266,5 +312,19 @@ namespace Blazor_WebAssembly.Services
 
             return (true, null);
         }
+
+        #region Métodos privados
+
+        private async Task<UserToken> PegarDadosToken()
+        {
+            UserToken dadosToken = new UserToken();
+
+            //Pegando o token que foi gerado
+            dadosToken.Token = await localStorage.GetItemAsync<string>("authToken");
+
+            return dadosToken;
+        }
+
+        #endregion Métodos privados
     }
 }

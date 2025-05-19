@@ -5,21 +5,183 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager Navigation
 
-<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Organize suas tarefas de forma simples e eficiente.</h1>
+        <p>Transforme o caos em produtividade com nossa plataforma de gerenciamento de tarefas.</p>
+        @if (!usuarioLogado)
+        {
+            <a href="/login" class="cta-button">Comece agora</a>
+        }
+    </div>
 
-Welcome to your new app.
+  <div class="hero-image">
+        <img src="images/TelaTarefasComputador.png" alt="Aplicativo em uso"
+             style="width: 100%; max-width: 800px; height: auto;">
+</div>
+
+</div>
+
+<div class="features-section">
+    <h2>Sua ferramenta ideal de produtividade</h2>
+    <p>Gerencie tarefas com quadros, listas e prazos. Simples, visual e poderoso.</p>
+
+    <div class="features-grid">
+        <div class="feature-box">
+            <h3>✅ Criação de Tarefas</h3>
+            <p>Adicione novas tarefas com prazos, prioridades e descrições.</p>
+        </div>
+        <div class="feature-box">
+            <h3>📊 Acompanhamento</h3>
+            <p>Visualize o andamento das suas atividades em tempo real.</p>
+        </div>
+        <div class="feature-box">
+            <h3>⚙️ Atualizações Simples</h3>
+            <p>Atualize o status ou prioridade das tarefas com poucos cliques</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    @if (usuarioLogado)
+    {
+        <p>&copy; 2025 - Desenvolvido por Israel Oliveira </p>
+    }
+    else
+    {
+        <p>&copy; 2025 - Desenvolvido por Israel Oliveira | <a href="/login">Entrar</a></p>
+    }
+</footer>
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background-color: #f7f9fb;
+        color: #333;
+    }
+
+    .hero-section {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 30px;
+        background: linear-gradient(135deg, #ffffff, #e0f7ff);
+    }
+
+    .hero-content {
+        flex: 1 1 400px;
+        padding: 20px;
+        max-width: 600px;
+    }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #212121;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+    .cta-button {
+        background-color: #0052cc;
+        color: white;
+        padding: 14px 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+        .cta-button:hover {
+            background-color: #003f9e;
+        }
+
+    .hero-image {
+        flex: 1 1 300px;
+        text-align: center;
+        padding: 20px;
+    }
+
+        .hero-image img {
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .features-section {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: #ffffff;
+    }
+
+        .features-section h2 {
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .features-section p {
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: #555;
+        }
+
+    .features-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .feature-box {
+        background: #f0f4f8;
+        padding: 25px;
+        border-radius: 12px;
+        width: 260px;
+        box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+
+        .feature-box h3 {
+            margin-bottom: 10px;
+            color: #0073e6;
+        }
+
+    .footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #e9eef3;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+        .footer a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+</style>
+
 
 @code {
+
+    private bool usuarioLogado = false;
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
-        if (!user.Identity.IsAuthenticated)
+        if (user.Identity.IsAuthenticated)
         {
-            Navigation.NavigateTo("/login");
+            usuarioLogado = true;
         }
     }
+
+
 }

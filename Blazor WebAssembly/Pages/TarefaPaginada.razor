@@ -62,13 +62,13 @@ else
                             {
                                 <tr class="@GetRowClass(tarefa)">
                                     <td>
-                                        <div class="fw-semibold">@tarefa.id</div>
-                                        <div class="fw-semibold">@tarefa.titulo</div>
-                                        @if (!string.IsNullOrEmpty(tarefa.descricao))
+                                        <div class="fw-semibold">@tarefa.Id</div>
+                                        <div class="fw-semibold">@tarefa.Titulo</div>
+                                        @if (!string.IsNullOrEmpty(tarefa.Descricao))
                                         {
                                             <div class="text-muted small text-truncate" style="max-width: 300px;"
-                                                 title="@tarefa.descricao">
-                                                @tarefa.descricao
+                                                 title="@tarefa.Descricao">
+                                                @tarefa.Descricao
                                             </div>
                                         }
                                     </td>
@@ -77,32 +77,32 @@ else
                                
 
                                     <td>
-                                        <span class="badge @GetPriorityBadgeClass(tarefa.prioridade)">
-                                            @tarefa.prioridade
+                                        <span class="badge @GetPriorityBadgeClass(tarefa.Prioridade)">
+                                            @tarefa.Prioridade
                                         </span>
                                     </td>
                                     <td>
-                                        @(tarefa.prazo > 0 ? $"{tarefa.prazo} dia(s)" : "-")
+                                        @(tarefa.Prazo > 0 ? $"{tarefa.Prazo} dia(s)" : "-")
                                     </td>
                                     <td>
-                                        <span class="badge @GetStatusBadgeClass(tarefa.status)">
-                                            @tarefa.status
+                                        <span class="badge @GetStatusBadgeClass(tarefa.Status)">
+                                            @tarefa.Status
                                         </span>
                                     </td>
                                     <td class="text-end">
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-sm btn-outline-primary"
-                                                    @onclick="() => VisualizarTarefa(tarefa.id)"
+                                                    @onclick="() => VisualizarTarefa(tarefa.Id)"
                                                     title="Visualizar">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                             <button class="btn btn-sm btn-outline-secondary"
-                                                    @onclick="() => EditarTarefa(tarefa.id)"
+                                                    @onclick="() => EditarTarefa(tarefa.Id)"
                                                     title="Editar">
                                                 <i class="bi bi-pencil"></i>
                                             </button>
                                             <button class="btn btn-sm btn-outline-danger"
-                                                    @onclick="() => ConfirmarExclusao(tarefa.id)"
+                                                    @onclick="() => ConfirmarExclusao(tarefa.Id)"
                                                     title="Excluir">
                                                 <i class="bi bi-trash"></i>
                                             </button>
@@ -289,11 +289,11 @@ else
 
     private string GetRowClass(TarefaConsultaDTO tarefa)
     {
-        if (tarefa.status == "Concluído")
+        if (tarefa.Status == "Concluído")
         {
             return "table-success";
         }
-        else if (DateTime.Now > Convert.ToDateTime(tarefa.data).AddDays(tarefa.prazo))
+        else if (DateTime.Now > Convert.ToDateTime(tarefa.Data).AddDays(tarefa.Prazo))
         {
             return "table-danger";
         }

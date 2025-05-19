@@ -17,7 +17,7 @@
     <DataAnnotationsValidator />
     @* <ValidationSummary /> *@
 
-    @if (TarefaAlterarDTO.titulo == null)
+    @if (TarefaAlterarDTO.Titulo == null)
     {
         <div class="alert alert-info text-center">
             Nenhuma tarefa encontrada
@@ -36,21 +36,21 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Título</label>
-                        <InputText @bind-Value="TarefaAlterarDTO.titulo" class="form-control" disabled />
+                        <InputText @bind-Value="TarefaAlterarDTO.Titulo" class="form-control" disabled />
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-bold">Prioridade</label>
-                        <InputText @bind-Value="TarefaAlterarDTO.prioridade" class="form-control" disabled />
+                        <InputText @bind-Value="TarefaAlterarDTO.Prioridade" class="form-control" disabled />
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-bold">Prazo (dias)</label>
-                        <InputNumber @bind-Value="TarefaAlterarDTO.prazo" class="form-control" disabled />
+                        <InputNumber @bind-Value="TarefaAlterarDTO.Prazo" class="form-control" disabled />
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold ">Descrição</label>
-                    <InputTextArea @bind-Value="TarefaAlterarDTO.descricao"
+                    <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
                                    class="form-control"
                                    rows="4" disabled />
                 </div>
@@ -58,10 +58,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Status</label>
-                        <InputText @bind-Value="TarefaAlterarDTO.status" class="form-control" disabled />
+                        <InputText @bind-Value="TarefaAlterarDTO.Status" class="form-control" disabled />
                     </div>
                 </div>
+
+
             </div>
+                <div class="card-footer text-end">
+                    <button type="button" class="btn btn-secondary me-2" @onclick="() => VoltarPaginaTarefas()">Voltar</button>
+                </div>
 
         </div>
     }
@@ -75,8 +80,6 @@
     public int id { get; set; }
 
     private TarefaAlterarDTO TarefaAlterarDTO = new TarefaAlterarDTO();
-
-
 
     protected override async Task OnInitializedAsync()
     {
@@ -115,5 +118,9 @@
         }
     }
 
+    private async void VoltarPaginaTarefas()
+    {
+        Navigation.NavigateTo($"/tarefa-rolagem");
+    }
 
 }

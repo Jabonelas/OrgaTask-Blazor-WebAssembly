@@ -34,34 +34,34 @@
 
         @foreach (var tarefa in tarefas)
         {
-            <div class="tarefa-card @GetPriorityClass(tarefa.prioridade) @GetStatusClass(tarefa.status)" @onclick="() => VisualizarTarefa(tarefa.id)">
+            <div class="tarefa-card @GetPriorityClass(tarefa.Prioridade) @GetStatusClass(tarefa.Status)" @onclick="() => VisualizarTarefa(tarefa.Id)">
                 <div class="tarefa-header">
-                    <span class="prioridade">@tarefa.prioridade</span>
-                    <span class="status">@tarefa.status</span>
+                    <span class="prioridade">@tarefa.Prioridade</span>
+                    <span class="status">@tarefa.Status</span>
                 </div>
                 <div class="tarefa-content">
-                    <h4>@tarefa.id</h4>
-                    <h4>@tarefa.titulo</h4>
-                    @if (!string.IsNullOrEmpty(tarefa.descricao))
+                    <h4>@tarefa.Id</h4>
+                    <h4>@tarefa.Titulo</h4>
+                    @if (!string.IsNullOrEmpty(tarefa.Descricao))
                     {
-                        <p class="descricao">@tarefa.descricao</p>
+                        <p class="descricao">@tarefa.Descricao</p>
                     }
                     <div class="tarefa-meta">
-                        <span><i class="bi bi-calendar"></i> @FormatDate(tarefa.data)</span>
-                        @if (tarefa.prazo > 0)
+                        <span><i class="bi bi-calendar"></i> @FormatDate(tarefa.Data)</span>
+                        @if (tarefa.Prazo > 0)
                         {
-                            <span><i class="bi bi-clock"></i> @tarefa.prazo dia(s)</span>
+                            <span><i class="bi bi-clock"></i> @tarefa.Prazo dia(s)</span>
                         }
                     </div>
                 </div>
                 <div class="tarefa-actions">
-                    <button @onclick="() => VisualizarTarefa(tarefa.id)" title="Visualizar">
+                    <button @onclick="() => VisualizarTarefa(tarefa.Id)" title="Visualizar">
                         <i class="bi bi-eye"></i>
                     </button>
-                    <button @onclick="() => EditarTarefa(tarefa.id)" title="Editar">
+                    <button @onclick="() => EditarTarefa(tarefa.Id)" title="Editar">
                         <i class="bi bi-pencil"></i>
                     </button>
-                    <button @onclick="() => ConfirmarExclusao(tarefa.id)" title="Excluir">
+                    <button @onclick="() => ConfirmarExclusao(tarefa.Id)" title="Excluir">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
@@ -147,44 +147,50 @@
     {
         Console.WriteLine($"Tentando carregar página {currentPage}...");
 
-        if (isLoading || !hasMoreItems)
-        {
-            Console.WriteLine("Cancelado - já em progresso ou sem mais itens");
-            return;
-        }
+        // if (isLoading || !hasMoreItems)
+        // {
+        //     Console.WriteLine("Cancelado - já em progresso ou sem mais itens");
+        //     return;
+        // }
 
         isLoading = true;
         try
         {
             var (success, errorMessage, items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
 
-            if (success && items?.Count > 0)
+            if (success)
             {
-                tarefas.AddRange(items);
-                currentPage++;
-                hasMoreItems = items.Count >= pageSize;
+                if (items?.Count > 0)
+                {
+                    tarefas.AddRange(items);
+                    currentPage++;
+                }
 
-                Console.WriteLine($"Página {currentPage - 1} carregada. Itens: {items.Count}, Total: {tarefas.Count}");
+                // ⚠️ Move esta verificação para fora do if
+                hasMoreItems = tarefas.Count < totalCount;
 
-                // Pequeno delay para evitar chamadas muito rápidas
+                Console.WriteLine($"Página {currentPage - 1} carregada. Itens: {items?.Count}, Total acumulado: {tarefas.Count}/{totalCount}");
+
                 await Task.Delay(300);
             }
             else
             {
                 hasMoreItems = false;
-                Console.WriteLine("Todos os itens foram carregados");
+                Console.WriteLine("Erro: " + errorMessage);
             }
         }
+
         catch (Exception ex)
         {
             Console.WriteLine($"Erro ao carregar itens: {ex.Message}");
-            await notificacaoService.MostrarErro("Erro ao carregar mais itens.");
+            await notificacaoService.MostrarErro($"Erro ao carregar mais itens. {ex.Message}");
         }
         finally
         {
             isLoading = false;
             StateHasChanged();
         }
+
     }
 
     public void Dispose()

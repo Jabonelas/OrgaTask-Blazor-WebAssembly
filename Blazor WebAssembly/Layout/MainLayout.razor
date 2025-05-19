@@ -17,29 +17,27 @@
 
         @if (!string.IsNullOrEmpty(usuario))
         {
-            <div class="top-row px-4">
-                <div style="display: flex; align-items: center; gap: 10px;">
-
-                    <p>@usuario</p>
-
-                    <button class="btn btn-sm btn-outline-danger"
-                            @onclick="() => Sair()">
-                            Sair
+            <div class="top-row px-4 d-flex justify-content-end align-items-center" style="height: 60px;">
+                <div class="user-info d-flex align-items-center gap-2">
+                    <div class="user-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; font-weight: bold;">
+                        @usuario.Substring(0, 1).ToUpper()
+                    </div>
+                    <span class="fw-semibold">@usuario</span>
+                    <button class="btn btn-sm btn-outline-danger" @onclick="() => Sair()">
+                        <i class="bi bi-box-arrow-right me-1"></i> Sair
                     </button>
                 </div>
             </div>
+
         }
         else
         {
-            <div class="top-row px-4">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  
+            <div class="top-row px-4 d-flex justify-content-end align-items-center" style="height: 60px;">
+                <div class="user-login d-flex align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-primary" @onclick="() => Login()">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                    </button>
                 </div>
-
-                <button class="btn btn-sm btn-outline-primary" @onclick="() => Login()">
-                    Login
-                </button>
-
             </div>
         }
 
@@ -64,9 +62,10 @@
         {
             string usuarioLogado = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "usuario");
 
-            usuario = "Usuário: " + usuarioLogado.Replace("\"", "");
+            usuario = usuarioLogado.Replace("\"", "");
 
-        }else
+        }
+        else
         {
             usuario = "";
 
@@ -87,6 +86,7 @@
             // Remover o token
             await localStorage.RemoveItemAsync("authToken");
             // Remover o usuário
+
             // await localStorage.RemoveItemAsync("usuario");
 
             Navigation.NavigateTo("/login", forceLoad: true); // forceLoad pode ajudar se o redirecionamento não estiver funcionando direito

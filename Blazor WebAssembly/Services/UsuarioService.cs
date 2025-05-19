@@ -29,10 +29,20 @@ namespace Blazor_WebAssembly.Services
                 var json = JsonConvert.SerializeObject(_dadosLogin);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var request = new HttpRequestMessage(HttpMethod.Post, $"Usuario/login")
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Post, $"usuarios/login")
                 {
                     Content = content
                 };
+#else
+
+    var request = new HttpRequestMessage(HttpMethod.Post, $"https://blazor-api.onrender.com/api/usuarios/login")
+                {
+                    Content = content
+                };
+
+#endif
 
                 var response = await http.SendAsync(request);
 
@@ -74,10 +84,20 @@ namespace Blazor_WebAssembly.Services
                 var json = JsonConvert.SerializeObject(_dadosUsuario);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var request = new HttpRequestMessage(HttpMethod.Post, $"Usuario/cadastrar")
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Post, "usuarios")
                 {
                     Content = content
                 };
+#else
+
+    var request = new HttpRequestMessage(HttpMethod.Post, "https://blazor-api.onrender.com/api/usuarios")
+    {
+        Content = content
+    };
+
+#endif
 
                 var response = await http.SendAsync(request);
 

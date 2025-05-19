@@ -1,6 +1,16 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+
+
+
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Blazor WebAssembly</a>
+        <a class="navbar-brand" href="">OrgaTask </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,58 +19,67 @@
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
+       
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-          <div class="nav-item px-3">
-            <NavLink class="nav-link" href="cadastrar-usuario">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Cadastrar Usuário
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="cadastrar-tarefa">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Nova Tarefa
-            </NavLink>
-        </div>
 
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="tarefa-rolagem">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas
-            </NavLink>
-        </div>
-
-        @* <div class="nav-item px-3">
-            <NavLink class="nav-link" href="tarefas">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas
-            </NavLink>
+        @*       <div class="nav-item px-3">
+        <NavLink class="nav-link" href="cadastrar-usuario">
+        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Cadastrar Usuário
+        </NavLink>
         </div> *@
 
-    @*     <div class="nav-item px-3">
-            <NavLink class="nav-link" href="tarefas-paginada">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas Pagina
-            </NavLink>
+        @if (usuarioLogado)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="cadastrar-tarefa">
+                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Nova Tarefa
+                </NavLink>
+            </div>
+
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="tarefa-rolagem">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas
+                </NavLink>
+            </div>
+        }
+
+        @*      <div class="nav-item px-3">
+        <NavLink class="nav-link" href="tarefas">
+        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas
+        </NavLink>
+        </div> *@
+
+        @*     <div class="nav-item px-3">
+        <NavLink class="nav-link" href="tarefas-paginada">
+        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas Pagina
+        </NavLink>
         </div>
 
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="tarefa-rolagem">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas Rolagem
-            </NavLink>
+        <NavLink class="nav-link" href="tarefa-rolagem">
+        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tarefas Rolagem
+        </NavLink>
         </div> *@
 
-@*         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="login">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Login
-            </NavLink>
+        @*         <div class="nav-item px-3">
+        <NavLink class="nav-link" href="login">
+        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Login
+        </NavLink>
         </div> *@
 
     </nav>
 </div>
 
+
+
 @code {
+
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -68,5 +87,19 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+
+    private bool usuarioLogado = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            usuarioLogado = true;
+        }
     }
 }

@@ -27,26 +27,26 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Nome</label>
-                    <InputText @bind-Value="UsuarioCadastrarDTO.nome" class="form-control" />
-                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.nome)" class="text-danger" />
+                    <InputText @bind-Value="UsuarioCadastrarDTO.Nome" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.Nome)" class="text-danger" />
                 </div>
-            
-                  <div class="col-md-6">
+
+                <div class="col-md-6">
                     <label class="form-label fw-bold">Login</label>
-                    <InputText @bind-Value="UsuarioCadastrarDTO.login" class="form-control" />
-                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.login)" class="text-danger" />
+                    <InputText @bind-Value="UsuarioCadastrarDTO.Login" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.Login)" class="text-danger" />
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label fw-bold">Senha</label>
-                    <InputText type="password" @bind-Value="UsuarioCadastrarDTO.senha" class="form-control" />
-                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.senha)" class="text-danger" />
+                    <InputText type="password" @bind-Value="UsuarioCadastrarDTO.Senha" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.Senha)" class="text-danger" />
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label fw-bold">Confimar Senha</label>
-                    <InputText type="password" @bind-Value="UsuarioCadastrarDTO.confirmarSenha" class="form-control" />
-                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.confirmarSenha)" class="text-danger" />
+                    <InputText type="password" @bind-Value="UsuarioCadastrarDTO.ConfirmarSenha" class="form-control" />
+                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.ConfirmarSenha)" class="text-danger" />
                 </div>
 
 
@@ -54,6 +54,7 @@
         </div>
         <div class="card-footer text-end">
             <button type="button" class="btn btn-secondary me-2" @onclick="() => CancelarCadastro()">Cancelar</button>
+
             <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
     </div>
@@ -75,7 +76,7 @@
         // if (!user.Identity.IsAuthenticated)
         // {
         //     await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
-          
+
         //     Navigation.NavigateTo("/login");
         // }
     }
@@ -84,7 +85,7 @@
     {
         try
         {
-            if (UsuarioCadastrarDTO.senha != UsuarioCadastrarDTO.confirmarSenha)
+            if (UsuarioCadastrarDTO.Senha != UsuarioCadastrarDTO.ConfirmarSenha)
             {
                 await notificacaoService.MostrarErro("As senhas não coincidem!");
 
@@ -97,10 +98,12 @@
             {
                 await notificacaoService.MostrarSucesso("Usuário cadastrado com sucesso!");
 
-                UsuarioLoginDTO.login = UsuarioCadastrarDTO.login;
-                UsuarioLoginDTO.senha = UsuarioCadastrarDTO.senha;
+                UsuarioLoginDTO.login = UsuarioCadastrarDTO.Login;
+                UsuarioLoginDTO.senha = UsuarioCadastrarDTO.Senha;
 
                 await iUsuarioService.LoginAsync(UsuarioLoginDTO);
+
+                LimparCampos();
 
                 Navigation.NavigateTo("/tarefas");
             }
@@ -118,13 +121,21 @@
         }
     }
 
+
+    private void LimparCampos()
+    {
+        UsuarioCadastrarDTO.Nome = "";
+        UsuarioCadastrarDTO.Login = "";
+        UsuarioCadastrarDTO.Senha = "";
+    }
+
     private async void CancelarCadastro()
     {
         bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar o cadastro do usuário?");
-        
+
         if (confirmado)
         {
-            Navigation.NavigateTo($"/tarefas");
+            Navigation.NavigateTo($"/cadastrar-usuario");
         }
     }
 }

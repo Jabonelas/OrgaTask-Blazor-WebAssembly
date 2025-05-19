@@ -535,7 +535,7 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.11": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.15": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -1123,7 +1123,7 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.11": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.15": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -2197,10 +2197,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.11": {
-      "sha512": "apyq1nlpnHG64NVs1RpgUJAxM73bu5fLFB/SsIcYYiLKdUxiIMPQQWr9ysRxfJRLlKwLSoJo6LmjhjS9sxC8eg==",
+    "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.15": {
+      "sha512": "Q/RDNqyGuVXcXdtAO1PknxbEjYbiYs9ONoClC91G16PZ/i4U+Jhzy+XiTywO/+dvVsvb7JZmsPqlNYuuBvGMBg==",
       "type": "package",
-      "path": "microsoft.net.sdk.webassembly.pack/8.0.11",
+      "path": "microsoft.net.sdk.webassembly.pack/8.0.15",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -2228,7 +2228,7 @@
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.props",
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets",
         "build/Wasm.web.config",
-        "microsoft.net.sdk.webassembly.pack.8.0.11.nupkg.sha512",
+        "microsoft.net.sdk.webassembly.pack.8.0.15.nupkg.sha512",
         "microsoft.net.sdk.webassembly.pack.nuspec",
         "tools/net472/Microsoft.Bcl.AsyncInterfaces.dll",
         "tools/net472/Microsoft.Build.dll",
@@ -2358,7 +2358,7 @@
       "Microsoft.AspNetCore.Components.WebAssembly >= 8.0.11",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 8.0.11",
       "Microsoft.NET.ILLink.Tasks >= 8.0.11",
-      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.11",
+      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.15",
       "Newtonsoft.Json >= 13.0.3",
       "System.IdentityModel.Tokens.Jwt >= 8.9.0"
     ]
@@ -2440,7 +2440,7 @@
           "Microsoft.NET.Sdk.WebAssembly.Pack": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.11, )",
+            "version": "[8.0.15, )",
             "autoReferenced": true
           },
           "Newtonsoft.Json": {
@@ -2466,7 +2466,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.15, 8.0.15]"
           }
         ],
         "frameworkReferences": {
