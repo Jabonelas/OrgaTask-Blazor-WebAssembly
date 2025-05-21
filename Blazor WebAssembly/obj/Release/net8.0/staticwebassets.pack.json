@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\icon-192.png"
     },
     {
+      "Id": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\images\\TelaTarefasComputador.png",
+      "PackagePath": "staticwebassets\\images\\TelaTarefasComputador.png"
+    },
+    {
       "Id": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },

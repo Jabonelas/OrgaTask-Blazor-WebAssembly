@@ -1,7 +1,9 @@
 ﻿@page "/exibir-tarefa/{id:int}"
+@using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.DTOs
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Blazor_WebAssembly.Interfaces.Tarefa
 @using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
@@ -15,63 +17,110 @@
 
 <EditForm Model="@TarefaAlterarDTO">
     <DataAnnotationsValidator />
-    @* <ValidationSummary /> *@
 
     @if (TarefaAlterarDTO.Titulo == null)
     {
-        <div class="alert alert-info text-center">
-            Nenhuma tarefa encontrada
+        <div class="alert alert-info text-center py-4 my-4">
+            <i class="bi bi-info-circle-fill me-2"></i> Nenhuma tarefa encontrada
         </div>
-
     }
     else
     {
+        <div class="container-fluid min-vh-100 p-0">
+            <div class="row g-0 min-vh-100">
+                <!-- Painel Esquerdo (Background) -->
+                <div class="col-lg-5 d-none d-lg-block" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+                    <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                        <div style="max-width: 500px;">
+                            <h1 class="display-5 mb-4"><i class="bi bi-card-checklist"></i> Detalhes da Tarefa</h1>
+                            <p class="lead mb-5">Visualize todos os detalhes desta tarefa.</p>
 
-        <div class="card edit-form">
-            <div class="card-header bg-primary text-white">
-                <h3>Exibir Tarefa Detalhada</h3>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                                <span>Detalhes completos da tarefa</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                                <span>Prioridade e status claros</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                                <span>Prazo e descrição detalhados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel Direito (Visualização) -->
+                <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
+                    <div class="w-100" style="max-width: 600px;">
+                        <div class="text-center mb-5 d-lg-none">
+                            <h2 class="text-primary"><i class="bi bi-card-checklist"></i> Detalhes da Tarefa</h2>
+                        </div>
+
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <!-- Título -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Título da Tarefa</label>
+                                    <InputText @bind-Value="TarefaAlterarDTO.Titulo"
+                                               class="form-control form-control-lg bg-light"
+                                               disabled />
+                                </div>
+
+                                <!-- Prioridade e Prazo -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Prioridade</label>
+                                        <InputText @bind-Value="TarefaAlterarDTO.Prioridade"
+                                                   class="form-control form-control-lg bg-light"
+                                                   disabled />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Prazo (dias)</label>
+                                        <InputNumber @bind-Value="TarefaAlterarDTO.Prazo"
+                                                     class="form-control form-control-lg bg-light"
+                                                     disabled />
+                                    </div>
+                                </div>
+
+                                <!-- Descrição -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Descrição</label>
+                                    <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
+                                                   class="form-control bg-light"
+                                                   rows="5"
+                                                   disabled />
+                                </div>
+
+                                <!-- Status -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Status</label>
+                                    <InputText @bind-Value="TarefaAlterarDTO.Status"
+                                               class="form-control form-control-lg bg-light"
+                                               disabled />
+                                </div>
+
+                                <!-- Botão Voltar -->
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button type="button"
+                                            class="btn btn-outline-secondary px-4"
+                                            @onclick="VoltarPaginaTarefas">
+                                        <i class="bi bi-arrow-left me-1"></i> Voltar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <!-- Campos organizados em grid -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Título</label>
-                        <InputText @bind-Value="TarefaAlterarDTO.Titulo" class="form-control" disabled />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">Prioridade</label>
-                        <InputText @bind-Value="TarefaAlterarDTO.Prioridade" class="form-control" disabled />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">Prazo (dias)</label>
-                        <InputNumber @bind-Value="TarefaAlterarDTO.Prazo" class="form-control" disabled />
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-bold ">Descrição</label>
-                    <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
-                                   class="form-control"
-                                   rows="4" disabled />
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Status</label>
-                        <InputText @bind-Value="TarefaAlterarDTO.Status" class="form-control" disabled />
-                    </div>
-                </div>
-
-
-            </div>
-                <div class="card-footer text-end">
-                    <button type="button" class="btn btn-secondary me-2" @onclick="() => VoltarPaginaTarefas()">Voltar</button>
-                </div>
-
         </div>
     }
-
 </EditForm>
+
+
+
 
 
 @code {
@@ -120,7 +169,7 @@
 
     private async void VoltarPaginaTarefas()
     {
-        Navigation.NavigateTo($"/tarefa-rolagem");
+        Navigation.NavigateTo($"/tarefa-rolagem/todas");
     }
 
 }

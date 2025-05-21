@@ -1,13 +1,15 @@
 ﻿using Blazor_WebAssembly.DTOs;
-using Blazor_WebAssembly.Interfaces;
 using Blazored.LocalStorage;
 using Newtonsoft.Json;
 using System.Net;
 using Blazor_WebAssembly.DTOs.Tarefa;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Security.Cryptography;
+using BlazorAPI.DTOs.Tarefa;
+using Blazor_WebAssembly.Interfaces.Tarefa;
 
-namespace Blazor_WebAssembly.Services
+namespace Blazor_WebAssembly.Services.Tarefa
 {
     public class TarefaService : ITarefaService
     {
@@ -26,7 +28,7 @@ namespace Blazor_WebAssembly.Services
             public int TotalCount { get; set; }
         }
 
-        public async Task<(bool success, string errorMessage, List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int pageNumber, int pageSize)
+        public async Task<(bool success, string errorMessage, List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int _pageNumber, int _pageSize, string _status)
         {
             UserToken dadosToken = new UserToken();
             dadosToken = await PegarDadosToken();
@@ -35,15 +37,17 @@ namespace Blazor_WebAssembly.Services
 
 #if DEBUG
 
-                var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/paginado?pageNumber={pageNumber}&pageSize={pageSize}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/paginado/{_status}?pageNumber={_pageNumber}&pageSize={_pageSize}");
 
 #else
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/paginado?pageNumber={pageNumber}&pageSize={pageSize}");
+            //var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/paginado?pageNumber={pageNumber}&pageSize={pageSize}");
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/paginado/{_status}?pageNumber={_pageNumber}&pageSize={_pageSize}");
 
 #endif
 
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await http.SendAsync(request);
 
@@ -89,7 +93,7 @@ namespace Blazor_WebAssembly.Services
 
 #endif
 
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await http.SendAsync(request);
 
@@ -244,7 +248,7 @@ namespace Blazor_WebAssembly.Services
 
 #endif
 
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
                 var response = await http.SendAsync(request);
 
@@ -292,7 +296,7 @@ namespace Blazor_WebAssembly.Services
 
 #endif
 
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", dadosToken.Token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
 
             var response = await http.SendAsync(request);
 
@@ -311,6 +315,156 @@ namespace Blazor_WebAssembly.Services
             }
 
             return (true, null);
+        }
+
+        public async Task<(bool success, string errorMessage, TarefaQtdStatus)> BuscarQtdStatusTarefaAsync()
+        {
+            try
+            {
+                UserToken dadosToken = await PegarDadosToken();
+
+                if (dadosToken == null || string.IsNullOrEmpty(dadosToken.Token))
+                {
+                    return (false, "Token de autenticação inválido", null);
+                }
+
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/qtd_status");
+#else
+
+                var request = new HttpRequestMessage(HttpMethod.Get, "https://blazor-api.onrender.com/api/tarefas/qtd_status");
+
+#endif
+
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+                var response = await http.SendAsync(request);
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var qtdStatusTarefas = JsonConvert.DeserializeObject<TarefaQtdStatus>(responseContent);
+
+                    return (true, null, qtdStatusTarefas);
+                }
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return (false, "Sessão expirada. Por favor, faça login novamente.", null);
+                }
+
+                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                return (false, errorResponse?.message ?? "Erro desconhecido", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro em BuscarQtdStatusTarefaAsync: {ex}");
+
+                return (false, $"Ocorreu um erro inesperado: {ex.Message}", null);
+            }
+        }
+
+        public async Task<(bool success, string errorMessage, decimal porcentagemTarefasConcluidas)> BuscarQtdTareMensalfaAsync()
+        {
+            try
+            {
+                UserToken dadosToken = await PegarDadosToken();
+
+                if (dadosToken == null || string.IsNullOrEmpty(dadosToken.Token))
+                {
+                    return (false, "Token de autenticação inválido", 0);
+                }
+
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/qtd_concluida");
+#else
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/qtd_concluida");
+
+#endif
+
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+                var response = await http.SendAsync(request);
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var porcentagemTarefaConcluida = JsonConvert.DeserializeObject<decimal>(responseContent);
+
+                    return (true, null, porcentagemTarefaConcluida);
+                }
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return (false, "Sessão expirada. Por favor, faça login novamente.", 0);
+                }
+
+                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                return (false, errorResponse?.message ?? "Erro desconhecido", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro em BuscarQtdTareMensalfaAsync: {ex}");
+
+                return (false, $"Ocorreu um erro inesperado: {ex.Message}", 0);
+            }
+        }
+
+        public async Task<(bool success, string errorMessage, List<TarefaPrioridadeAltaDTO>)> BuscarTarefasPrioridadeAltaAsync()
+        {
+            try
+            {
+                UserToken dadosToken = await PegarDadosToken();
+
+                if (dadosToken == null || string.IsNullOrEmpty(dadosToken.Token))
+                {
+                    return (false, "Token de autenticação inválido", null);
+                }
+
+#if DEBUG
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"tarefas/prioridade_alta");
+#else
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://blazor-api.onrender.com/api/tarefas/prioridade_alta");
+
+#endif
+
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
+
+                var response = await http.SendAsync(request);
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var listaTarefasPrioridadeAlta = JsonConvert.DeserializeObject<List<TarefaPrioridadeAltaDTO>>(responseContent);
+
+                    return (true, null, listaTarefasPrioridadeAlta);
+                }
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return (false, "Sessão expirada. Por favor, faça login novamente.", null);
+                }
+
+                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                return (false, errorResponse?.message ?? "Erro desconhecido", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro em BuscarTarefasPrioridadeAltaAsync: {ex}");
+
+                return (false, $"Ocorreu um erro inesperado: {ex.Message}", null);
+            }
         }
 
         #region Métodos privados

@@ -1,6 +1,7 @@
 ﻿@page "/tarefas-paginada"
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Blazor_WebAssembly.Interfaces.Tarefa
 @using Microsoft.AspNetCore.Components.Authorization
 @inject ITarefaService ITarefaService
 @inject IJSRuntime JS
@@ -189,7 +190,7 @@ else
 
         try
         {
-            var(success,errorMessage, items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize);
+            var(success,errorMessage, items, totalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize, "");
 
             if (success)
             {

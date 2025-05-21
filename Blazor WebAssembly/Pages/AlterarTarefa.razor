@@ -2,6 +2,7 @@
 @using Blazor_WebAssembly.DTOs
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Blazor_WebAssembly.Interfaces.Tarefa
 @using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
@@ -13,72 +14,129 @@
 @inject NotificacaoService notificacaoService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-
-
-
 <EditForm Model="@TarefaAlterarDTO" OnValidSubmit="@HandleSubmit">
     <DataAnnotationsValidator />
-    @* <ValidationSummary /> *@
 
-    <div class="card edit-form">
-        <div class="card-header bg-primary text-white">
-            <h3>Editar Tarefa</h3>
-        </div>
-        <div class="card-body">
-            <!-- Campos organizados em grid -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Título</label>
-                    <InputText @bind-Value="TarefaAlterarDTO.Titulo" class="form-control" />
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.Titulo)" class="text-danger" />
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label fw-bold">Prioridade</label>
-                    <InputSelect @bind-Value="TarefaAlterarDTO.Prioridade" class="form-select">
-                        <option value=""></option>
-                        <option value="Alta">Alta</option>
-                        <option value="Média">Média</option>
-                        <option value="Baixa">Baixa</option>
-                    </InputSelect>
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prioridade)" class="text-danger" />
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label fw-bold">Prazo (dias)</label>
-                    <InputNumber @bind-Value="TarefaAlterarDTO.Prazo" class="form-control" />
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prazo)" class="text-danger" />
+    <div class="container-fluid min-vh-100 p-0">
+        <div class="row g-0 min-vh-100">
+            <!-- Painel Esquerdo (Background) -->
+            <div class="col-lg-5 d-none d-lg-block bg-gradient-primary">
+                @* <div class="h-100 d-flex flex-column justify-content-center text-white p-5" > *@
+                <div class="h-100 d-flex flex-column justify-content-center text-white p-5" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+                    <div style="max-width: 500px;">
+                        <h1 class="display-5 mb-4"><i class="bi bi-pencil-square"></i> Editar Tarefa</h1>
+                        <p class="lead mb-5">Atualize os detalhes da sua tarefa para manter sua produtividade em dia.</p>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Organize suas prioridades de forma eficiente</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Acompanhe prazos e progressos</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Mantenha seu fluxo de trabalho organizado</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label fw-bold ">Descrição</label>
-                <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
-                               class="form-control"
-                               rows="4" />
-                <ValidationMessage For="@(() => TarefaAlterarDTO.Descricao)" class="text-danger" />
-            </div>
+            <!-- Painel Direito (Formulário) -->
+            <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
+                <div class="w-100" style="max-width: 600px;">
+                    <div class="text-center mb-5 d-lg-none">
+                        <h2 class="text-primary"><i class="bi bi-pencil-square"></i> Editar Tarefa</h2>
+                    </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Status</label>
-                    <InputSelect @bind-Value="TarefaAlterarDTO.Status" class="form-select">
-                        <option value=""></option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Em Progresso">Em Progresso</option>
-                        <option value="Concluído">Concluído</option>
-                    </InputSelect>
-                    <ValidationMessage For="@(() => TarefaAlterarDTO.Status)" class="text-danger" />
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <!-- Título -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Título da Tarefa</label>
+                                <InputText @bind-Value="TarefaAlterarDTO.Titulo"
+                                           class="form-control form-control-lg" />
+                                <ValidationMessage For="@(() => TarefaAlterarDTO.Titulo)" class="text-danger small" />
+                            </div>
+
+                            <!-- Prioridade e Prazo -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Prioridade</label>
+                                    <InputSelect @bind-Value="TarefaAlterarDTO.Prioridade"
+                                                 class="form-select form-select-lg">
+                                        <option value=""></option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="Média">Média</option>
+                                        <option value="Baixa">Baixa</option>
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prioridade)" class="text-danger small" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Prazo (dias)</label>
+                                    <InputNumber @bind-Value="TarefaAlterarDTO.Prazo"
+                                                 class="form-control form-control-lg" />
+                                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prazo)" class="text-danger small" />
+                                </div>
+                            </div>
+
+                            <!-- Descrição -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Descrição</label>
+                                <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
+                                               class="form-control"
+                                               rows="5" />
+                                <ValidationMessage For="@(() => TarefaAlterarDTO.Descricao)" class="text-danger small" />
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Status</label>
+                                <InputSelect @bind-Value="TarefaAlterarDTO.Status"
+                                             class="form-select form-select-lg">
+                                    <option value=""></option>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Em Progresso">Em Progresso</option>
+                                    <option value="Concluído">Concluído</option>
+                                </InputSelect>
+                                <ValidationMessage For="@(() => TarefaAlterarDTO.Status)" class="text-danger small" />
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="d-flex justify-content-between pt-3">
+                                <button type="button"
+                                        class="btn btn-outline-secondary px-4"
+                                        @onclick="CancelarAlteracao">
+                                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                                </button>
+
+                                <button type="submit"
+                                        class="btn btn-primary px-4"
+                                        disabled="@isSubmitting">
+                                    <span class="spinner-border spinner-border-sm me-1"
+                                          hidden="@(!isSubmitting)"></span>
+                                    <i class="bi bi-check-lg me-1" hidden="@isSubmitting"></i>
+                                    @(isSubmitting ? "Salvando..." : "Salvar Alterações")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer text-end">
-            <button type="button" class="btn btn-secondary me-2" @onclick="() => CancelarAlteracao()">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
     </div>
 </EditForm>
 
 
+
+
+
+
 @code {
+
+    private bool isSubmitting = false;
 
     [Parameter]
     public int id { get; set; }
@@ -127,7 +185,7 @@
 
                 LimparCampos();
 
-                Navigation.NavigateTo($"/tarefas");
+                Navigation.NavigateTo($"/tarefa-rolagem/todas");
             }
             else
             {
@@ -158,7 +216,7 @@
 
         if (confirmado)
         {
-            Navigation.NavigateTo($"/tarefas");
+            Navigation.NavigateTo($"/tarefa-rolagem/todas");
         }
     }
 }

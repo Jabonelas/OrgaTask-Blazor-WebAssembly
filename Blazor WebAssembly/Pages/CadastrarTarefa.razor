@@ -2,6 +2,7 @@
 @using Blazor_WebAssembly.DTOs
 @using Blazor_WebAssembly.DTOs.Tarefa
 @using Blazor_WebAssembly.Interfaces
+@using Blazor_WebAssembly.Interfaces.Tarefa
 @using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
@@ -16,70 +17,129 @@
 
 <EditForm Model="@TarefaCadastrarDTO" OnValidSubmit="@HandleSubmit">
     <DataAnnotationsValidator />
-    @* <ValidationSummary /> *@
 
-    <div class="card edit-form">
-        <div class="card-header bg-primary text-white">
-            <h3>Cadastrar Nova Tarefa</h3>
-        </div>
-        <div class="card-body">
-            <!-- Campos organizados em grid -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Título</label>
-                    <InputText @bind-Value="TarefaCadastrarDTO.Titulo" class="form-control" />
-                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Titulo)" class="text-danger" />
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label fw-bold">Prioridade</label>
-                    <InputSelect @bind-Value="TarefaCadastrarDTO.Prioridade" class="form-select">
-                        <option value=""></option>
-                        <option value="Alta">Alta</option>
-                        <option value="Média">Média</option>
-                        <option value="Baixa">Baixa</option>
-                    </InputSelect>
-                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Prioridade)" class="text-danger" />
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label fw-bold">Prazo (dias)</label>
-                    <InputNumber @bind-Value="TarefaCadastrarDTO.Prazo" class="form-control" />
-                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Prazo)" class="text-danger" />
+    <div class="container-fluid min-vh-100 p-0">
+        <div class="row g-0 min-vh-100">
+            <!-- Painel Esquerdo (Background) -->
+            <div class="col-lg-5 d-none d-lg-block" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+                <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                    <div style="max-width: 500px;">
+                        <h1 class="display-5 mb-4"><i class="bi bi-plus-circle-fill"></i> Nova Tarefa</h1>
+                        <p class="lead mb-5">Preencha os campos ao lado para criar uma nova tarefa e organizar seu trabalho.</p>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Organize suas atividades por prioridade</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Defina prazos e acompanhe seu progresso</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Mantenha seu fluxo de trabalho organizado</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label fw-bold ">Descrição</label>
-                <InputTextArea @bind-Value="TarefaCadastrarDTO.Descricao"
-                               class="form-control"
-                               rows="4" />
-                <ValidationMessage For="@(() => TarefaCadastrarDTO.Descricao)" class="text-danger" />
-            </div>
+            <!-- Painel Direito (Formulário) -->
+            <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
+                <div class="w-100" style="max-width: 600px;">
+                    <div class="text-center mb-5 d-lg-none">
+                        <h2 class="text-primary"><i class="bi bi-plus-circle-fill"></i> Nova Tarefa</h2>
+                    </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Status</label>
-                    <InputSelect @bind-Value="TarefaCadastrarDTO.Status" class="form-select">
-                        <option value=""></option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Em Progresso">Em Progresso</option>
-                        <option value="Concluído">Concluído</option>
-                    </InputSelect>
-                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Status)" class="text-danger" />
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <!-- Título -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Título</label>
+                                <InputText @bind-Value="TarefaCadastrarDTO.Titulo"
+                                           class="form-control form-control-lg" />
+                                <ValidationMessage For="@(() => TarefaCadastrarDTO.Titulo)" class="text-danger small" />
+                            </div>
+
+                            <!-- Prioridade e Prazo -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Prioridade</label>
+                                    <InputSelect @bind-Value="TarefaCadastrarDTO.Prioridade"
+                                                 class="form-select form-select-lg">
+                                        <option value=""></option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="Média">Média</option>
+                                        <option value="Baixa">Baixa</option>
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Prioridade)" class="text-danger small" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Prazo (dias)</label>
+                                    <InputNumber @bind-Value="TarefaCadastrarDTO.Prazo"
+                                                 class="form-control form-control-lg" />
+                                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Prazo)" class="text-danger small" />
+                                </div>
+                            </div>
+
+                            <!-- Descrição -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Descrição</label>
+                                <InputTextArea @bind-Value="TarefaCadastrarDTO.Descricao"
+                                               class="form-control"
+                                               rows="5" />
+                                <ValidationMessage For="@(() => TarefaCadastrarDTO.Descricao)" class="text-danger small" />
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Status</label>
+                                <InputSelect @bind-Value="TarefaCadastrarDTO.Status"
+                                             class="form-select form-select-lg">
+                                    <option value=""></option>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Em Progresso">Em Progresso</option>
+                                    <option value="Concluído">Concluído</option>
+                                </InputSelect>
+                                <ValidationMessage For="@(() => TarefaCadastrarDTO.Status)" class="text-danger small" />
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="d-flex justify-content-between pt-3">
+                                <button type="button"
+                                        class="btn btn-outline-secondary px-4"
+                                        @onclick="CancelarAlteracao">
+                                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                                </button>
+
+                                <button type="submit"
+                                        class="btn btn-primary px-4"
+                                        disabled="@isSubmitting">
+                                    <span class="spinner-border spinner-border-sm me-1"
+                                          hidden="@(!isSubmitting)"></span>
+                                    <i class="bi bi-check-lg me-1" hidden="@isSubmitting"></i>
+                                    @(isSubmitting ? "Salvando..." : "Salvar Tarefa")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer text-end">
-            <button type="button" class="btn btn-secondary me-2" @onclick="() => CancelarAlteracao()">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
     </div>
 </EditForm>
 
 
+
+
+
+
+
 @code {
 
-    private TarefaAlterarDTO TarefaCadastrarDTO = new TarefaAlterarDTO();
+    private bool isSubmitting = false;
 
+    private TarefaAlterarDTO TarefaCadastrarDTO = new TarefaAlterarDTO();
 
     protected override async Task OnInitializedAsync()
     {
@@ -97,7 +157,6 @@
         }
     }
 
-
     private async Task HandleSubmit()
     {
         try
@@ -108,10 +167,7 @@
             {
                 await notificacaoService.MostrarSucesso("Tarefa cadastrada com sucesso!");
 
-
-
                 LimparCampos();
-
             }
             else
             {
@@ -143,7 +199,7 @@
 
         if (confirmado)
         {
-            Navigation.NavigateTo($"/tarefas");
+            Navigation.NavigateTo($"/tarefa-rolagem/todas");
         }
     }
 }

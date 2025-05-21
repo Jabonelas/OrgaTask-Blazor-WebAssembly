@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HP43kLrjY9xX0cboCYZTk+XbuP8a1ab92v9bssjricA=",
+  "Hash": "Yb4iySALQxZ9g52NtA2g9zXZpwgcaC/ErYoDDkAA1pU=",
   "Source": "Blazor WebAssembly",
   "BasePath": "/",
   "Mode": "Root",
@@ -8242,6 +8242,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icon-192.png"
+    },
+    {
+      "Identity": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\images\\TelaTarefasComputador.png",
+      "SourceId": "Blazor WebAssembly",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "images/TelaTarefasComputador.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\TelaTarefasComputador.png"
     },
     {
       "Identity": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",

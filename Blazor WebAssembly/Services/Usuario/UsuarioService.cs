@@ -7,7 +7,7 @@ using Blazor_WebAssembly.DTOs.Usuario;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace Blazor_WebAssembly.Services
+namespace Blazor_WebAssembly.Services.Usuario
 {
     public class UsuarioService : IUsuarioService
     {
