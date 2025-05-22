@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\.github\\workflows\\main.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\.github\\workflows\\main.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\404.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -58,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "main.yml",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\.github\\workflows\\main.yml",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\.github\\workflows\\main.yml",
@@ -95,20 +95,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\wwwroot\\index.html",
               "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",
               "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\index.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-05-22T13:48:50.495Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Program.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Program.cs",
@@ -116,8 +116,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T23:17:38.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T23:17:38.658Z"
             },
             {
               "$type": "Document",
