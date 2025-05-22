@@ -1,0 +1,16 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Blazor_WebAssembly.DTOs.Tarefa
+{
+    public class TarefaConsultaDTO
+    {
+        public int Id { get; set; }
+        public string Titulo { get; set; }
+        public string Descricao { get; set; }
+        public string Prioridade { get; set; }
+        public int Prazo { get; set; }
+        public string Status { get; set; }
+        public string Data { get; set; }
+    }
+}
