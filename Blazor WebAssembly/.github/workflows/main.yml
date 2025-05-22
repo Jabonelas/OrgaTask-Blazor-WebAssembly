@@ -40,7 +40,7 @@ jobs:
         run: dotnet build -c Release --no-restore
 
       - name: Publish .NET
-        run: dotnet publish "Blazor WebAssembly.csproj" -c Release -o docs --nologo
+        run: dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o docs --nologo
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
