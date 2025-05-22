@@ -1,0 +1,407 @@
+﻿@page "/tarefa-rolagem/{status}"
+@using Blazor_WebAssembly.DTOs.Tarefa
+@using Blazor_WebAssembly.Interfaces
+@using Blazor_WebAssembly.Interfaces.Tarefa
+@using Microsoft.AspNetCore.Components.Authorization
+@inject ITarefaService ITarefaService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@implements IDisposable
+@inject NotificacaoService notificacaoService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Tarefas</PageTitle>
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">@titulo</h3>
+        <button class="btn btn-primary" @onclick="NovaTarefa">
+            <i class="bi bi-plus-circle me-1"></i> Nova Tarefa
+        </button>
+    </div>
+
+    @if (!tarefas.Any() && !isLoading)
+    {
+        <div class="text-center my-5 text-muted">
+            <i class="bi bi-inbox fs-1 mb-3"></i>
+            <p class="fs-5">Nenhuma tarefa encontrada</p>
+            <button class="btn btn-primary" @onclick="NovaTarefa">
+                Criar primeira tarefa
+            </button>
+        </div>
+    }
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var tarefa in tarefas)
+        {
+            <div class="col">
+                <div class="card shadow-sm border-0 h-100 tarefa-card @GetPriorityClass(tarefa.Prioridade) @GetStatusClass(tarefa.Status)">
+                    <div class="card-body d-flex flex-column justify-content-between" @onclick="() => VisualizarTarefa(tarefa.Id)">
+                        <div>
+                 
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-secondary @GetPriorityClass(tarefa.Prioridade)">
+                                    <i class="bi @(GetPriorityIcon(tarefa.Prioridade)) me-1"></i> @tarefa.Prioridade
+                                </span>
+                                <span class="badge bg-info @GetStatusClass(tarefa.Status)">
+                                    <i class="bi @(GetStatusIcon(tarefa.Status)) me-1"></i> @tarefa.Status
+                                </span>
+                            </div>
+
+                            <h5 class="card-title">@tarefa.Titulo</h5>
+
+                            @if (!string.IsNullOrEmpty(tarefa.Descricao))
+                            {
+                                <p class="card-text text-muted small">@tarefa.Descricao</p>
+                            }
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3 text-muted small">
+                            <span><i class="bi bi-calendar me-1"></i>Criado: @FormatDate(tarefa.Data)</span>
+                            @if (tarefa.Prazo > 0)
+                            {
+                                <span><i class="bi bi-clock me-1"></i>Prazo estipulado: @tarefa.Prazo dia(s)</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
+                        <button class="btn btn-sm btn-outline-primary" title="Visualizar" @onclick="() => VisualizarTarefa(tarefa.Id)">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" title="Editar" @onclick="() => EditarTarefa(tarefa.Id)">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" title="Excluir" @onclick="() => ConfirmarExclusao(tarefa.Id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center my-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+        </div>
+    }
+
+    <div @ref="sentinel" tarefa-sentinela style="height: 1px;"></div>
+
+</div>
+
+
+@code {
+
+    [Parameter] public string? status { get; set; }
+
+    private List<TarefaConsultaDTO> tarefas = new();
+    private ElementReference sentinel;
+    private DotNetObjectReference<TarefaRolagem>? objRef;
+    private int currentPage = 1;
+    private const int pageSize = 12;
+    private bool isLoading = false;
+    private bool hasMoreItems = true;
+    private int totalCount = 0;
+    private IJSObjectReference? infiniteScrollModule;
+    private IJSObjectReference? observerInstance;
+    private string titulo = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+            Navigation.NavigateTo("/login");
+        }
+
+        await LoadMoreItems();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                Console.WriteLine("Iniciando configuração do scroll infinito...");
+
+                // Cria a referência .NET
+                objRef = DotNetObjectReference.Create(this);
+                Console.WriteLine("DotNetObjectReference criada com sucesso");
+
+                // Chama a função JavaScript diretamente do objeto window
+                await JS.InvokeVoidAsync(
+                    "window.infiniteScroll.init",
+                    sentinel,
+                    objRef);
+
+                Console.WriteLine("Scroll infinito inicializado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERRO na inicialização: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+
+                // Fallback: garante que o botão "Carregar mais" será exibido
+                hasMoreItems = true;
+                StateHasChanged();
+
+                await notificacaoService.MostrarErro(
+                    "Recurso automático desativado. Use o botão 'Carregar Mais' manualmente.");
+            }
+        }
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Reseta a paginação quando o status muda
+        await ResetPagination();
+    }
+
+ 
+
+
+    [JSInvokable]
+    public async Task LoadMoreItems()
+    {
+        // Se já estiver carregando ou não houver mais itens, não faz nada
+        if (isLoading || !hasMoreItems)
+        {
+            Console.WriteLine($"Cancelando carga: isLoading={isLoading}, hasMoreItems={hasMoreItems}");
+            return;
+        }
+
+        Console.WriteLine($"Carregando página {currentPage}...");
+
+        isLoading = true;
+        StateHasChanged(); // Força a atualização para mostrar o indicador de carregamento
+        
+        try
+        {
+            var (success, errorMessage, items, newTotalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize, status);
+
+            if (success)
+            {
+
+
+                SentandoTituloPagina();
+
+                if (items?.Count > 0)
+                {
+                    tarefas.AddRange(items);
+                    currentPage++;
+                    totalCount = newTotalCount;
+                    hasMoreItems = tarefas.Count < totalCount;
+
+                    Console.WriteLine($"Página {currentPage - 1} carregada. Itens: {items.Count}, Total acumulado: {tarefas.Count}/{totalCount}");
+                }
+                else
+                {
+                    hasMoreItems = false;
+                    Console.WriteLine("Nenhum item adicional encontrado");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Erro na API: " + errorMessage);
+                await notificacaoService.MostrarErro($"Erro ao carregar tarefas: {errorMessage}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao carregar itens: {ex.Message}");
+            await notificacaoService.MostrarErro($"Erro ao carregar mais itens: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+
+            // Força uma nova verificação do sentinela após o carregamento
+            if (hasMoreItems)
+            {
+                await Task.Delay(300); // Pequeno delay para garantir o redesenho
+                await CheckSentinelVisibility();
+            }
+        }
+
+    }
+
+
+    private async Task CheckSentinelVisibility()
+    {
+        try
+        {
+            var isVisible = await JS.InvokeAsync<bool>(
+                "window.infiniteScroll.checkVisibility",
+                sentinel);
+
+            Console.WriteLine($"Sentinela visível? {isVisible}");
+
+            if (isVisible && hasMoreItems && !isLoading)
+            {
+                Console.WriteLine("Sentinela visível - carregando mais itens...");
+                await LoadMoreItems();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao verificar sentinela: {ex.Message}");
+        }
+    }
+
+    private void SentandoTituloPagina()
+    {
+        
+        switch (status)
+        {
+            case "todas":
+
+                titulo = "Todas as Minhas Tarefas";
+
+                break;
+
+            case "Pendente":
+
+                titulo = "Todas as Minhas Tarefas Pendentes";
+
+                break;
+
+
+            case "Em Progresso":
+
+                titulo = "Todas as Minhas Tarefas Em Progresso";
+
+                break;
+
+
+            case "Concluído":
+
+                titulo = "Todas as Minhas Tarefas Concluídas";
+
+                break;
+
+            default:
+                Console.WriteLine("Opção inválida! Tente novamente.");
+                break;
+        }
+
+    }
+
+    public async void Dispose()
+    {
+        try
+        {
+            if (observerInstance != null)
+            {
+                await observerInstance.InvokeVoidAsync("dispose");
+                await observerInstance.DisposeAsync();
+            }
+
+            if (infiniteScrollModule != null)
+            {
+                await infiniteScrollModule.DisposeAsync();
+            }
+
+            objRef?.Dispose();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao limpar observers: {ex.Message}");
+        }
+    }
+
+    private string GetPriorityIcon(string prioridade)
+    {
+        return prioridade switch
+        {
+            "Alta" => "bi-exclamation-triangle-fill",
+            "Média" => "bi-exclamation-circle-fill",
+            "Baixa" => "bi-arrow-down-circle-fill",
+            _ => "bi-question-circle"
+        };
+    }
+
+    private string GetStatusIcon(string status)
+    {
+        return status switch
+        {
+            "Concluído" => "bi-check-circle-fill",
+            "Em Progresso" => "bi-arrow-repeat",
+            "Pendente" => "bi-clock",
+            _ => "bi-question-circle"
+        };
+    }
+
+    private string GetPriorityClass(string prioridade)
+    {
+        return prioridade switch
+        {
+            "Alta" => "prioridade-alta",
+            "Média" => "prioridade-media",
+            "Baixa" => "prioridade-baixa",
+            _ => ""
+        };
+    }
+
+    private string GetStatusClass(string status)
+    {
+        return status switch
+        {
+            "Concluído" => "status-concluido",
+            "Em Progresso" => "status-progresso",
+            "Pendente" => "status-pendente",
+            _ => ""
+        };
+    }
+
+    private string FormatDate(object dateObj)
+    {
+        if (dateObj == null) return "-";
+        if (dateObj is DateTime date) return date.ToString("dd/MM/yyyy");
+        if (DateTime.TryParse(dateObj.ToString(), out var parsedDate)) return parsedDate.ToString("dd/MM/yyyy");
+        return dateObj.ToString();
+    }
+
+    private void VisualizarTarefa(int id) => Navigation.NavigateTo($"/exibir-tarefa/{id}");
+    private void EditarTarefa(int id) => Navigation.NavigateTo($"/editar-tarefa/{id}");
+    private void NovaTarefa() => Navigation.NavigateTo("/cadastrar-tarefa");
+
+    private async Task ConfirmarExclusao(int id)
+    {
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja excluir esta tarefa?");
+
+        if (confirmado)
+        {
+            try
+            {
+                await ITarefaService.DeletarTarefaAsync(id);
+                await ResetPagination();
+                await notificacaoService.MostrarSucesso("Tarefa excluída com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao excluir tarefas: {ex.Message}");
+
+                await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
+            }
+        }
+    }
+
+    private async Task ResetPagination()
+    {
+        currentPage = 1;
+        tarefas.Clear();
+        hasMoreItems = true;
+        await LoadMoreItems();
+    }
+}
