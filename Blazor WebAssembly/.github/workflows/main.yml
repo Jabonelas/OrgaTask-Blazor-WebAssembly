@@ -40,7 +40,7 @@ jobs:
         run: dotnet build -c Release --no-restore
 
       - name: Publish .NET
-        run: dotnet publish Blazor-WebAssembly.csproj -c:Release -o docs --nologo
+        run: dotnet publish BlazorWebAssembly.csproj -c:Release -o docs --nologo
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -48,7 +48,7 @@ jobs:
       - name: Upload
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/wwwroot'
+          path: "docs/wwwroot"
 
       - name: Deploy
         id: deployment
