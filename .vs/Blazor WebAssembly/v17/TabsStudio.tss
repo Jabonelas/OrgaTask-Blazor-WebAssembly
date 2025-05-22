@@ -34,5 +34,8 @@
     <ArrayOfString>
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\404.html</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\.github\workflows\main.yml</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
