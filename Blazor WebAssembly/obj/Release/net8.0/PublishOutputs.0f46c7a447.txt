@@ -1,0 +1,1 @@
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\publish\web.config

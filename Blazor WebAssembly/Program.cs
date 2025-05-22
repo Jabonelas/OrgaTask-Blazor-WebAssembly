@@ -32,7 +32,7 @@ namespace Blazor_WebAssembly
             // Ambiente de produção (GitHub Pages + Render.com)
             builder.Services.AddScoped(sp => new HttpClient
             {
-                BaseAddress = new Uri("https://blazor-api.onrender.com")
+                BaseAddress = new Uri("https://blazor-api.onrender.com/api/")
             });
 #endif
 
