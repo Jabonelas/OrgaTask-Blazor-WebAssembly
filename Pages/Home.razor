@@ -1,0 +1,74 @@
+﻿@page "/"
+@using Blazor_WebAssembly.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Organize suas tarefas de forma simples e eficiente.</h1>
+        <p>Transforme o caos em produtividade com nossa plataforma de gerenciamento de tarefas.</p>
+        @if (!usuarioLogado)
+        {
+            <a href="/login" class="cta-button">Comece agora</a>
+        }
+    </div>
+
+  <div class="hero-image">
+        <img src="images/TelaTarefasComputador.png" alt="Aplicativo em uso"
+             style="width: 100%; max-width: 800px; height: auto;">
+</div>
+
+</div>
+
+<div class="features-section">
+    <h2>Sua ferramenta ideal de produtividade</h2>
+    <p>Gerencie tarefas com quadros, listas e prazos. Simples, visual e poderoso.</p>
+
+    <div class="features-grid">
+        <div class="feature-box">
+            <h3>✅ Criação de Tarefas</h3>
+            <p>Adicione novas tarefas com prazos, prioridades e descrições.</p>
+        </div>
+        <div class="feature-box">
+            <h3>📊 Acompanhamento</h3>
+            <p>Visualize o andamento das suas atividades em tempo real.</p>
+        </div>
+        <div class="feature-box">
+            <h3>⚙️ Atualizações Simples</h3>
+            <p>Atualize o status ou prioridade das tarefas com poucos cliques</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    @if (usuarioLogado)
+    {
+        <p>&copy; 2025 - Desenvolvido por Israel Oliveira </p>
+    }
+    else
+    {
+        <p>&copy; 2025 - Desenvolvido por Israel Oliveira | <a href="/login">Entrar</a></p>
+    }
+</footer>
+
+
+
+@code {
+
+    private bool usuarioLogado = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            usuarioLogado = true;
+        }
+    }
+
+
+}

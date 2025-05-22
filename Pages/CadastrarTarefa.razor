@@ -1,0 +1,205 @@
+﻿@page "/cadastrar-tarefa"
+@using Blazor_WebAssembly.DTOs
+@using Blazor_WebAssembly.DTOs.Tarefa
+@using Blazor_WebAssembly.Interfaces
+@using Blazor_WebAssembly.Interfaces.Tarefa
+@using Microsoft.AspNetCore.Components.Authorization
+@using Newtonsoft.Json
+@using System.Text
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject HttpClient Http
+@inject ITarefaService ITarefaService
+@inject IJSRuntime JS
+@inject NotificacaoService notificacaoService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<EditForm Model="@TarefaCadastrarDTO" OnValidSubmit="@HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="container-fluid min-vh-100 p-0">
+        <div class="row g-0 min-vh-100">
+            <!-- Painel Esquerdo (Background) -->
+            <div class="col-lg-5 d-none d-lg-block" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+                <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                    <div style="max-width: 500px;">
+                        <h1 class="display-5 mb-4"><i class="bi bi-plus-circle-fill"></i> Nova Tarefa</h1>
+                        <p class="lead mb-5">Preencha os campos ao lado para criar uma nova tarefa e organizar seu trabalho.</p>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Organize suas atividades por prioridade</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Defina prazos e acompanhe seu progresso</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span>Mantenha seu fluxo de trabalho organizado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel Direito (Formulário) -->
+            <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
+                <div class="w-100" style="max-width: 600px;">
+                    <div class="text-center mb-5 d-lg-none">
+                        <h2 class="text-primary"><i class="bi bi-plus-circle-fill"></i> Nova Tarefa</h2>
+                    </div>
+
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <!-- Título -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Título</label>
+                                <InputText @bind-Value="TarefaCadastrarDTO.Titulo"
+                                           class="form-control form-control-lg" />
+                                <ValidationMessage For="@(() => TarefaCadastrarDTO.Titulo)" class="text-danger small" />
+                            </div>
+
+                            <!-- Prioridade e Prazo -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Prioridade</label>
+                                    <InputSelect @bind-Value="TarefaCadastrarDTO.Prioridade"
+                                                 class="form-select form-select-lg">
+                                        <option value=""></option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="Média">Média</option>
+                                        <option value="Baixa">Baixa</option>
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Prioridade)" class="text-danger small" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Prazo (dias)</label>
+                                    <InputNumber @bind-Value="TarefaCadastrarDTO.Prazo"
+                                                 class="form-control form-control-lg" />
+                                    <ValidationMessage For="@(() => TarefaCadastrarDTO.Prazo)" class="text-danger small" />
+                                </div>
+                            </div>
+
+                            <!-- Descrição -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Descrição</label>
+                                <InputTextArea @bind-Value="TarefaCadastrarDTO.Descricao"
+                                               class="form-control"
+                                               rows="5" />
+                                <ValidationMessage For="@(() => TarefaCadastrarDTO.Descricao)" class="text-danger small" />
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Status</label>
+                                <InputSelect @bind-Value="TarefaCadastrarDTO.Status"
+                                             class="form-select form-select-lg">
+                                    <option value=""></option>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Em Progresso">Em Progresso</option>
+                                    <option value="Concluído">Concluído</option>
+                                </InputSelect>
+                                <ValidationMessage For="@(() => TarefaCadastrarDTO.Status)" class="text-danger small" />
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="d-flex justify-content-between pt-3">
+                                <button type="button"
+                                        class="btn btn-outline-secondary px-4"
+                                        @onclick="CancelarAlteracao">
+                                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                                </button>
+
+                                <button type="submit"
+                                        class="btn btn-primary px-4"
+                                        disabled="@isSubmitting">
+                                    <span class="spinner-border spinner-border-sm me-1"
+                                          hidden="@(!isSubmitting)"></span>
+                                    <i class="bi bi-check-lg me-1" hidden="@isSubmitting"></i>
+                                    @(isSubmitting ? "Salvando..." : "Salvar Tarefa")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+
+
+
+
+
+@code {
+
+    private bool isSubmitting = false;
+
+    private TarefaAlterarDTO TarefaCadastrarDTO = new TarefaAlterarDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
+
+            Navigation.NavigateTo("/", forceLoad: true);
+
+            // Navigation.NavigateTo("/login");
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            var (sucesso, errorMessage) = await ITarefaService.CadastrarTarefaAsync(TarefaCadastrarDTO);
+
+            if (sucesso)
+            {
+                await notificacaoService.MostrarSucesso("Tarefa cadastrada com sucesso!");
+
+                LimparCampos();
+            }
+            else
+            {
+                await notificacaoService.MostrarErro(errorMessage);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao cadastrar tarefas: {ex.Message}");
+
+            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
+        }
+
+
+    }
+
+    private void LimparCampos()
+    {
+        TarefaCadastrarDTO.Titulo = "";
+        TarefaCadastrarDTO.Prioridade = "";
+        TarefaCadastrarDTO.Prazo = 0;
+        TarefaCadastrarDTO.Descricao = "";
+        TarefaCadastrarDTO.Status = "";
+    }
+
+    private async void CancelarAlteracao()
+    {
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar a alteração da tarefa?");
+
+        if (confirmado)
+        {
+            Navigation.NavigateTo($"/tarefa-rolagem/todas");
+        }
+    }
+}
