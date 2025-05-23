@@ -1,13 +1,13 @@
-﻿name: Deploy
+﻿name: Deploy Blazor to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Corrigido de "branchs" para "branches"
-
+    branches: ["main"]
+  
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Adicionado para permitir push
   pages: write
   id-token: write
 
@@ -25,10 +25,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Clean workspace
+        run: |
+          rm -rf docs/  # Limpa docs existente
+          rm -rf publish/  # Limpa publicação anterior
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x # Versão mais flexível
+          dotnet-version: 8.0.x
 
       - name: Install .NET Wasm Tools
         run: dotnet workload install wasm-tools
@@ -39,20 +44,47 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore
 
-      - name: Publish
+      - name: Publish Blazor App
         run: |
-          # Publica diretamente para a pasta docs
-          dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o docs --nologo
-
-          # Cria arquivos essenciais
+          # Publica para pasta temporária
+          dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o publish --nologo
+          
+          # Prepara pasta docs
+          mkdir -p docs
+          cp -r publish/wwwroot/* docs/
+          
+          # Arquivos essenciais
           touch docs/.nojekyll
-          echo '<!DOCTYPE html><html><head><script>sessionStorage.redirect=location.pathname;location.replace("/");</script></head></html>' > docs/404.html
-
-          # Configura CSP
-          echo 'Content-Security-Policy: default-src '\''self'\''; style-src '\''self'\'' https://fonts.googleapis.com '\''unsafe-inline'\''; font-src '\''self'\'' https://fonts.gstatic.com;' > docs/_headers
-
-      - name: Verify files
-        run: ls -R docs # Verifica a estrutura de arquivos
+          
+          # 404.html para roteamento SPA
+          echo '<!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8"/>
+              <script>
+                sessionStorage.redirect = location.pathname;
+                location.replace("/");
+              </script>
+            </head>
+          </html>' > docs/404.html
+          
+          # CSP completo com todas as permissões necessárias
+          echo '/*
+  Content-Security-Policy:
+    default-src '\''self'\'';
+    style-src '\''self'\'' https://fonts.googleapis.com '\''unsafe-inline'\'';
+    font-src '\''self'\'' https://fonts.gstatic.com data:;
+    script-src '\''self'\'' '\''unsafe-inline'\'' '\''wasm-unsafe-eval'\'';
+    connect-src '\''self'\'' https://*.*;
+    img-src '\''self'\'' data:;
+    media-src '\''self'\'';
+    frame-src '\''self'\'';
+    worker-src '\''self'\'' blob:;
+' > docs/_headers
+          
+          # Verificação
+          echo "Estrutura da pasta docs:"
+          ls -R docs
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -60,8 +92,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "docs" # Alterado de docs/wwwroot para docs
+          path: "docs"
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
