@@ -21,7 +21,18 @@ namespace Blazor_WebAssembly
 
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/api/") });
+#if DEBUG
+
+                   builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/api/") });
+#else
+
+            builder.Services.AddScoped(sp =>
+        new HttpClient
+        {
+            BaseAddress = new Uri(builder.Configuration["https://blazor-api.onrender.com"] ?? "https://blazor-api.onrender.com")
+        });
+
+#endif
 
             // tarefa
             builder.Services.AddScoped<ITarefaService, TarefaService>();
