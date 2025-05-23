@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\Blazor WebAssembly.styles.css"
     },
     {
+      "Id": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\404.html",
+      "PackagePath": "staticwebassets\\404.html"
+    },
+    {
+      "Id": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\_headers",
+      "PackagePath": "staticwebassets"
+    },
+    {
       "Id": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
