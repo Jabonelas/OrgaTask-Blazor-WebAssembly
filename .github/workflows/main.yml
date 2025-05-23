@@ -2,7 +2,7 @@
 
 on:
   push:
-    branchs: ["main"]
+    branches: ["main"] # Corrigido de "branchs" para "branches"
 
   workflow_dispatch:
 
@@ -28,7 +28,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.102
+          dotnet-version: 8.0.x # Versão mais flexível
 
       - name: Install .NET Wasm Tools
         run: dotnet workload install wasm-tools
@@ -39,16 +39,28 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore
 
-      - name: Publish .NET
-        run: dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o docs --nologo
+      - name: Publish
+        run: |
+          # Publica diretamente para a pasta docs
+          dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o docs --nologo
+
+          # Cria arquivos essenciais
+          touch docs/.nojekyll
+          echo '<!DOCTYPE html><html><head><script>sessionStorage.redirect=location.pathname;location.replace("/");</script></head></html>' > docs/404.html
+
+          # Configura CSP
+          echo 'Content-Security-Policy: default-src '\''self'\''; style-src '\''self'\'' https://fonts.googleapis.com '\''unsafe-inline'\''; font-src '\''self'\'' https://fonts.gstatic.com;' > docs/_headers
+
+      - name: Verify files
+        run: ls -R docs # Verifica a estrutura de arquivos
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "docs/wwwroot"
+          path: "docs" # Alterado de docs/wwwroot para docs
 
       - name: Deploy
         id: deployment
