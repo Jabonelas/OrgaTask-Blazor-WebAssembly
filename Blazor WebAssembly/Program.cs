@@ -1,13 +1,11 @@
 using Blazor_WebAssembly.Interfaces;
+using Blazor_WebAssembly.Interfaces.Tarefa;
+using Blazor_WebAssembly.Services.Tarefa;
+using Blazor_WebAssembly.Services.Usuario;
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.Components.Authorization;
-using Blazor_WebAssembly.Layout;
-using Blazor_WebAssembly.Pages;
-using Blazor_WebAssembly.Services.Usuario;
-using Blazor_WebAssembly.Services.Tarefa;
-using Blazor_WebAssembly.Interfaces.Tarefa;
 
 namespace Blazor_WebAssembly
 {
@@ -23,7 +21,7 @@ namespace Blazor_WebAssembly
 
 #if DEBUG
 
-                   builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/api/") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/api/") });
 #else
 
             builder.Services.AddScoped(sp =>

@@ -29,10 +29,13 @@
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\index.html</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Program.cs</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Services\Usuario\UsuarioService.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Services\Usuario\UsuarioService.cs</string>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\AnaliseTarefasUsuario.razor</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Program.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

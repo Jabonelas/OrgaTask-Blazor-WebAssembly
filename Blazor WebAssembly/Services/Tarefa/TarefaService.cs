@@ -1,13 +1,12 @@
 ﻿using Blazor_WebAssembly.DTOs;
+using Blazor_WebAssembly.DTOs.Tarefa;
+using Blazor_WebAssembly.Interfaces.Tarefa;
+using BlazorAPI.DTOs.Tarefa;
 using Blazored.LocalStorage;
 using Newtonsoft.Json;
 using System.Net;
-using Blazor_WebAssembly.DTOs.Tarefa;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Security.Cryptography;
-using BlazorAPI.DTOs.Tarefa;
-using Blazor_WebAssembly.Interfaces.Tarefa;
 
 namespace Blazor_WebAssembly.Services.Tarefa
 {

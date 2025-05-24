@@ -1,11 +1,10 @@
 ﻿using Blazor_WebAssembly.DTOs;
+using Blazor_WebAssembly.DTOs.Usuario;
+using Blazor_WebAssembly.Interfaces;
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Newtonsoft.Json;
 using System.Text;
-using Blazored.LocalStorage;
-using Blazor_WebAssembly.Interfaces;
-using Blazor_WebAssembly.DTOs.Usuario;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Blazor_WebAssembly.Services.Usuario
 {
@@ -56,8 +55,6 @@ namespace Blazor_WebAssembly.Services.Usuario
 
                     // Armazenando o usuario
                     await localStorage.SetItemAsync("usuario", _dadosLogin.login);
-
-                    (authStateProvider as CustomAuthenticationStateProvider)?.NotifyUserLogout();
 
                     return (true, null);
                 }
