@@ -28,42 +28,33 @@ namespace Blazor_WebAssembly.Services.Usuario
                 var json = JsonConvert.SerializeObject(_dadosLogin);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-#if DEBUG
+                var endpoint = SetandoEndPoint("usuarios/login");
 
-                var request = new HttpRequestMessage(HttpMethod.Post, $"usuarios/login")
+                using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
-                    Content = content
-                };
-#else
+                    request.Content = content;
+                    var response = await http.SendAsync(request);
 
-    var request = new HttpRequestMessage(HttpMethod.Post, $"https://blazor-api.onrender.com/api/usuarios/login")
-                {
-                    Content = content
-                };
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
 
-#endif
+                        // Armazenando o token
+                        await localStorage.SetItemAsync("authToken", result.Token);
 
-                var response = await http.SendAsync(request);
+                        // Armazenando o usuario
+                        await localStorage.SetItemAsync("usuario", _dadosLogin.login);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
+                        return (true, null);
+                    }
+                    else
+                    {
+                        var errorContent = await response.Content.ReadAsStringAsync();
 
-                    // Armazenando o token
-                    await localStorage.SetItemAsync("authToken", result.Token);
-
-                    // Armazenando o usuario
-                    await localStorage.SetItemAsync("usuario", _dadosLogin.login);
-
-                    return (true, null);
-                }
-                else
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-
-                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-                    return (false, errorResponse?.message ?? "Erro desconhecido");
+                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                        return (false, errorResponse?.message ?? "Erro desconhecido");
+                    }
                 }
             }
             catch (Exception ex)
@@ -81,45 +72,53 @@ namespace Blazor_WebAssembly.Services.Usuario
                 var json = JsonConvert.SerializeObject(_dadosUsuario);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-#if DEBUG
+                var endpoint = SetandoEndPoint("usuarios");
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "usuarios")
+                using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
-                    Content = content
-                };
-#else
+                    request.Content = content;
+                    var response = await http.SendAsync(request);
 
-    var request = new HttpRequestMessage(HttpMethod.Post, "https://blazor-api.onrender.com/api/usuarios")
-    {
-        Content = content
-    };
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
 
-#endif
+                        //    // Armazenando o token
+                        await localStorage.SetItemAsync("authToken", result.Token);
+                        return (true, null);
+                    }
+                    else
+                    {
+                        var errorContent = await response.Content.ReadAsStringAsync();
 
-                var response = await http.SendAsync(request);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
-
-                    //    // Armazenando o token
-                    await localStorage.SetItemAsync("authToken", result.Token);
-                    return (true, null);
-                }
-                else
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-
-                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-                    return (false, errorResponse?.message ?? "Erro desconhecido");
+                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                        return (false, errorResponse?.message ?? "Erro desconhecido");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erro em CadastrarUsuarioAsync: {ex.Message}");
+
                 return (false, ex.Message);
             }
         }
+
+        #region Metodo Privado
+
+        private string SetandoEndPoint(string _endpont)
+        {
+#if DEBUG
+
+            return $"{_endpont}";
+
+#else
+            return $"https://blazor-api.onrender.com/{_endpont}";
+
+#endif
+        }
+
+        #endregion Metodo Privado
     }
 }
