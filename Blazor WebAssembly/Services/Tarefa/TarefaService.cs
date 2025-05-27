@@ -74,52 +74,6 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage, List<TarefaConsultaDTO>)> ObterTarefasAsync()
-        {
-            try
-            {
-                UserToken dadosToken = await PegarDadosToken();
-
-                if (dadosToken == null || string.IsNullOrEmpty(dadosToken.Token))
-                {
-                    return (false, "Token de autenticação inválido", null);
-                }
-
-                var endpoint = SetandoEndPoint($"tarefas");
-
-                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
-                {
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
-
-                    var response = await http.SendAsync(request);
-
-                    var responseContent = await response.Content.ReadAsStringAsync();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var listaTarefa = JsonConvert.DeserializeObject<List<TarefaConsultaDTO>>(responseContent);
-
-                        return (true, null, listaTarefa);
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
-                    }
-
-                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
-
-                    return (false, errorResponse?.message ?? "Erro desconhecido", null);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro em ObterTarefasAsync: {ex}");
-
-                return (false, $"Ocorreu um erro inesperado: {ex.Message}", null);
-            }
-        }
-
         public async Task<(bool success, string errorMessage)> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
         {
             try

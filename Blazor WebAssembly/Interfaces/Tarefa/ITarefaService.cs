@@ -5,8 +5,6 @@ namespace Blazor_WebAssembly.Interfaces.Tarefa
 {
     public interface ITarefaService
     {
-        Task<(bool success, string errorMessage, List<TarefaConsultaDTO>)> ObterTarefasAsync();
-
         Task<(bool success, string errorMessage, List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int _pageNumber, int _pageSize, string _status);
 
         Task<(bool success, string errorMessage)> DeletarTarefaAsync(int _id);
