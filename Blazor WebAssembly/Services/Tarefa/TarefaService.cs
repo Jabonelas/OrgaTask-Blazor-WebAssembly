@@ -48,22 +48,18 @@ namespace Blazor_WebAssembly.Services.Tarefa
                         return (false, "Sessão expirada. Por favor, faça login novamente.", null, 0);
                     }
 
-                    if (!response.IsSuccessStatusCode)
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        var errorContent = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<PagedResult<TarefaConsultaDTO>>(responseContent);
 
-                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-
-                        return (false, errorResponse?.message ?? "Erro desconhecido", null, 0);
+                        return (true, "", result.Items, result.TotalCount);
                     }
 
-                    response.EnsureSuccessStatusCode();
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
 
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    var result = JsonConvert.DeserializeObject<PagedResult<TarefaConsultaDTO>>(content);
-
-                    return (true, "", result.Items, result.TotalCount);
+                    return (false, errorResponse?.message ?? "Erro desconhecido", null, 0);
                 }
             }
             catch (Exception ex)
@@ -102,15 +98,15 @@ namespace Blazor_WebAssembly.Services.Tarefa
                         return (false, "Sessão expirada. Por favor, faça login novamente.");
                     }
 
-                    if (!response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
-                        var errorContent = await response.Content.ReadAsStringAsync();
-
-                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-                        return (false, errorResponse?.message ?? "Erro desconhecido");
+                        return (true, null);
                     }
 
-                    return (true, null);
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
                 }
             }
             catch (Exception ex)
@@ -149,15 +145,15 @@ namespace Blazor_WebAssembly.Services.Tarefa
                         return (false, "Sessão expirada. Por favor, faça login novamente.");
                     }
 
-                    if (!response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
-                        var errorContent = await response.Content.ReadAsStringAsync();
-
-                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-                        return (false, errorResponse?.message ?? "Erro desconhecido");
+                        return (true, null);
                     }
 
-                    return (true, null);
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
                 }
             }
             catch (Exception ex)
@@ -187,6 +183,11 @@ namespace Blazor_WebAssembly.Services.Tarefa
 
                     var response = await http.SendAsync(request);
 
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
+                    }
+
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     if (response.IsSuccessStatusCode)
@@ -194,11 +195,6 @@ namespace Blazor_WebAssembly.Services.Tarefa
                         var tarefa = JsonConvert.DeserializeObject<TarefaAlterarDTO>(responseContent);
 
                         return (true, null, tarefa);
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
                     }
 
                     var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
@@ -233,21 +229,20 @@ namespace Blazor_WebAssembly.Services.Tarefa
 
                     var response = await http.SendAsync(request);
 
-                    var responseContent = await response.Content.ReadAsStringAsync();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var tarefa = JsonConvert.DeserializeObject<TarefaAlterarDTO>(responseContent);
-
-                        return (true, null);
-                    }
-
                     if (response.StatusCode == HttpStatusCode.Unauthorized)
                     {
                         return (false, "Sessão expirada. Por favor, faça login novamente.");
                     }
 
-                    return (true, null);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return (true, null);
+                    }
+
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
                 }
             }
             catch (Exception ex)
@@ -258,7 +253,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage, TarefaQtdStatus)> BuscarQtdStatusTarefaAsync()
+        public async Task<(bool success, string errorMessage, TarefaQtdStatusDTO)> BuscarQtdStatusTarefaAsync()
         {
             try
             {
@@ -269,7 +264,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido", null);
                 }
 
-                var endpoint = SetandoEndPoint("tarefas/qtd_status");
+                var endpoint = SetandoEndPoint("tarefas/status_completo");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
                 {
@@ -277,18 +272,18 @@ namespace Blazor_WebAssembly.Services.Tarefa
 
                     var response = await http.SendAsync(request);
 
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
+                    }
+
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var qtdStatusTarefas = JsonConvert.DeserializeObject<TarefaQtdStatus>(responseContent);
+                        TarefaQtdStatusDTO qtdStatusTarefas = JsonConvert.DeserializeObject<TarefaQtdStatusDTO>(responseContent);
 
                         return (true, null, qtdStatusTarefas);
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
                     }
 
                     var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
@@ -301,52 +296,6 @@ namespace Blazor_WebAssembly.Services.Tarefa
                 Console.WriteLine($"Erro em BuscarQtdStatusTarefaAsync: {ex}");
 
                 return (false, $"Ocorreu um erro inesperado: {ex.Message}", null);
-            }
-        }
-
-        public async Task<(bool success, string errorMessage, decimal porcentagemTarefasConcluidas)> BuscarQtdTareMensalfaAsync()
-        {
-            try
-            {
-                UserToken dadosToken = await PegarDadosToken();
-
-                if (dadosToken == null || string.IsNullOrEmpty(dadosToken.Token))
-                {
-                    return (false, "Token de autenticação inválido", 0);
-                }
-
-                var endpoint = SetandoEndPoint("tarefas/qtd_concluida");
-
-                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
-                {
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", dadosToken.Token);
-
-                    var response = await http.SendAsync(request);
-
-                    var responseContent = await response.Content.ReadAsStringAsync();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var porcentagemTarefaConcluida = JsonConvert.DeserializeObject<decimal>(responseContent);
-
-                        return (true, null, porcentagemTarefaConcluida);
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        return (false, "Sessão expirada. Por favor, faça login novamente.", 0);
-                    }
-
-                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
-
-                    return (false, errorResponse?.message ?? "Erro desconhecido", 0);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro em BuscarQtdTareMensalfaAsync: {ex}");
-
-                return (false, $"Ocorreu um erro inesperado: {ex.Message}", 0);
             }
         }
 
@@ -369,17 +318,18 @@ namespace Blazor_WebAssembly.Services.Tarefa
 
                     var response = await http.SendAsync(request);
 
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
+                    }
+
                     var responseContent = await response.Content.ReadAsStringAsync();
+
                     if (response.IsSuccessStatusCode)
                     {
                         var listaTarefasPrioridadeAlta = JsonConvert.DeserializeObject<List<TarefaPrioridadeAltaDTO>>(responseContent);
 
                         return (true, null, listaTarefasPrioridadeAlta);
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        return (false, "Sessão expirada. Por favor, faça login novamente.", null);
                     }
 
                     var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);

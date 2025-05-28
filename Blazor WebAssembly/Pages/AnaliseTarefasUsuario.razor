@@ -14,6 +14,8 @@
 @inject IJSRuntime JS
 
 
+<PageTitle>Dashboard de Tarefas</PageTitle>
+
 <h1 class="main-title">Dashboard de Tarefas</h1>
 
 <!-- Cards de Status -->
@@ -118,6 +120,8 @@
 
 @code {
 
+
+
     private int PendenteCount = 0;
     private int EmProgressoCount = 0;
     private int ConcluidoCount = 0;
@@ -128,16 +132,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await CarregarInformacoesCards();
+        await CarregarInformacoesStatusAsync();
 
-        await CarregarPorcentagemTarefasConcluidas();
-
-        await CarregarTarefasPrioridadeAlta();
-
-
+        await CarregarTarefasPrioridadeAltaAsync();
     }
 
-    private async Task CarregarInformacoesCards()
+    private async Task CarregarInformacoesStatusAsync()
     {
         try
         {
@@ -148,6 +148,7 @@
                 PendenteCount = TarefaQtdStatus.Pendente;
                 EmProgressoCount = TarefaQtdStatus.EmProgresso;
                 ConcluidoCount = TarefaQtdStatus.Concluido;
+                PorcentagemTarefasConcluidas = TarefaQtdStatus.PorcentagemConcluidas;
             }
             else
             {
@@ -163,30 +164,9 @@
         }
     }
 
-    private async Task CarregarPorcentagemTarefasConcluidas()
-    {
-        try
-        {
-            var (success, errorMessage, porcentagemTarefasConcluidas) = await ITarefaService.BuscarQtdTareMensalfaAsync();
 
-            if (success)
-            {
-                PorcentagemTarefasConcluidas = porcentagemTarefasConcluidas;
-            }
-            else
-            {
-                await notificacaoService.MostrarErro(errorMessage);
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao buscar porcentagem de tarefas concluidas: {ex.Message}");
 
-            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        }
-    }
-
-    private async Task CarregarTarefasPrioridadeAlta()
+    private async Task CarregarTarefasPrioridadeAltaAsync()
     {
         try
         {

@@ -35,9 +35,10 @@ namespace Blazor_WebAssembly.Services.Usuario
                     request.Content = content;
                     var response = await http.SendAsync(request);
 
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
                     if (response.IsSuccessStatusCode)
                     {
-                        var responseContent = await response.Content.ReadAsStringAsync();
                         var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
 
                         // Armazenando o token
@@ -48,13 +49,10 @@ namespace Blazor_WebAssembly.Services.Usuario
 
                         return (true, null);
                     }
-                    else
-                    {
-                        var errorContent = await response.Content.ReadAsStringAsync();
 
-                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-                        return (false, errorResponse?.message ?? "Erro desconhecido");
-                    }
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
                 }
             }
             catch (Exception ex)
@@ -77,24 +75,24 @@ namespace Blazor_WebAssembly.Services.Usuario
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
                     request.Content = content;
+
                     var response = await http.SendAsync(request);
+
+                    var responseContent = await response.Content.ReadAsStringAsync();
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var responseContent = await response.Content.ReadAsStringAsync();
                         var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
 
                         //    // Armazenando o token
                         await localStorage.SetItemAsync("authToken", result.Token);
+
                         return (true, null);
                     }
-                    else
-                    {
-                        var errorContent = await response.Content.ReadAsStringAsync();
 
-                        var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
-                        return (false, errorResponse?.message ?? "Erro desconhecido");
-                    }
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseContent);
+
+                    return (false, errorResponse?.message ?? "Erro desconhecido");
                 }
             }
             catch (Exception ex)

@@ -15,9 +15,7 @@ namespace Blazor_WebAssembly.Interfaces.Tarefa
 
         Task<(bool success, string errorMessage, TarefaAlterarDTO)> BuscarTarefaAsync(int _id);
 
-        Task<(bool success, string errorMessage, TarefaQtdStatus)> BuscarQtdStatusTarefaAsync();
-
-        Task<(bool success, string errorMessage, decimal porcentagemTarefasConcluidas)> BuscarQtdTareMensalfaAsync();
+        Task<(bool success, string errorMessage, TarefaQtdStatusDTO)> BuscarQtdStatusTarefaAsync();
 
         Task<(bool success, string errorMessage, List<TarefaPrioridadeAltaDTO>)> BuscarTarefasPrioridadeAltaAsync();
     }
