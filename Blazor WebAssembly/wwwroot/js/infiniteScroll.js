@@ -37,18 +37,15 @@ window.infiniteScroll = {
 
     // Verifica se o elemento está visível
     checkVisibility: function (element) {
-        try {
-            const rect = element.getBoundingClientRect();
-            const isVisible = (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.bottom >= 0 &&
-                rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
-                rect.right >= 0
-            );
+        const rect = element.getBoundingClientRect();
+        const isVisible = (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0 &&
+            rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+            rect.right >= 0
+        );
 
-            console.log('Verificando visibilidade do sentinela:', isVisible);
-            return isVisible;
-        } catch {
-        }
+        console.log('Verificando visibilidade do sentinela:', isVisible);
+        return isVisible;
     }
 };

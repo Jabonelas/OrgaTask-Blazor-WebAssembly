@@ -82,11 +82,6 @@ namespace Blazor_WebAssembly.Services.Usuario
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var result = JsonConvert.DeserializeObject<UserToken>(responseContent);
-
-                        //    // Armazenando o token
-                        await localStorage.SetItemAsync("authToken", result.Token);
-
                         return (true, null);
                     }
 

@@ -35,9 +35,6 @@
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\AnaliseTarefasUsuario.razor</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Program.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\TarefaPaginada.razor</string>
     </ArrayOfString>
     <ArrayOfString>
@@ -48,6 +45,9 @@
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\js\infiniteScroll.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Blazor WebAssembly.csproj</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
