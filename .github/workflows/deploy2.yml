@@ -1,0 +1,39 @@
+name: Build and Deploy to Cloudflare Pages
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+      - name: Publish
+        run: |
+          dotnet publish -c Release -o publish
+          mv publish/wwwroot/* .
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: blazor-app
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: blazor-app
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "OrgaTask-Blazor-WebAssembly"
+          directory: "."
