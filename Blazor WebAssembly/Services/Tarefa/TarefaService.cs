@@ -6,7 +6,6 @@ using Blazored.LocalStorage;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Blazor_WebAssembly.Services.Tarefa
