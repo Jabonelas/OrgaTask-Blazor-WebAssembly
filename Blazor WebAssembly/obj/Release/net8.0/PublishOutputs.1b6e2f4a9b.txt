@@ -1,2 +1,5 @@
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\publish\publish\web.config
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\publish\publish\wwwroot\sample-data\weather.json
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\publish\publish\wwwroot\_framework\blazor.boot.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\publish\emcc-props.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\publish\web.config
