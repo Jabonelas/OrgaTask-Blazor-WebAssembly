@@ -89,6 +89,10 @@
           "SelectedChildIndex": 15,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "NotificacaoService.cs",
@@ -98,12 +102,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:43:06.211Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "WhenOpened": "2025-06-03T18:43:06.211Z"
             },
             {
               "$type": "Document",
@@ -115,8 +114,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Layout\\NavMenu.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:31:48.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T18:31:48.544Z"
             },
             {
               "$type": "Document",
@@ -128,8 +126,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Layout\\MainLayout.razor",
               "ViewState": "AgIAAEEAAAAAAAAAAAAAAEoAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:31:43.62Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T18:31:43.62Z"
             },
             {
               "$type": "Document",
@@ -141,8 +138,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\Home.razor",
               "ViewState": "AgIAAFoAAAAAAAAAAAAAAMAAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T17:46:49.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T17:46:49.401Z"
             },
             {
               "$type": "Document",
@@ -190,8 +186,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\TarefaPaginada.razor",
               "ViewState": "AgIAALkAAAAAAAAAAAAAAAEBAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T23:57:21.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T23:57:21.615Z"
             },
             {
               "$type": "Document",
@@ -203,8 +198,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\DashboardTarefas.razor",
               "ViewState": "AgIAAFwAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-23T19:07:55.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T19:07:55.229Z"
             },
             {
               "$type": "Document",
@@ -216,8 +210,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Services\\Usuario\\UsuarioService.cs",
               "ViewState": "AgIAAEMAAAAAAAAAAAAwwFQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T17:49:36.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T17:49:36.886Z"
             },
             {
               "$type": "Document",
@@ -229,8 +222,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\index.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-05-22T20:51:11.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T20:51:11.4Z"
             },
             {
               "$type": "Document",
@@ -242,8 +234,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Services\\Tarefa\\TarefaService.cs",
               "ViewState": "AgIAADQBAAAAAAAAAAAswC0BAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T22:33:59.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T22:33:59.2Z"
             },
             {
               "$type": "Document",
@@ -255,8 +246,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\Login.razor",
               "ViewState": "AgIAAGsAAAAAAAAAAAAAAJcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:56:50.147Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:56:50.147Z"
             },
             {
               "$type": "Document",
@@ -268,8 +258,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\css\\app.css",
               "ViewState": "AgIAACoCAAAAAAAAAAAQwE8CAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-21T21:51:15.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:51:15.275Z"
             },
             {
               "$type": "Document",
@@ -279,7 +268,7 @@
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
               "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\TarefaRolagem.razor",
-              "ViewState": "AgIAAJ4BAAAAAAAAAAAYwMcBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAcwJQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-21T21:46:34.898Z",
               "EditorCaption": ""
@@ -294,8 +283,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\VisualizarTarefa.razor",
               "ViewState": "AgIAAI0AAAAAAAAAAAAUwKkAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:43:28.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:43:28.154Z"
             },
             {
               "$type": "Document",
@@ -307,8 +295,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\CadastrarTarefa.razor",
               "ViewState": "AgIAAJ4AAAAAAAAAAAAAAMMAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:43:00.665Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:43:00.665Z"
             },
             {
               "$type": "Document",
@@ -320,8 +307,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\CadastrarUsuario.razor",
               "ViewState": "AgIAALIAAAAAAAAAAAArwM8AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:21:54.707Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:21:54.707Z"
             },
             {
               "$type": "Document",
@@ -333,8 +319,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Pages\\AlterarTarefa.razor",
               "ViewState": "AgIAAKAAAAAAAAAAAAAAAM8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T20:56:58.448Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:56:58.448Z"
             }
           ]
         },

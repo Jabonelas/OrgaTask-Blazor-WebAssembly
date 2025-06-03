@@ -105,30 +105,23 @@
 
     [Parameter] public string? status { get; set; }
 
-
-
     private List<TarefaConsultaDTO> tarefas = new();
 
     private ElementReference sentinel;
 
     private DotNetObjectReference<TarefaRolagem>? objRef;
 
-    private int currentPage = 1;
-
-    private const int pageSize = 15;
-
-    private bool isLoading = false;
-
-    private bool hasMoreItems = true;
-
-    private int totalCount = 0;
-
-    private IJSObjectReference? infiniteScrollModule;
-
-    private IJSObjectReference? observerInstance;
-
     private string titulo = "";
 
+    private const int pageSize = 15;
+    private int currentPage = 1;
+    private int totalCount = 0;
+
+    private bool isLoading = false;
+    private bool hasMoreItems = true;
+
+    private IJSObjectReference? infiniteScrollModule;
+    private IJSObjectReference? observerInstance;
 
 
     protected override async Task OnInitializedAsync()
@@ -146,8 +139,6 @@
 
         await CarregandoMaisItensAsync();
     }
-
-
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
