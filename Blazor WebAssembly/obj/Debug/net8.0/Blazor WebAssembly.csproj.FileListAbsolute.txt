@@ -1078,6 +1078,6 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\nz1k2rhuwe-zuuz495fmz.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\6skurxj03h-5q0vb17tux.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\jx60qdkk8f-f66483my3b.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\nz1k2rhuwe-uoufnr09vf.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\6skurxj03h-enno65lida.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\jx60qdkk8f-60b1y97syq.gz
