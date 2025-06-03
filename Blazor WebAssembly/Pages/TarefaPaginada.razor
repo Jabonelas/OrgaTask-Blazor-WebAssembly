@@ -103,7 +103,7 @@ else
                                                 <i class="bi bi-pencil"></i>
                                             </button>
                                             <button class="btn btn-sm btn-outline-danger"
-                                                    @onclick="() => ConfirmarExclusao(tarefa.Id)"
+                                                    @onclick="() => ConfirmarExclusaoAsync(tarefa.Id)"
                                                     title="Excluir">
                                                 <i class="bi bi-trash"></i>
                                             </button>
@@ -163,7 +163,7 @@ else
         }
 
 
-        await LoadMoreItems();
+        await CarregandoMaisItensAsync();
 
 
     }
@@ -178,7 +178,7 @@ else
     }
 
     [JSInvokable]
-    public async Task LoadMoreItems()
+    public async Task CarregandoMaisItensAsync()
     {
         // Debounce para evitar chamadas rápidas consecutivas
         if (DateTime.Now - lastLoadTime < TimeSpan.FromMilliseconds(300) || isLoading || !hasMoreItems)
@@ -222,12 +222,12 @@ else
         }
     }
 
-    private async Task ResetPagination()
+    private async Task ResetandoPaginacaoAsync()
     {
         currentPage = 1;
         listaTarefas.Clear();
         hasMoreItems = true;
-        await LoadMoreItems();
+        await CarregandoMaisItensAsync();
     }
 
     private void VisualizarTarefa(int id)
@@ -245,7 +245,7 @@ else
         Navigation.NavigateTo("/cadastrar-tarefa");
     }
 
-    private async Task ConfirmarExclusao(int id)
+    private async Task ConfirmarExclusaoAsync(int id)
     {
         bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja excluir esta tarefa?");
 
@@ -254,7 +254,7 @@ else
             try
             {
                 await ITarefaService.DeletarTarefaAsync(id);
-                await ResetPagination();
+                await ResetandoPaginacaoAsync();
                 await notificacaoService.MostrarSucesso("Tarefa excluída com sucesso!");
             }
             catch (Exception ex)

@@ -104,7 +104,7 @@
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
                                         class="btn btn-outline-secondary px-4"
-                                        @onclick="CancelarCadastro">
+                                        @onclick="CancelarCadastroAsync">
                                     <i class="bi bi-x-lg me-1"></i> Cancelar
                                 </button>
 
@@ -182,7 +182,6 @@
 
                 Navigation.NavigateTo("/", forceLoad: true);
 
-                // Navigation.NavigateTo($"/tarefa-rolagem/todas");
             }
             else
             {
@@ -206,7 +205,7 @@
         UsuarioCadastrarDTO.Senha = "";
     }
 
-    private async void CancelarCadastro()
+    private async Task CancelarCadastroAsync()
     {
         bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar o cadastro do usuário?");
 

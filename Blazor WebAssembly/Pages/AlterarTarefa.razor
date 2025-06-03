@@ -108,7 +108,7 @@
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
                                         class="btn btn-outline-secondary px-4"
-                                        @onclick="CancelarAlteracao">
+                                        @onclick="CancelarAlteracaoAsync">
                                     <i class="bi bi-x-lg me-1"></i> Cancelar
                                 </button>
 
@@ -147,8 +147,6 @@
     {
         try
         {
-
-
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 
             var user = authState.User;
@@ -160,12 +158,9 @@
                 Navigation.NavigateTo("/login");
             }
 
-
             (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await ITarefaService.BuscarTarefaAsync(id);
 
             TarefaAlterarDTO = tarefa;
-
-
         }
         catch (Exception ex)
         {
@@ -210,7 +205,7 @@
         TarefaAlterarDTO.Status = "";
     }
 
-    private async void CancelarAlteracao()
+    private async Task CancelarAlteracaoAsync()
     {
         bool confirmado = await notificacaoService.MostrarConfirmacao("confirm", "Tem certeza que deseja cancelar a alteração da tarefa?");
 

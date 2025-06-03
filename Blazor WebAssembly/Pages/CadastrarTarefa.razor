@@ -108,7 +108,7 @@
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
                                         class="btn btn-outline-secondary px-4"
-                                        @onclick="CancelarAlteracao">
+                                        @onclick="CancelarAlteracaoAsync">
                                     <i class="bi bi-x-lg me-1"></i> Cancelar
                                 </button>
 
@@ -193,7 +193,7 @@
         TarefaCadastrarDTO.Status = "";
     }
 
-    private async void CancelarAlteracao()
+    private async Task CancelarAlteracaoAsync()
     {
         bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar a alteração da tarefa?");
 

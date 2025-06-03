@@ -21,6 +21,8 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
@@ -30,16 +32,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx0ZXJhclRhcmVmYS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/AnaliseTarefasUsuario.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5hbGlzZVRhcmVmYXNVc3VhcmlvLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/CadastrarTarefa.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyVGFyZWZhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/CadastrarUsuario.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyVXN1YXJpby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/DashboardTarefas.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkVGFyZWZhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Home.razor]
