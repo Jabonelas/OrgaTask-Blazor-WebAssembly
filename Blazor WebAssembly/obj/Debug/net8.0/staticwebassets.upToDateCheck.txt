@@ -4,10 +4,10 @@ wwwroot\css\bootstrap\bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css.map
 wwwroot\favicon.png
 wwwroot\icon-192.png
+wwwroot\IconeOrgaTask48.ico
 wwwroot\images\TelaDesktop.png
+wwwroot\images\TelaWeb.png
 wwwroot\index.html
 wwwroot\js\infiniteScroll.js
 wwwroot\sample-data\weather.json
 wwwroot\_headers
-wwwroot\images\TelaWeb.png
-wwwroot\IconeOrgaTask48.ico
