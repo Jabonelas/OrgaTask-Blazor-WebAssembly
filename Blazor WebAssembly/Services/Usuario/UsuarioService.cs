@@ -4,6 +4,7 @@ using Blazor_WebAssembly.Interfaces;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Newtonsoft.Json;
+using System.Net.Http;
 using System.Text;
 
 namespace Blazor_WebAssembly.Services.Usuario
@@ -12,13 +13,11 @@ namespace Blazor_WebAssembly.Services.Usuario
     {
         private readonly HttpClient http;
         private readonly ILocalStorageService localStorage;
-        private readonly AuthenticationStateProvider authStateProvider;
 
-        public UsuarioService(HttpClient _http, ILocalStorageService _localStorage, AuthenticationStateProvider _authStateProvider)
+        public UsuarioService(HttpClient _http, ILocalStorageService _localStorage)
         {
             http = _http;
             localStorage = _localStorage;
-            authStateProvider = _authStateProvider;
         }
 
         public async Task<(bool success, string errorMessage)> LoginAsync(UsuarioLoginDTO _dadosLogin)
@@ -28,7 +27,7 @@ namespace Blazor_WebAssembly.Services.Usuario
                 var json = JsonConvert.SerializeObject(_dadosLogin);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = SetandoEndPoint("usuarios/login");
+                var endpoint = SetandoEndPoint("api/usuarios/login");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
@@ -70,7 +69,7 @@ namespace Blazor_WebAssembly.Services.Usuario
                 var json = JsonConvert.SerializeObject(_dadosUsuario);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = SetandoEndPoint("usuarios");
+                var endpoint = SetandoEndPoint("api/usuarios");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
@@ -103,7 +102,6 @@ namespace Blazor_WebAssembly.Services.Usuario
         private string SetandoEndPoint(string _endpont)
         {
 #if DEBUG
-
             return $"{_endpont}";
 
 #else

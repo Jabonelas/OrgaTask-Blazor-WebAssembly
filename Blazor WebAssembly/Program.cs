@@ -21,7 +21,7 @@ namespace Blazor_WebAssembly
 
 #if DEBUG
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/api/") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7091/") });
 #else
 
             builder.Services.AddScoped(sp =>
