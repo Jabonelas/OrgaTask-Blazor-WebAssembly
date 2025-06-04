@@ -5,7 +5,7 @@ wwwroot\css\bootstrap\bootstrap.min.css.map
 wwwroot\favicon.png
 wwwroot\icon-192.png
 wwwroot\IconeOrgaTask48.ico
-wwwroot\images\TelaDesktop.png
+wwwroot\images\TelaDesktop1.png
 wwwroot\images\TelaWeb.png
 wwwroot\index.html
 wwwroot\js\infiniteScroll.js
