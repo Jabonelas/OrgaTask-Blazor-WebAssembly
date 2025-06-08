@@ -32,8 +32,10 @@ Aplicação web que consome a **OrgaTask API** para:
 Esta aplicação consome:
 - [OrgaTask API](https://github.com/Jabonelas/OrgaTask-API) (Backend principal)
   
+<!--
 Outros frontends do sistema:
 - [OrgaTask Desktop](https://github.com/Jabonelas/OrgaTask-Windows-Forms) (Versão Desktop)
+-->
 
 - 📊 Arquitetura do Sistema
 
@@ -47,7 +49,7 @@ A API central (Backend) serve dados para os frontends Web e Desktop.
 - **Autenticação**: JWT Bearer Tokens
 - **Consumo de API**: REST (HttpClient)
 - **Padrões Arquiteturais**:
-  - **Service Layer**: Separação clara entre controllers e lógica de negócio
+  - **Service Layer**: Separação clara entre componentes UI e lógica de negócio
   - **Injeção de Dependência**: Nativa do .NET (IServiceCollection)
 
 ## 🚀 Como Executar
