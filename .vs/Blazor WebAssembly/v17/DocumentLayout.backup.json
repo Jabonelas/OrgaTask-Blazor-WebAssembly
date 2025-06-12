@@ -70,8 +70,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\Interfaces\\Tarefa\\ITarefaService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T00:29:00.883Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T00:29:00.883Z"
             },
             {
               "$type": "Document",
@@ -165,7 +164,7 @@
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Services\\Tarefa\\TarefaService.cs",
               "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Services\\Tarefa\\TarefaService.cs",
               "RelativeToolTip": "Blazor WebAssembly\\Services\\Tarefa\\TarefaService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHEBAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAPEAAAAAAAAAAIAwwPUAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T23:30:30.749Z",
               "EditorCaption": ""
@@ -180,7 +179,8 @@
               "RelativeToolTip": "Blazor WebAssembly\\Services\\Usuario\\UsuarioService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:30:18.733Z"
+              "WhenOpened": "2025-06-03T23:30:18.733Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

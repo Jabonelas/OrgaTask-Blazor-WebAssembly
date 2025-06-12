@@ -2,9 +2,7 @@
 using Blazor_WebAssembly.DTOs.Usuario;
 using Blazor_WebAssembly.Interfaces;
 using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components.Authorization;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
 
 namespace Blazor_WebAssembly.Services.Usuario
