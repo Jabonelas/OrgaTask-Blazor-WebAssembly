@@ -1,6 +1,6 @@
 ﻿using Blazor_WebAssembly.DTOs;
 using Blazor_WebAssembly.DTOs.Usuario;
-using Blazor_WebAssembly.Interfaces;
+using Blazor_WebAssembly.Interfaces.Usuario;
 using Blazored.LocalStorage;
 using Newtonsoft.Json;
 using System.Text;

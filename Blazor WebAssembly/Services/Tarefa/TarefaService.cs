@@ -1,7 +1,6 @@
 ﻿using Blazor_WebAssembly.DTOs;
 using Blazor_WebAssembly.DTOs.Tarefa;
 using Blazor_WebAssembly.Interfaces.Tarefa;
-using BlazorAPI.DTOs.Tarefa;
 using Blazored.LocalStorage;
 using Newtonsoft.Json;
 using System.Net;

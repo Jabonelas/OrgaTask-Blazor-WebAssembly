@@ -3,6 +3,11 @@ build_property.EnableAotAnalyzer =
 build_property.EnableSingleFileAnalyzer = 
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property._MvvmToolkitIsUsingWindowsRuntimePack = false
+build_property.CsWinRTComponent = 
+build_property.CsWinRTAotOptimizerEnabled = 
+build_property.CsWinRTAotWarningLevel = 
 build_property.TargetFramework = net8.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
@@ -42,10 +47,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Tarefas/DashboardTarefas.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhc1xEYXNoYm9hcmRUYXJlZmFzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Tarefas/TarefaPaginada.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyZWZhc1xUYXJlZmFQYWdpbmFkYS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/israe/source/repos/Blazor WebAssembly/Blazor WebAssembly/Pages/Tarefas/TarefaRolagem.razor]

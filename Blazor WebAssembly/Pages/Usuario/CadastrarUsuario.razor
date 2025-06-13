@@ -1,21 +1,9 @@
 ﻿@page "/cadastrar-usuario"
-@using Blazor_WebAssembly.DTOs.Usuario
-@using Blazor_WebAssembly.Interfaces
-@using Microsoft.AspNetCore.Components.Authorization
-@using Newtonsoft.Json
-@using System.Text
-@inject NavigationManager Navigation
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject HttpClient Http
-@inject IUsuarioService iUsuarioService
-@inject NotificacaoService notificacaoService
-@inject IJSRuntime JS
-@* @inject AuthenticationStateProvider AuthenticationStateProvider *@
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Blazor_WebAssembly.ViewModel.Usuario
+@inject CadastrarUsuarioViewModel CadastrarUsuarioViewModel
 
 
-
-<EditForm Model="@UsuarioCadastrarDTO" OnValidSubmit="@HandleSubmit">
+<EditForm Model="@CadastrarUsuarioViewModel.usuarioCadastrarDTO" OnValidSubmit="@CadastrarUsuarioViewModel.CadastrarUsuarioAsync">
     <DataAnnotationsValidator />
 
     <div class="container-fluid min-vh-100 bg-light p-0">
@@ -58,17 +46,17 @@
                             <!-- Nome Completo -->
                             <div class="mb-4">
                                 <label class="form-label fw-bold">Nome Completo</label>
-                                <InputText @bind-Value="UsuarioCadastrarDTO.Nome"
+                                <InputText @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.Nome"
                                            class="form-control form-control-lg" />
-                                <ValidationMessage For="@(() => UsuarioCadastrarDTO.Nome)" class="text-danger small" />
+                                <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Nome)" class="text-danger small" />
                             </div>
 
                             <!-- Nome de Usuário -->
                             <div class="mb-4">
                                 <label class="form-label fw-bold">Nome de Usuário</label>
-                                <InputText @bind-Value="UsuarioCadastrarDTO.Login"
+                                <InputText @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.Login"
                                            class="form-control form-control-lg" />
-                                <ValidationMessage For="@(() => UsuarioCadastrarDTO.Login)" class="text-danger small" />
+                                <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Login)" class="text-danger small" />
                             </div>
 
                             <!-- Senha e Confirmar Senha -->
@@ -76,27 +64,27 @@
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">Senha</label>
                                     <div class="input-group">
-                                        <InputText type="password" @bind-Value="UsuarioCadastrarDTO.Senha"
+                                        <InputText type="password" @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.Senha"
                                                    class="form-control form-control-lg" id="fullPassword" />
                                         <button class="btn btn-outline-secondary" type="button"
                                                 onclick="togglePassword('fullPassword')">
                                             <i class="bi bi-eye"></i>
                                         </button>
                                     </div>
-                                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.Senha)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Senha)" class="text-danger small" />
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">Confirmar Senha</label>
                                     <div class="input-group">
-                                        <InputText type="password" @bind-Value="UsuarioCadastrarDTO.ConfirmarSenha"
+                                        <InputText type="password" @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.ConfirmarSenha"
                                                    class="form-control form-control-lg" id="fullConfirmPassword" />
                                         <button class="btn btn-outline-secondary" type="button"
                                                 onclick="togglePassword('fullConfirmPassword')">
                                             <i class="bi bi-eye"></i>
                                         </button>
                                     </div>
-                                    <ValidationMessage For="@(() => UsuarioCadastrarDTO.ConfirmarSenha)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.ConfirmarSenha)" class="text-danger small" />
                                 </div>
                             </div>
 
@@ -104,17 +92,17 @@
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
                                         class="btn btn-outline-secondary px-4"
-                                        @onclick="CancelarCadastroAsync">
+                                        @onclick="CadastrarUsuarioViewModel.CancelarCadastroAsync">
                                     <i class="bi bi-x-lg me-1"></i> Cancelar
                                 </button>
 
                                 <button type="submit"
                                         class="btn btn-primary px-4"
-                                        disabled="@isSubmitting">
+                                        disabled="@CadastrarUsuarioViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
-                                          hidden="@(!isSubmitting)"></span>
-                                    <i class="bi bi-check-lg me-1" hidden="@isSubmitting"></i>
-                                    @(isSubmitting ? "Cadastrando..." : "Cadastrar")
+                                          hidden="@(!CadastrarUsuarioViewModel.isSubmitting)"></span>
+                                    <i class="bi bi-check-lg me-1" hidden="@CadastrarUsuarioViewModel.isSubmitting"></i>
+                                    @(CadastrarUsuarioViewModel.isSubmitting ? "Cadastrando..." : "Cadastrar")
                                 </button>
                             </div>
                         </div>
@@ -145,74 +133,7 @@
 </script>
 
 
-
-
-
 @code {
 
-    private bool isSubmitting = false;
 
-    private UsuarioCadastrarDTO UsuarioCadastrarDTO = new UsuarioCadastrarDTO();
-
-    private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
-
-    private async Task HandleSubmit()
-    {
-        try
-        {
-            if (UsuarioCadastrarDTO.Senha != UsuarioCadastrarDTO.ConfirmarSenha)
-            {
-                await notificacaoService.MostrarErro("As senhas não coincidem!");
-
-                return;
-            }
-
-            var (sucesso, errorMessage) = await iUsuarioService.CadastrarUsuarioAsync(UsuarioCadastrarDTO);
-
-            if (sucesso)
-            {
-                await notificacaoService.MostrarSucesso("Usuário cadastrado com sucesso!");
-
-                UsuarioLoginDTO.login = UsuarioCadastrarDTO.Login;
-                UsuarioLoginDTO.senha = UsuarioCadastrarDTO.Senha;
-
-                await iUsuarioService.LoginAsync(UsuarioLoginDTO);
-
-                LimparCampos();
-
-                Navigation.NavigateTo("/", forceLoad: true);
-
-            }
-            else
-            {
-                await notificacaoService.MostrarErro(errorMessage);
-            }
-        }
-        catch (Exception ex)
-        {
-
-            Console.WriteLine($"Erro ao cadastrar usuario: {ex.Message}");
-
-            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        }
-    }
-
-
-    private void LimparCampos()
-    {
-        UsuarioCadastrarDTO.Nome = "";
-        UsuarioCadastrarDTO.Login = "";
-        UsuarioCadastrarDTO.Senha = "";
-    }
-
-    private async Task CancelarCadastroAsync()
-    {
-        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja cancelar o cadastro do usuário?");
-
-        if (confirmado)
-        {
-            Navigation.NavigateTo($"/");
-
-        }
-    }
 }

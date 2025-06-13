@@ -6,6 +6,7 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using Newtonsoft.Json
 @using System.Text
+@using Blazor_WebAssembly.ViewModel.Tarefa
 @inject NavigationManager Navigation
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject HttpClient Http
@@ -13,8 +14,9 @@
 @inject IJSRuntime JS
 @inject NotificacaoService notificacaoService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AlterarTarefaViewModel AlterarTarefaViewModel
 
-<EditForm Model="@TarefaAlterarDTO" OnValidSubmit="@HandleSubmit">
+<EditForm Model="@AlterarTarefaViewModel.tarefaAlterarDTO" OnValidSubmit="@AlterarTarefaViewModel.AlterarTarefaAsync">
     <DataAnnotationsValidator />
 
     <div class="container-fluid min-vh-100 p-0">
@@ -55,70 +57,70 @@
                             <!-- Título -->
                             <div class="mb-4">
                                 <label class="form-label fw-bold">Título da Tarefa</label>
-                                <InputText @bind-Value="TarefaAlterarDTO.Titulo"
+                                <InputText @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Titulo"
                                            class="form-control form-control-lg" />
-                                <ValidationMessage For="@(() => TarefaAlterarDTO.Titulo)" class="text-danger small" />
+                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Titulo)" class="text-danger small" />
                             </div>
 
                             <!-- Prioridade e Prazo -->
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">Prioridade</label>
-                                    <InputSelect @bind-Value="TarefaAlterarDTO.Prioridade"
+                                    <InputSelect @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Prioridade"
                                                  class="form-select form-select-lg">
                                         <option value=""></option>
                                         <option value="Alta">Alta</option>
                                         <option value="Média">Média</option>
                                         <option value="Baixa">Baixa</option>
                                     </InputSelect>
-                                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prioridade)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prioridade)" class="text-danger small" />
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">Prazo (dias)</label>
-                                    <InputNumber @bind-Value="TarefaAlterarDTO.Prazo"
+                                    <InputNumber @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Prazo"
                                                  class="form-control form-control-lg" />
-                                    <ValidationMessage For="@(() => TarefaAlterarDTO.Prazo)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prazo)" class="text-danger small" />
                                 </div>
                             </div>
 
                             <!-- Descrição -->
                             <div class="mb-4">
                                 <label class="form-label fw-bold">Descrição</label>
-                                <InputTextArea @bind-Value="TarefaAlterarDTO.Descricao"
+                                <InputTextArea @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Descricao"
                                                class="form-control"
                                                rows="5" />
-                                <ValidationMessage For="@(() => TarefaAlterarDTO.Descricao)" class="text-danger small" />
+                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Descricao)" class="text-danger small" />
                             </div>
 
                             <!-- Status -->
                             <div class="mb-4">
                                 <label class="form-label fw-bold">Status</label>
-                                <InputSelect @bind-Value="TarefaAlterarDTO.Status"
+                                <InputSelect @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Status"
                                              class="form-select form-select-lg">
                                     <option value=""></option>
                                     <option value="Pendente">Pendente</option>
                                     <option value="Em Progresso">Em Progresso</option>
                                     <option value="Concluído">Concluído</option>
                                 </InputSelect>
-                                <ValidationMessage For="@(() => TarefaAlterarDTO.Status)" class="text-danger small" />
+                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Status)" class="text-danger small" />
                             </div>
 
                             <!-- Botões -->
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
                                         class="btn btn-outline-secondary px-4"
-                                        @onclick="CancelarAlteracaoAsync">
+                                        @onclick="AlterarTarefaViewModel.CancelarAlteracaoAsync">
                                     <i class="bi bi-x-lg me-1"></i> Cancelar
                                 </button>
 
                                 <button type="submit"
                                         class="btn btn-primary px-4"
-                                        disabled="@isSubmitting">
+                                        disabled="@AlterarTarefaViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
-                                          hidden="@(!isSubmitting)"></span>
-                                    <i class="bi bi-check-lg me-1" hidden="@isSubmitting"></i>
-                                    @(isSubmitting ? "Salvando..." : "Salvar Alterações")
+                                          hidden="@(!AlterarTarefaViewModel.isSubmitting)"></span>
+                                    <i class="bi bi-check-lg me-1" hidden="@AlterarTarefaViewModel.isSubmitting"></i>
+                                    @(AlterarTarefaViewModel.isSubmitting ? "Salvando..." : "Salvar Alterações")
                                 </button>
                             </div>
                         </div>
@@ -130,88 +132,13 @@
 </EditForm>
 
 
-
-
-
-
 @code {
-
-    private bool isSubmitting = false;
 
     [Parameter]
     public int id { get; set; }
 
-    private TarefaAlterarDTO TarefaAlterarDTO = new TarefaAlterarDTO();
-
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-            var user = authState.User;
-
-            if (!user.Identity.IsAuthenticated)
-            {
-                await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
-
-                Navigation.NavigateTo("/login");
-            }
-
-            (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await ITarefaService.BuscarTarefaAsync(id);
-
-            TarefaAlterarDTO = tarefa;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro: {ex.Message}");
-        }
-    }
-
-    private async Task HandleSubmit()
-    {
-        try
-        {
-            (bool sucesso, string errorMessage) = await ITarefaService.AlterarTarefaAsync(TarefaAlterarDTO);
-
-            if (sucesso)
-            {
-                await notificacaoService.MostrarSucesso("Dados da tarefa alterada com sucesso!");
-
-                LimparCampos();
-
-                Navigation.NavigateTo($"/tarefa-rolagem/todas");
-            }
-            else
-            {
-                await notificacaoService.MostrarErro(errorMessage);
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao alterar tarefas: {ex.Message}");
-
-            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        }
-    }
-
-
-    private void LimparCampos()
-    {
-        TarefaAlterarDTO.Titulo = "";
-        TarefaAlterarDTO.Prioridade = "";
-        TarefaAlterarDTO.Prazo = 0;
-        TarefaAlterarDTO.Descricao = "";
-        TarefaAlterarDTO.Status = "";
-    }
-
-    private async Task CancelarAlteracaoAsync()
-    {
-        bool confirmado = await notificacaoService.MostrarConfirmacao("confirm", "Tem certeza que deseja cancelar a alteração da tarefa?");
-
-        if (confirmado)
-        {
-            Navigation.NavigateTo($"/tarefa-rolagem/todas");
-        }
+        await AlterarTarefaViewModel.BuscarTarefaAsync(id);
     }
 }

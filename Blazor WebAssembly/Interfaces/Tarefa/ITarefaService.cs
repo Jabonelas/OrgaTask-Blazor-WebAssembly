@@ -1,5 +1,4 @@
 ﻿using Blazor_WebAssembly.DTOs.Tarefa;
-using BlazorAPI.DTOs.Tarefa;
 
 namespace Blazor_WebAssembly.Interfaces.Tarefa
 {

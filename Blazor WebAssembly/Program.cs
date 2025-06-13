@@ -1,7 +1,4 @@
-using Blazor_WebAssembly.Interfaces;
-using Blazor_WebAssembly.Interfaces.Tarefa;
-using Blazor_WebAssembly.Services.Tarefa;
-using Blazor_WebAssembly.Services.Usuario;
+using Blazor_WebAssembly.Extensions;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -32,14 +29,8 @@ namespace Blazor_WebAssembly
 
 #endif
 
-            // tarefa
-            builder.Services.AddScoped<ITarefaService, TarefaService>();
-
-            // usuario
-            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-
-            // injetando notivicacao
-            builder.Services.AddScoped<NotificacaoService>();
+            //Adicionando as injeções de dependencias
+            builder.Services.AdicionarInjecoesDependencias();
 
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();

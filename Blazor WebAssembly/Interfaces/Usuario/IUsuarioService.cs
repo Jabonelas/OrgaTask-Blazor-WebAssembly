@@ -1,6 +1,6 @@
 ﻿using Blazor_WebAssembly.DTOs.Usuario;
 
-namespace Blazor_WebAssembly.Interfaces
+namespace Blazor_WebAssembly.Interfaces.Usuario
 {
     public interface IUsuarioService
     {

@@ -1,4 +1,4 @@
-﻿namespace BlazorAPI.DTOs.Tarefa
+﻿namespace Blazor_WebAssembly.DTOs.Tarefa
 {
     public class TarefaPrioridadeAltaDTO
     {

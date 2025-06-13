@@ -1,17 +1,6 @@
 ﻿@page "/login"
-@using Blazor_WebAssembly.DTOs.Usuario
-@using Blazor_WebAssembly.Interfaces
-@using Microsoft.AspNetCore.Components.Authorization
-@using Newtonsoft.Json
-@using System.Text
-@inject HttpClient Http
-@inject NavigationManager Navigation
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject IUsuarioService iUsuarioService
-@inject NotificacaoService notificacaoService
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject IJSRuntime JSRuntime
-@inject NavigationManager NavigationManager
+@using Blazor_WebAssembly.ViewModel.Usuario
+@inject LoginViewModel LoginViewModel
 
 
 
@@ -47,7 +36,7 @@
                     <div class="card-body p-4">
                         <h3 class="text-center mb-4"><i class="bi bi-box-arrow-in-right"></i> Acesse sua conta</h3>
 
-                        <EditForm Model="@UsuarioLoginDTO" OnValidSubmit="@HandleSubmit">
+                        <EditForm Model="@LoginViewModel.usuarioLogin" OnValidSubmit="@LoginViewModel.RealizarLoginAsync">
                             <DataAnnotationsValidator />
 
                             <!-- Usuário -->
@@ -55,11 +44,11 @@
                                 <label class="form-label fw-bold">Usuário</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
-                                    <InputText @bind-Value="UsuarioLoginDTO.login"
+                                    <InputText @bind-Value="@LoginViewModel.usuarioLogin.login"
                                                class="form-control form-control-lg"
                                                placeholder="Digite seu usuário" />
                                 </div>
-                                <ValidationMessage For="@(() => UsuarioLoginDTO.login)" class="text-danger small" />
+                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.login)" class="text-danger small" />
                             </div>
 
                             <!-- Senha com botão para mostrar/esconder -->
@@ -67,7 +56,7 @@
                                 <label class="form-label fw-bold">Senha</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
-                                    <InputText @bind-Value="UsuarioLoginDTO.senha"
+                                    <InputText @bind-Value="LoginViewModel.usuarioLogin.senha"
                                                type="password"
                                                class="form-control form-control-lg"
                                                placeholder="Digite sua senha"
@@ -78,18 +67,18 @@
                                         <i class="bi bi-eye"></i>
                                     </button>
                                 </div>
-                                <ValidationMessage For="@(() => UsuarioLoginDTO.senha)" class="text-danger small" />
+                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.senha)" class="text-danger small" />
                             </div>
 
                             <!-- Botão Entrar -->
                             <div class="d-grid mb-3">
                                 <button type="submit"
                                         class="btn btn-primary btn-lg"
-                                        disabled="@isSubmitting">
+                                        disabled="@LoginViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
-                                          hidden="@(!isSubmitting)"></span>
-                                    <i class="bi bi-box-arrow-in-right me-1" hidden="@isSubmitting"></i>
-                                    @(isSubmitting ? "Entrando..." : "Entrar")
+                                          hidden="@(!LoginViewModel.isSubmitting)"></span>
+                                    <i class="bi bi-box-arrow-in-right me-1" hidden="@LoginViewModel.isSubmitting"></i>
+                                    @(LoginViewModel.isSubmitting ? "Entrando..." : "Entrar")
                                 </button>
                             </div>
 
@@ -97,7 +86,7 @@
                             <div class="d-grid">
                                 <button type="button"
                                         class="btn btn-outline-secondary btn-lg"
-                                        @onclick="CriarConta">
+                                        @onclick="LoginViewModel.CriarConta">
                                     <i class="bi bi-person-plus me-1"></i> Criar uma conta
                                 </button>
                             </div>
@@ -108,9 +97,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <script>
     function togglePassword(id) {
@@ -134,49 +120,8 @@
 
 @code {
 
-    private bool isSubmitting = false;
-    private UsuarioLoginDTO UsuarioLoginDTO = new UsuarioLoginDTO();
-
     protected override async Task OnInitializedAsync()
     {
-        string? usuarioLogado = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "usuario");
-
-        if (!string.IsNullOrEmpty(usuarioLogado))
-        {
-            UsuarioLoginDTO.login =  usuarioLogado.Replace("\"", "");
-            
-        }
-    }
-
-    private void CriarConta()
-    {
-        NavigationManager.NavigateTo("/cadastrar-usuario");
-    }
-
-    private async Task HandleSubmit()
-    {
-        try
-        {
-            var (sucesso, mensagemErro) = await iUsuarioService.LoginAsync(UsuarioLoginDTO);
-
-            if (sucesso)
-            {
-                await notificacaoService.MostrarSucesso("Login realizado com sucesso!");
-
-                Navigation.NavigateTo("/", forceLoad: true);
-
-                // Navigation.NavigateTo("/tarefas");
-            }
-            else
-            {
-                await notificacaoService.MostrarErro(mensagemErro);
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao realizar login: {ex.Message}");
-
-            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        }
+        await LoginViewModel.PegarUsuarioLogadoAsync();
     }
 }
