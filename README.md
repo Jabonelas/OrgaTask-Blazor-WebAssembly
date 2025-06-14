@@ -55,15 +55,12 @@ A API central (Backend) serve dados para os frontends Web e Desktop.
   - **Service Layer**: Substitui o Model tradicional, lidando com:
     - Comunicação API (`HttpClient`)
     - Lógica de negócio
+  - **Injeção de Dependência**: Nativa do .NET (IServiceCollection)
 
 - **Comunicação**
   - **Consumo de API**: REST API (via HttpClient)
   - **Autenticação**: JWT (Bearer Token)
   - **Serialização JSON**
-
-- **Padrões**:
-  - **Service Layer**: Separação clara entre componentes UI e lógica de negócio
-  - **Injeção de Dependência**: Nativa do .NET (IServiceCollection)
 
 ## 🚀 Como Executar
 1. **Pré-requisitos**:
