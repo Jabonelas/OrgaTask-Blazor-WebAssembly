@@ -1,83 +1,67 @@
 ﻿@page "/tarefa-rolagem/{status}"
-@using Blazor_WebAssembly.DTOs.Tarefa
-@using Blazor_WebAssembly.Interfaces
-@using Blazor_WebAssembly.Interfaces.Tarefa
-@using Microsoft.AspNetCore.Components.Authorization
-@inject ITarefaService ITarefaService
-@inject IJSRuntime JS
-@inject NavigationManager Navigation
-@implements IDisposable
-@inject NotificacaoService notificacaoService
-@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Blazor_WebAssembly.ViewModel.Tarefa
+@inject TarefaRolagemViewModel TarefaRolagemViewModel
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Tarefas</PageTitle>
 
-<h1 class="main-title">@titulo</h1>
+<h1 class="main-title">@TarefaRolagemViewModel.titulo</h1>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <button class="btn btn-primary" @onclick="NovaTarefa">
+        <button class="btn btn-primary" @onclick="TarefaRolagemViewModel.NovaTarefa">
             <i class="bi bi-plus-circle me-1"></i> Nova Tarefa
         </button>
     </div>
 
-    @if (!tarefas.Any() && !isLoading)
-
+    @if (!TarefaRolagemViewModel.tarefas.Any() && !TarefaRolagemViewModel.isLoading)
     {
         <div class="text-center my-5 text-muted">
             <i class="bi bi-inbox fs-1 mb-3"></i>
             <p class="fs-5">Nenhuma tarefa encontrada</p>
-            <button class="btn btn-primary" @onclick="NovaTarefa">
+            <button class="btn btn-primary" @onclick="TarefaRolagemViewModel.NovaTarefa">
                 Criar primeira tarefa
             </button>
         </div>
     }
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach (var tarefa in tarefas)
-
+        @foreach (var tarefa in TarefaRolagemViewModel.tarefas)
         {
             <div class="col">
-                <div class="card shadow-sm border-0 h-100 tarefa-card @PegandoClassPrioridade(tarefa.Prioridade) @PegandoClassStatus(tarefa.Status)">
-                    <div class="card-body d-flex flex-column justify-content-between" @onclick="() => VisualizarTarefa(tarefa.Id)">
+                <div class="card shadow-sm border-0 h-100 tarefa-card @TarefaRolagemViewModel.PegandoClassPrioridade(tarefa.Prioridade) @TarefaRolagemViewModel.PegandoClassStatus(tarefa.Status)">
+                    <div class="card-body d-flex flex-column justify-content-between" @onclick="() => TarefaRolagemViewModel.VisualizarTarefa(tarefa.Id)">
                         <div>
-
                             <div class="d-flex justify-content-between mb-2">
-                                <span class="badge bg-secondary @PegandoClassPrioridade(tarefa.Prioridade)">
-                                    <i class="bi @(PegandoIconePrioridade(tarefa.Prioridade)) me-1"></i> @tarefa.Prioridade
+                                <span class="badge bg-secondary @TarefaRolagemViewModel.PegandoClassPrioridade(tarefa.Prioridade)">
+                                    <i class="bi @(TarefaRolagemViewModel.PegandoIconePrioridade(tarefa.Prioridade)) me-1"></i> @tarefa.Prioridade
                                 </span>
-                                <span class="badge bg-info @PegandoClassStatus(tarefa.Status)">
-                                    <i class="bi @(PegandoIconeStatus(tarefa.Status)) me-1"></i> @tarefa.Status
+                                <span class="badge bg-info @TarefaRolagemViewModel.PegandoClassStatus(tarefa.Status)">
+                                    <i class="bi @(TarefaRolagemViewModel.PegandoIconeStatus(tarefa.Status)) me-1"></i> @tarefa.Status
                                 </span>
                             </div>
-
                             <h5 class="card-title">@tarefa.Titulo</h5>
-
                             @if (!string.IsNullOrEmpty(tarefa.Descricao))
-
                             {
                                 <p class="card-text text-muted small">@tarefa.Descricao</p>
                             }
                         </div>
-
                         <div class="d-flex justify-content-between align-items-center mt-3 text-muted small">
-                            <span><i class="bi bi-calendar me-1"></i>Criado: @FormatandoData(tarefa.Data)</span>
+                            <span><i class="bi bi-calendar me-1"></i>Criado: @TarefaRolagemViewModel.FormatandoData(tarefa.Data)</span>
                             @if (tarefa.Prazo > 0)
-
                             {
                                 <span><i class="bi bi-clock me-1"></i>Prazo estipulado: @tarefa.Prazo dia(s)</span>
                             }
                         </div>
                     </div>
-
                     <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
-                        <button class="btn btn-sm btn-outline-primary" title="Visualizar" @onclick="() => VisualizarTarefa(tarefa.Id)">
+                        <button class="btn btn-sm btn-outline-primary" title="Visualizar" @onclick="() => TarefaRolagemViewModel.VisualizarTarefa(tarefa.Id)">
                             <i class="bi bi-eye"></i>
                         </button>
-                        <button class="btn btn-sm btn-outline-warning" title="Editar" @onclick="() => EditarTarefa(tarefa.Id)">
+                        <button class="btn btn-sm btn-outline-warning" title="Editar" @onclick="() => TarefaRolagemViewModel.EditarTarefa(tarefa.Id)">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <button class="btn btn-sm btn-outline-danger" title="Excluir" @onclick="() => ConfirmarExclusaoAsync(tarefa.Id)">
+                        <button class="btn btn-sm btn-outline-danger" title="Excluir" @onclick="() => TarefaRolagemViewModel.ConfirmarExclusaoAsync(tarefa.Id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -86,8 +70,7 @@
         }
     </div>
 
-    @if (isLoading)
-
+    @if (TarefaRolagemViewModel.isLoading)
     {
         <div class="text-center my-4">
             <div class="spinner-border text-primary" role="status">
@@ -97,47 +80,22 @@
     }
 
     <div @ref="sentinel" tarefa-sentinela style="height: 1px;"></div>
-
 </div>
 
-
 @code {
-
-    [Parameter] public string? status { get; set; }
-
-    private List<TarefaConsultaDTO> tarefas = new();
-
-    private ElementReference sentinel;
+   
+    [Parameter]
+    public string? status { get; set; }
 
     private DotNetObjectReference<TarefaRolagem>? objRef;
-
-    private string titulo = "";
-
-    private const int pageSize = 15;
-    private int currentPage = 1;
-    private int totalCount = 0;
-
-    private bool isLoading = false;
-    private bool hasMoreItems = true;
-
     private IJSObjectReference? infiniteScrollModule;
     private IJSObjectReference? observerInstance;
-
+    private ElementReference sentinel;
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-        var user = authState.User;
-
-        if (!user.Identity.IsAuthenticated)
-        {
-            await notificacaoService.MostrarErro("Sessão expirada. Por favor, faça login novamente.");
-
-            Navigation.NavigateTo("/login");
-        }
-
-        await CarregandoMaisItensAsync();
+        TarefaRolagemViewModel.OnStateChanged += StateHasChanged;
+        await TarefaRolagemViewModel.VertificarSecaoValidaAsync(status);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -146,126 +104,46 @@
         {
             try
             {
-                // Cria a referência .NET
+                infiniteScrollModule = await JSRuntime.InvokeAsync<IJSObjectReference>(
+                    "import", "./js/infiniteScroll.js");
 
                 objRef = DotNetObjectReference.Create(this);
-
-                // Chama a função JavaScript diretamente do objeto window
-
-                await JS.InvokeVoidAsync(
-
-                    "window.infiniteScroll.init",
-
-                    sentinel,
-
-                    objRef);
+                observerInstance = await infiniteScrollModule.InvokeAsync<IJSObjectReference>(
+                    "initObserver", sentinel, objRef);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"ERRO na inicialização: {ex.Message}");
-
-                Console.WriteLine(ex.StackTrace);
-
-                // Fallback: garante que o botão "Carregar mais" será exibido
-
-                hasMoreItems = true;
-
+                Console.WriteLine($"Erro na inicialização do observer: {ex.Message}");
+                TarefaRolagemViewModel.hasMoreItems = true;
                 StateHasChanged();
-
-                await notificacaoService.MostrarErro(
-
-                    "Recurso automático desativado. Use o botão 'Carregar Mais' manualmente.");
             }
         }
+    }
+
+    [JSInvokable]
+    public async Task CarregandoMaisItensAsync()
+    {
+        await TarefaRolagemViewModel.CarregandoMaisItensAsync();
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        // Reseta a paginação quando o status muda
-
-        await ResetandoPaginacaoAsync();
+        await TarefaRolagemViewModel.ResetandoPaginacaoAsync();
     }
 
-    [JSInvokable]
-
-    public async Task CarregandoMaisItensAsync()
-    {
-        // Se já estiver carregando ou não houver mais itens, não faz nada
-
-        if (isLoading || !hasMoreItems)
-        {
-            Console.WriteLine($"Cancelando carga: isLoading={isLoading}, hasMoreItems={hasMoreItems}");
-
-            return;
-        }
-
-        isLoading = true;
-
-        StateHasChanged(); // Força a atualização para mostrar o indicador de carregamento
-
-        try
-        {
-            var (success, errorMessage, items, newTotalCount) = await ITarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize, status);
-
-            if (success)
-            {
-                SentandoTituloPagina();
-                
-                if (items?.Count > 0)
-                {
-                    tarefas.AddRange(items);
-
-                    currentPage++;
-
-                    totalCount = newTotalCount;
-
-                    hasMoreItems = tarefas.Count < totalCount;
-                }
-                else
-                {
-                    hasMoreItems = false;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Erro na API: " + errorMessage);
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao carregar itens: {ex.Message}");
-
-            await notificacaoService.MostrarErro($"Erro ao carregar mais itens: {ex.Message}");
-        }
-        finally
-        {
-            isLoading = false;
-
-            StateHasChanged();
-
-            // Força uma nova verificação do sentinela após o carregamento
-            if (hasMoreItems)
-            {
-                await Task.Delay(300); // Pequeno delay para garantir o redesenho
-
-                await ChecandoVisibilidadeSentinelAsync();
-            }
-        }
-    }
-
-    private async Task ChecandoVisibilidadeSentinelAsync()
+    public async Task ChecandoVisibilidadeSentinelAsync()
     {
         try
         {
-            var isVisible = await JS.InvokeAsync<bool>(
-
-                "window.infiniteScroll.checkVisibility",
-
-                sentinel);
-
-            if (isVisible && hasMoreItems && !isLoading)
+            if (infiniteScrollModule != null)
             {
-                await CarregandoMaisItensAsync();
+                var isVisible = await infiniteScrollModule.InvokeAsync<bool>(
+                    "checkVisibility", sentinel);
+
+                if (isVisible && TarefaRolagemViewModel.hasMoreItems && !TarefaRolagemViewModel.isLoading)
+                {
+                    await TarefaRolagemViewModel.CarregandoMaisItensAsync();
+                }
             }
         }
         catch (Exception ex)
@@ -274,175 +152,17 @@
         }
     }
 
-    private void SentandoTituloPagina()
+    public void Dispose()
     {
-        switch (status)
+        TarefaRolagemViewModel.OnStateChanged -= StateHasChanged;
+
+        if (observerInstance != null)
         {
-            case "todas":
-
-                titulo = "Todas as Minhas Tarefas";
-                break;
-
-            case "Pendente":
-
-                titulo = "Todas as Minhas Tarefas Pendentes";
-                break;
-
-            case "Em Progresso":
-
-                titulo = "Todas as Minhas Tarefas Em Progresso";
-                break;
-
-            case "Concluído":
-
-                titulo = "Todas as Minhas Tarefas Concluídas";
-                break;
-
-            default:
-
-                Console.WriteLine("Opção inválida! Tente novamente.");
-                break;
+            _ = observerInstance.InvokeVoidAsync("dispose");
+            _ = observerInstance.DisposeAsync();
         }
+        infiniteScrollModule?.DisposeAsync();
+        objRef?.Dispose();
     }
 
-    public async void Dispose()
-    {
-        try
-        {
-            if (observerInstance != null)
-            {
-                await observerInstance.InvokeVoidAsync("dispose");
-
-                await observerInstance.DisposeAsync();
-            }
-
-            if (infiniteScrollModule != null)
-            {
-                await infiniteScrollModule.DisposeAsync();
-            }
-
-            objRef?.Dispose();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao limpar observers: {ex.Message}");
-        }
-    }
-
-    private string PegandoIconePrioridade(string prioridade)
-    {
-        return prioridade switch
-        {
-
-            "Alta" => "bi-exclamation-triangle-fill",
-
-            "Média" => "bi-exclamation-circle-fill",
-
-            "Baixa" => "bi-arrow-down-circle-fill",
-
-            _ => "bi-question-circle"
-        };
-    }
-
-    private string PegandoIconeStatus(string status)
-    {
-        return status switch
-        {
-            "Concluído" => "bi-check-circle-fill",
-
-            "Em Progresso" => "bi-arrow-repeat",
-
-            "Pendente" => "bi-clock",
-
-            _ => "bi-question-circle"
-        };
-    }
-
-    private string PegandoClassPrioridade(string prioridade)
-    {
-        return prioridade switch
-        {
-            "Alta" => "prioridade-alta",
-
-            "Média" => "prioridade-media",
-
-            "Baixa" => "prioridade-baixa",
-
-            _ => ""
-        };
-    }
-
-    private string PegandoClassStatus(string status)
-    {
-        return status switch
-        {
-            "Concluído" => "status-concluido",
-
-            "Em Progresso" => "status-progresso",
-
-            "Pendente" => "status-pendente",
-
-            _ => ""
-        };
-    }
-    
-    private string FormatandoData(object dateObj)
-    {
-        if (dateObj == null) return "-";
-
-        if (dateObj is DateTime date) return date.ToString("dd/MM/yyyy");
-
-        if (DateTime.TryParse(dateObj.ToString(), out var parsedDate)) return parsedDate.ToString("dd/MM/yyyy");
-
-        return dateObj.ToString();
-    }
-
-    private void VisualizarTarefa(int id)
-    {
-        Navigation.NavigateTo($"/exibir-tarefa/{id}");
-    }
-
-    private void EditarTarefa(int id)
-    {
-        Navigation.NavigateTo($"/editar-tarefa/{id}");
-    }
-
-    private void NovaTarefa()
-    {
-        Navigation.NavigateTo("/cadastrar-tarefa");
-    }
-
-    private async Task ConfirmarExclusaoAsync(int id)
-    {
-        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!", "Tem certeza que deseja excluir esta tarefa?");
-
-        if (confirmado)
-        {
-            try
-            {
-                await ITarefaService.DeletarTarefaAsync(id);
-
-                await ResetandoPaginacaoAsync();
-
-                await notificacaoService.MostrarSucesso("Tarefa excluída com sucesso!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro ao excluir tarefas: {ex.Message}");
-
-                await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-            }
-        }
-    }
-
-    private async Task ResetandoPaginacaoAsync()
-    {
-        currentPage = 1;
-
-        tarefas.Clear();
-
-        hasMoreItems = true;
-
-        await CarregandoMaisItensAsync();
-    }
 }

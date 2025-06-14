@@ -1,17 +1,6 @@
 ﻿@page "/dashboard-tarefas"
-@using Blazor_WebAssembly.DTOs.Tarefa
-@using Blazor_WebAssembly.Interfaces
-@inject HttpClient Http
-@inject ITarefaService ITarefaService
-@using Blazor_WebAssembly.Interfaces.Tarefa
-@using Microsoft.AspNetCore.Components.Authorization
-@using Newtonsoft.Json
-@using System.Text
-@inject NavigationManager Navigation
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject NotificacaoService notificacaoService
-@inject IJSRuntime JS
-
+@using Blazor_WebAssembly.ViewModel.Tarefa
+@inject DashboardTarefasViewModel DashboardTarefasViewModel
 
 <PageTitle>Dashboard de Tarefas</PageTitle>
 
@@ -22,37 +11,37 @@
     <div class="status-grid">
 
         <!-- Card Pendentes -->
-        <div class="status-card pending" @onclick="@(() => TarefasPendentes("Pendente"))">
+        <div class="status-card pending" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Pendente"))">
             <div class="card-icon">
                 <i class="fas fa-clock"></i>
             </div>
             <div class="card-content" style="color: #000; display: flex; flex-direction: column; align-items: center;" >
                 <h3>Pendentes</h3>
-                <div class="count">@PendenteCount</div>
+                <div class="count">@DashboardTarefasViewModel.pendenteCount</div>
                 <div class="card-footer">Atualizado agora</div>
             </div>
         </div>
 
         <!-- Card Em Progresso -->
-        <div class="status-card in-progress" @onclick="@(() => TarefasPendentes("Em Progresso"))">
+        <div class="status-card in-progress" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Em Progresso"))">
             <div class="card-icon">
                 <i class="fas fa-tasks"></i>
             </div>
             <div class="card-content" style="color: #000; display: flex; flex-direction: column; align-items: center;">
                 <h3>Em Progresso</h3>
-                <div class="count">@EmProgressoCount</div>
+                <div class="count">@DashboardTarefasViewModel.emProgressoCount</div>
                 <div class="card-footer">Atualizado agora</div>
             </div>
         </div>
 
         <!-- Card Concluídas -->
-        <div class="status-card completed" @onclick="@(() => TarefasPendentes("Concluído"))">
+        <div class="status-card completed" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Concluído"))">
             <div class="card-icon">
                 <i class="fas fa-check-circle"></i>
             </div>
             <div class="card-content" style="color: #000; display: flex; flex-direction: column; align-items: center;">
                 <h3>Concluídas</h3>
-                <div class="count">@ConcluidoCount</div>
+                <div class="count">@DashboardTarefasViewModel.concluidoCount</div>
                 <div class="card-footer">Atualizado agora</div>
             </div>
         </div>
@@ -68,13 +57,13 @@
         <div class="progress-container">
             <div class="progress-labels">
                 <span>Progresso</span>
-                <span>@PorcentagemTarefasConcluidas%</span>
+                <span>@DashboardTarefasViewModel.porcentagemTarefasConcluidas%</span>
             </div>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: @PorcentagemTarefasConcluidas%"></div>
+                <div class="progress-fill" style="width: @DashboardTarefasViewModel.porcentagemTarefasConcluidas%"></div>
             </div>
             <div class="progress-description">
-                <i class="fas fa-info-circle"></i> Você completou @PorcentagemTarefasConcluidas% das tarefas cadastradas
+                <i class="fas fa-info-circle"></i> Você completou @DashboardTarefasViewModel.porcentagemTarefasConcluidas% das tarefas cadastradas
             </div>
         </div>
     </div>
@@ -83,11 +72,11 @@
     <div class="priority-section">
         <div class="section-header">
             <h2><i class="fas fa-exclamation-triangle"></i> Tarefas Prioritárias</h2>
-            <span class="badge">@listaTarefasPrioridadeAlta.Count itens</span>
+            <span class="badge">@DashboardTarefasViewModel.listaTarefasPrioridadeAlta.Count itens</span>
         </div>
 
         <div class="priority-list">
-            @foreach (var item in listaTarefasPrioridadeAlta)
+            @foreach (var item in DashboardTarefasViewModel.listaTarefasPrioridadeAlta)
             {
                 <div class="priority-item">
                     <div class="task-info">
@@ -114,83 +103,10 @@
 </div>
 
 
-
-
-
 @code {
-
-
-
-    private int PendenteCount = 0;
-    private int EmProgressoCount = 0;
-    private int ConcluidoCount = 0;
-    private decimal PorcentagemTarefasConcluidas = 0;
-    private List<TarefaPrioridadeAltaDTO> listaTarefasPrioridadeAlta = new List<TarefaPrioridadeAltaDTO>();
-
-
 
     protected override async Task OnInitializedAsync()
     {
-        await CarregarInformacoesStatusAsync();
-
-        await CarregarTarefasPrioridadeAltaAsync();
-    }
-
-    private async Task CarregarInformacoesStatusAsync()
-    {
-        try
-        {
-            var (success, errorMessage, TarefaQtdStatus) = await ITarefaService.BuscarQtdStatusTarefaAsync();
-
-            if (success)
-            {
-                PendenteCount = TarefaQtdStatus.Pendente;
-                EmProgressoCount = TarefaQtdStatus.EmProgresso;
-                ConcluidoCount = TarefaQtdStatus.Concluido;
-                PorcentagemTarefasConcluidas = TarefaQtdStatus.PorcentagemConcluidas;
-            }
-            else
-            {
-                await notificacaoService.MostrarErro(errorMessage);
-            }
-        }
-        catch (Exception ex)
-        {
-
-            Console.WriteLine($"Erro ao buscar quantidade status tarefa: {ex.Message}");
-
-            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        }
-    }
-
-
-
-    private async Task CarregarTarefasPrioridadeAltaAsync()
-    {
-        try
-        {
-            var (success, errorMessage, listaTarefaPrioridadeAlta) = await ITarefaService.BuscarTarefasPrioridadeAltaAsync();
-
-            if (success && listaTarefaPrioridadeAlta != null)
-            {
-                listaTarefasPrioridadeAlta = listaTarefaPrioridadeAlta;
-            }
-            else
-            {
-                await notificacaoService.MostrarErro(errorMessage);
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao buscar porcentagem de tarefas concluidas: {ex.Message}");
-
-            await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
-        }
-    }
-
-    private void TarefasPendentes(string status)
-    {
-
-        Navigation.NavigateTo($"/tarefa-rolagem/{status}");
+       await DashboardTarefasViewModel.CarregarInformacoes();
     }
 }

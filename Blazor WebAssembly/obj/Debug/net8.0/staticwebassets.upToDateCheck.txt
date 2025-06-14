@@ -8,6 +8,6 @@ wwwroot\IconeOrgaTask48.ico
 wwwroot\images\TelaDesktop1.png
 wwwroot\images\TelaWeb.png
 wwwroot\index.html
-wwwroot\js\infiniteScroll.js
 wwwroot\sample-data\weather.json
 wwwroot\_headers
+wwwroot\js\infiniteScroll.js

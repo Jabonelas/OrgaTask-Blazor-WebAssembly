@@ -23,6 +23,9 @@ namespace Blazor_WebAssembly.Extensions
             service.AddScoped<CadastrarUsuarioViewModel>();
             service.AddScoped<VisualizarTarefaViewModel>();
             service.AddScoped<AlterarTarefaViewModel>();
+            service.AddScoped<CadastrarTarefaViewModel>();
+            service.AddScoped<DashboardTarefasViewModel>();
+            service.AddScoped<TarefaRolagemViewModel>();
 
             //Notivicacao
             service.AddScoped<NotificacaoService>();
