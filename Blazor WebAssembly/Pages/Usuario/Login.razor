@@ -122,6 +122,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Console.WriteLine("OnInitializedAsync iniciado");
         await LoginViewModel.PegarUsuarioLogadoAsync();
+        Console.WriteLine("OnInitializedAsync iniciado12"); 
     }
 }

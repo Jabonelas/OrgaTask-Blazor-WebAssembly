@@ -1,5 +1,6 @@
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Blazored.LocalStorage.wasm
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\CommunityToolkit.Mvvm.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Authorization.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.wasm
@@ -214,6 +215,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\ne
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\blazor.boot.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\blazor.webassembly.js.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Blazored.LocalStorage.wasm.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\CommunityToolkit.Mvvm.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Authorization.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.wasm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.wasm.gz
@@ -434,6 +436,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\ne
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\Blazor WebAssembly.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\Blazor WebAssembly.pdb
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\Blazored.LocalStorage.dll
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\CommunityToolkit.Mvvm.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\Microsoft.AspNetCore.Authorization.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\Microsoft.AspNetCore.Components.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Release\net8.0\Microsoft.AspNetCore.Components.Authorization.dll
@@ -651,6 +654,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\ne
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\Blazor WebAssembly.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\Blazor WebAssembly.sourcelink.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\webcil\Blazored.LocalStorage.wasm
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\webcil\CommunityToolkit.Mvvm.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\webcil\Microsoft.AspNetCore.Authorization.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\webcil\Microsoft.AspNetCore.Components.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\webcil\Microsoft.AspNetCore.Components.Authorization.wasm
@@ -859,6 +863,7 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\ne
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\blazor.boot.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\1k9d3hjzt4-mv535bwyet.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\60xoev7equ-12n6dz54qr.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\lplnxjh6f7-4sdv9o2ycm.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\nbl7auwyf4-n5pslkucsz.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\uovvv8yg86-zuiq2k1loo.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\9myo0x5wy6-kvcvutmuvo.gz
@@ -1068,15 +1073,16 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\ne
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\myxfgh3nd9-tptq2av103.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\u4lhzvc7wt-lfu7j35m59.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\bk28m5kczg-oyz0vx2fzb.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\nz1k2rhuwe-dv6dzmmce3.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\6skurxj03h-clicuqh8ro.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\jx60qdkk8f-wfi8xk2yvz.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\staticwebassets.build.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\staticwebassets.build.json.cache
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\staticwebassets.development.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\staticwebassets.build.endpoints.json
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\Blazor W.FBFE2D56.Up2Date
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\Blazor WebAssembly.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\refint\Blazor WebAssembly.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\Blazor WebAssembly.pdb
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\ref\Blazor WebAssembly.dll
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\nz1k2rhuwe-ha2ra2u6xg.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\6skurxj03h-e5uweku5es.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Release\net8.0\compressed\jx60qdkk8f-oqldv7fp3u.gz

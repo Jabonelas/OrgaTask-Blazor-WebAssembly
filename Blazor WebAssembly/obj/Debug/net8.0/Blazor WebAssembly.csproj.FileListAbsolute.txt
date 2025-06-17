@@ -1,10 +1,3 @@
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.csproj.AssemblyReference.cache
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.AssemblyInfoInputs.cache
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.AssemblyInfo.cs
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.csproj.CoreCompileInputs.cache
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.sourcelink.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\Blazored.LocalStorage.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\wwwroot\_framework\CommunityToolkit.Mvvm.wasm
@@ -653,6 +646,13 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\icudt_EFIGS.dat
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\icudt_no_CJK.dat
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\bin\Debug\net8.0\emcc-props.json
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.csproj.AssemblyReference.cache
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.AssemblyInfoInputs.cache
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.AssemblyInfo.cs
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.csproj.CoreCompileInputs.cache
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.sourcelink.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\webcil\Blazored.LocalStorage.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\webcil\CommunityToolkit.Mvvm.wasm
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\webcil\Microsoft.AspNetCore.Authorization.wasm
@@ -1073,6 +1073,9 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\myxfgh3nd9-tptq2av103.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\u4lhzvc7wt-lfu7j35m59.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\bk28m5kczg-oyz0vx2fzb.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\nz1k2rhuwe-1eh31s9ykt.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\6skurxj03h-p4zzjs3a2u.gz
+C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\jx60qdkk8f-s7diecy8t5.gz
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\staticwebassets.development.json
@@ -1083,6 +1086,3 @@ C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\refint\Blazor WebAssembly.dll
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\Blazor WebAssembly.pdb
 C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\ref\Blazor WebAssembly.dll
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\nz1k2rhuwe-8ifd55kqet.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\6skurxj03h-55vj2gi3f1.gz
-C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\obj\Debug\net8.0\compressed\jx60qdkk8f-da0mqzp0e1.gz

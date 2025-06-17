@@ -1,5 +1,6 @@
 ﻿using Blazor_WebAssembly.DTOs;
 using Blazor_WebAssembly.DTOs.Tarefa;
+using Blazor_WebAssembly.Helpers;
 using Blazor_WebAssembly.Interfaces.Tarefa;
 using Blazored.LocalStorage;
 using Newtonsoft.Json;
@@ -33,7 +34,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                 UserToken dadosToken = new UserToken();
                 dadosToken = await PegarDadosToken();
 
-                var endpoint = SetandoEndPoint($"api/tarefas/paginado/{_status}?pageNumber={_pageNumber}&pageSize={_pageSize}");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas/paginado/{_status}?pageNumber={_pageNumber}&pageSize={_pageSize}");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
                 {
@@ -82,7 +83,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                 var json = JsonConvert.SerializeObject(_dadosTarefa);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = SetandoEndPoint($"api/tarefas");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
@@ -129,7 +130,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                 var json = JsonConvert.SerializeObject(_dadosTarefa);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = SetandoEndPoint($"api/tarefas");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Put, endpoint))
                 {
@@ -173,7 +174,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido", null);
                 }
 
-                var endpoint = SetandoEndPoint($"api/tarefas/{_id}");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas/{_id}");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
                 {
@@ -219,7 +220,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido");
                 }
 
-                var endpoint = SetandoEndPoint($"api/tarefas/{_id}");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas/{_id}");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Delete, endpoint))
                 {
@@ -262,7 +263,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido", null);
                 }
 
-                var endpoint = SetandoEndPoint("api/tarefas/status_completo");
+                var endpoint = ApiRoutes.SetandoEndPoint("api/tarefas/status_completo");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
                 {
@@ -308,7 +309,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido", null);
                 }
 
-                var endpoint = SetandoEndPoint("api/tarefas/prioridade_alta");
+                var endpoint = ApiRoutes.SetandoEndPoint("api/tarefas/prioridade_alta");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
                 {
@@ -345,16 +346,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
 
         #region Métodos privados
 
-        private string SetandoEndPoint(string _endpont)
-        {
-#if DEBUG
-            return $"{_endpont}";
 
-#else
-            return $"https://blazor-api.onrender.com/{_endpont}";
-
-#endif
-        }
 
         private async Task<UserToken> PegarDadosToken()
         {

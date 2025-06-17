@@ -1,5 +1,6 @@
 ﻿using Blazor_WebAssembly.DTOs;
 using Blazor_WebAssembly.DTOs.Usuario;
+using Blazor_WebAssembly.Helpers;
 using Blazor_WebAssembly.Interfaces.Usuario;
 using Blazored.LocalStorage;
 using Newtonsoft.Json;
@@ -25,7 +26,7 @@ namespace Blazor_WebAssembly.Services.Usuario
                 var json = JsonConvert.SerializeObject(_dadosLogin);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = SetandoEndPoint("api/usuarios/login");
+                var endpoint = ApiRoutes.SetandoEndPoint("api/usuarios/login");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
@@ -67,7 +68,7 @@ namespace Blazor_WebAssembly.Services.Usuario
                 var json = JsonConvert.SerializeObject(_dadosUsuario);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = SetandoEndPoint("api/usuarios");
+                var endpoint = ApiRoutes.SetandoEndPoint("api/usuarios");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
@@ -95,19 +96,8 @@ namespace Blazor_WebAssembly.Services.Usuario
             }
         }
 
-        #region Metodo Privado
 
-        private string SetandoEndPoint(string _endpont)
-        {
-#if DEBUG
-            return $"{_endpont}";
 
-#else
-            return $"https://blazor-api.onrender.com/{_endpont}";
 
-#endif
-        }
-
-        #endregion Metodo Privado
     }
 }

@@ -77,7 +77,5 @@ namespace Blazor_WebAssembly.ViewModel.Usuario
                 isSubmitting = false;
             }
         }
-
-
     }
 }
