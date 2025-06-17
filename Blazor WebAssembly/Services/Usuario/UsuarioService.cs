@@ -43,7 +43,7 @@ namespace Blazor_WebAssembly.Services.Usuario
                         await localStorage.SetItemAsync("authToken", result.Token);
 
                         // Armazenando o usuario
-                        await localStorage.SetItemAsync("usuario", _dadosLogin.login);
+                        await localStorage.SetItemAsync("usuario", _dadosLogin.Login);
 
                         return (true, null);
                     }

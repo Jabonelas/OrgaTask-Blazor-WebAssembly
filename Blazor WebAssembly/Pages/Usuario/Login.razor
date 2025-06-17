@@ -44,11 +44,11 @@
                                 <label class="form-label fw-bold">Usuário</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
-                                    <InputText @bind-Value="@LoginViewModel.usuarioLogin.login"
+                                    <InputText @bind-Value="@LoginViewModel.usuarioLogin.Login"
                                                class="form-control form-control-lg"
                                                placeholder="Digite seu usuário" />
                                 </div>
-                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.login)" class="text-danger small" />
+                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.Login)" class="text-danger small" />
                             </div>
 
                             <!-- Senha com botão para mostrar/esconder -->
@@ -56,7 +56,7 @@
                                 <label class="form-label fw-bold">Senha</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
-                                    <InputText @bind-Value="LoginViewModel.usuarioLogin.senha"
+                                    <InputText @bind-Value="LoginViewModel.usuarioLogin.Senha"
                                                type="password"
                                                class="form-control form-control-lg"
                                                placeholder="Digite sua senha"
@@ -67,7 +67,7 @@
                                         <i class="bi bi-eye"></i>
                                     </button>
                                 </div>
-                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.senha)" class="text-danger small" />
+                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.Senha)" class="text-danger small" />
                             </div>
 
                             <!-- Botão Entrar -->

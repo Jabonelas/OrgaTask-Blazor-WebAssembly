@@ -47,8 +47,8 @@ namespace Blazor_WebAssembly.ViewModel.Usuario
                 {
                     await notificacaoService.MostrarSucesso("Usuário cadastrado com sucesso!");
 
-                    usuarioLoginDTO.login = usuarioCadastrarDTO.Login;
-                    usuarioLoginDTO.senha = usuarioCadastrarDTO.Senha;
+                    usuarioLoginDTO.Login = usuarioCadastrarDTO.Login;
+                    usuarioLoginDTO.Senha = usuarioCadastrarDTO.Senha;
 
                     await iUsuarioService.LoginAsync(usuarioLoginDTO);
 

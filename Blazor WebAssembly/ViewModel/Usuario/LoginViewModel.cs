@@ -37,7 +37,7 @@ namespace Blazor_WebAssembly.ViewModel.Usuario
 
             if (!string.IsNullOrEmpty(usuarioLogado))
             {
-                usuarioLogin.login = usuarioLogado.Replace("\"", "");
+                usuarioLogin.Login = usuarioLogado.Replace("\"", "");
 
             }
         }

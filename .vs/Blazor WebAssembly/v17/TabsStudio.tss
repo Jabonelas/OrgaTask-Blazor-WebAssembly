@@ -22,5 +22,14 @@
     <ArrayOfString>
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\Usuario\Login.razor</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\DTOs\NotificacaoService.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\DTOs\Usuario\UsuarioLoginDTO.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\ViewModel\Usuario\CadastrarUsuarioViewModel.cs</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
