@@ -1,73 +1,85 @@
 # OrgaTask Blazor WebAssembly
 
-![Blazor](https://img.shields.io/badge/Blazor-WebAssembly-%23512BD4)
-![.NET](https://img.shields.io/badge/.NET-8-%23512BD4)
-![JWT](https://img.shields.io/badge/JWT-Auth-%23000000)
+## Visão Geral
+
+OrgaTask Blazor WebAssembly é uma aplicação web single-page (SPA) que consome a OrgaTask API para gerenciar tarefas de forma interativa. Construída com Blazor WASM, a aplicação utiliza uma arquitetura MVVM adaptada, proporcionando uma experiência de usuário fluida e responsiva.
+
+## Tecnologias Utilizadas
+
+- **Core:** Blazor WebAssembly (.NET 8)
+- **Arquitetura:** MVVM Adaptada
+  - View: Componentes Razor (*.razor)
+  - ViewModel: Classes com estado e lógica da UI
+  - Service Layer: Comunicação com API e lógica de negócio
+
+- **Comunicação:**
+
+  - Consumo de API REST via HttpClient
+  - Autenticação com JWT Bearer Tokens
+  - Serialização JSON
+- **Injeção de Dependência:** Nativa do .NET (IServiceCollection)
+
+## Funcionalidades
+
+- Login e autenticação com JWT
+- Gerenciamento de tarefas (listar, criar, editar, excluir)
+- Interface responsiva e interativa
+- Tratamento de erros e feedback visual
+
+## Pré-requisitos
+
+- .NET 8 SDK
+- OrgaTask API rodando localmente ou em um servidor
+- Navegador moderno (Chrome, Firefox, Edge)
+
+## Como Executar o Projeto
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/Jabonelas/OrgaTask-Blazor-WebAssembly.git
+cd OrgaTask-Blazor-WebAssembly
+```
+
+2. Restaure as dependências:
+
+```bash
+dotnet restore
+```
+
+3. Configure a URL da API:
+
+Edite o arquivo Program.cs para apontar para a URL da OrgaTask API. 
+URL padrão: https://localhost:7170/ (modo desenvolvimento)
+
+4. Execute a aplicação:
+
+```bash
+dotnet run
+```
+
+5. Acesse no navegador: https://localhost:7170/
+
+## Exemplo de Uso
+
+1. Acesse a página de login e insira credenciais válidas.
+
+2. Após o login, visualize e gerencie suas tarefas na dashboard.
+
+3. Use os formulários para criar ou editar tarefas.
 
 
-## 🌐 **Sobre o OrgaTask**  
-**Aplicativo Web** para gestão de tarefas com autenticação segura e sincronização em tempo real.
 
-<p><em>Interface principal</em></p>
+<p><em>Interface Dashboard</em></p>
 
-![image](https://github.com/user-attachments/assets/4f2376e8-6571-410e-8549-2f475137be38)
+![image](https://github.com/user-attachments/assets/3866f0ab-9589-4e93-ab15-4d6ab71e2290)
+> Painel visual com acompanhamento do progresso e status de todas as atividades
 
-> Frontend web do ecossistema OrgaTask - Aplicação Blazor para gerenciamento de tarefas
- 
+<p><em>Interface Tarefas</em></p>
 
-## 📋 Visão Geral
+![image](https://github.com/user-attachments/assets/5f193776-f492-4dcb-981c-cdf942224c3a)
+> Visualização integrada de todas as tarefas registradas
 
-Frontend Blazor WebAssembly que consome a OrgaTask API para:
+Contribuições
 
-- Autenticação JWT segura
-
-- CRUD completo de tarefas (Criar/gerenciar tarefas com prioridades e status)
-
-- Controle de prioridades (Baixa/Média/Alta)
-
-- Sincronização em tempo real
-
-
-## 🌐 Ecossistema OrgaTask
-Esta aplicação consome:
-- [OrgaTask API](https://github.com/Jabonelas/OrgaTask-API) (Backend principal)
-  
-<!--
-Outros frontends do sistema:
-- [OrgaTask Desktop](https://github.com/Jabonelas/OrgaTask-Windows-Forms) (Versão Desktop)
--->
-
-
-![OrganizacaoOrgaTask](https://github.com/user-attachments/assets/bae20b56-ace7-4ef0-8d14-7fe13f1d9d31)
-Figura 1: Visão geral da integração entre os componentes do OrgaTask.
-A API central (Backend) serve dados para os frontends Web e Desktop.
-
-
-## 🛠 Tecnologias
-
-- **Core**: Blazor WASM (.NET 8)
-
-- **Arquitetura MVVM Adaptada**
-
-  - **Padrão customizado** otimizado para Blazor WASM:
-  - **View**: Componentes Razor (`*.razor`)
-  - **ViewModel**: Classes com estado/logica da UI (ex: `TaskViewModel.cs`)
-  - **Service Layer**: Substitui o Model tradicional, lidando com:
-    - Comunicação API (`HttpClient`)
-    - Lógica de negócio
-  - **Injeção de Dependência**: Nativa do .NET (IServiceCollection)
-
-- **Comunicação**
-  - **Consumo de API**: REST API (via HttpClient)
-  - **Autenticação**: JWT (Bearer Token)
-  - **Serialização JSON**
-
-## 🚀 Como Executar
-1. **Pré-requisitos**:
-   - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-   - OrgaTask API em execução (siga o [README da API](https://github.com/Jabonelas/OrgaTask-API#-como-executar))
-
-2. **Configuração**:
-   ```bash
-   git clone https://github.com/Jabonelas/OrgaTask-Blazor-WebAssembly.git
-   cd OrgaTask-Blazor-WebAssembly
+Contribuições são bem-vindas! Abra issues para relatar bugs ou sugerir melhorias, ou envie pull requests.
