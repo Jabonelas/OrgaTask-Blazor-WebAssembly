@@ -1,5 +1,4 @@
-﻿using Blazor_WebAssembly.DTOs.Tarefa;
-using Blazor_WebAssembly.Interfaces.Tarefa;
+﻿using Blazor_WebAssembly.Interfaces.Tarefa;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -28,7 +27,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 
         [ObservableProperty]
 
-        public List<TarefaPrioridadeAltaDTO> listaTarefasPrioridadeAlta = new List<TarefaPrioridadeAltaDTO>();
+        public List<TarefaPrioridadeAlta> listaTarefasPrioridadeAlta = new List<TarefaPrioridadeAlta>();
 
 
         public DashboardTarefasViewModel(
@@ -68,18 +67,19 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             try
             {
-                var (success, errorMessage, TarefaQtdStatus) = await iTarefaService.BuscarQtdStatusTarefaAsync();
+                var (Sucesso, ErrorMessagem, TarefaQtdStatus) = await iTarefaService.BuscarQtdStatusTarefaAsync();
 
-                if (success)
+                if (Sucesso)
                 {
                     pendenteCount = TarefaQtdStatus.Pendente;
                     emProgressoCount = TarefaQtdStatus.EmProgresso;
                     concluidoCount = TarefaQtdStatus.Concluido;
                     porcentagemTarefasConcluidas = TarefaQtdStatus.PorcentagemConcluidas;
+
                 }
                 else
                 {
-                    await notificacaoService.MostrarErro(errorMessage);
+                    await notificacaoService.MostrarErro(ErrorMessagem);
                 }
             }
             catch (Exception ex)
@@ -95,15 +95,32 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             try
             {
-                var (success, errorMessage, listaTarefaPrioridadeAlta) = await iTarefaService.BuscarTarefasPrioridadeAltaAsync();
+                var (Sucesso, ErrorMessagem, ListaTarefaPrioridadeAlta) = await iTarefaService.BuscarTarefasPrioridadeAltaAsync();
 
-                if (success && listaTarefaPrioridadeAlta != null)
+                if (Sucesso && ListaTarefaPrioridadeAlta != null)
                 {
-                    listaTarefasPrioridadeAlta = listaTarefaPrioridadeAlta;
+
+                    listaTarefasPrioridadeAlta.Clear();
+
+                    string descricaoPrazo = string.Empty;
+
+                    foreach (var tarefa in ListaTarefaPrioridadeAlta)
+                    {
+                        descricaoPrazo = tarefa.Prazo < 0 ? $"Prazo: {tarefa.Prazo.ToString().Replace("-", "")} dia(s) em atraso." : $"Prazo:{tarefa.Prazo} dia(s) restante(s).";
+
+                        listaTarefasPrioridadeAlta.Add(new TarefaPrioridadeAlta
+                        {
+                            Titulo = tarefa.Titulo,
+                            Data = tarefa.Data,
+                            Prazo = tarefa.Prazo,
+                            DescricaoPrazo = descricaoPrazo,
+                            Status = tarefa.Status
+                        });
+                    }
                 }
                 else
                 {
-                    await notificacaoService.MostrarErro(errorMessage);
+                    await notificacaoService.MostrarErro(ErrorMessagem);
                 }
             }
             catch (Exception ex)
@@ -114,9 +131,18 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             }
         }
 
+        public class TarefaPrioridadeAlta
+        {
+            public string Titulo { get; set; }
+            public string Data { get; set; }
+            public int Prazo { get; set; }
+            public string DescricaoPrazo { get; set; }
+            public string Status { get; set; }
+
+        }
+
         public void TarefasPendentes(string status)
         {
-
             navigation.NavigateTo($"/tarefa-rolagem/{status}");
         }
     }

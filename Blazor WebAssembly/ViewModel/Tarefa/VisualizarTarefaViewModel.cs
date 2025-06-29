@@ -43,18 +43,17 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                     navigation.NavigateTo("/login");
                 }
 
-                (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await iTarefaService.BuscarTarefaAsync(_id);
+                (bool Sucesso, string ErrorMessagem, TarefaAlterarDTO tarefa) = await iTarefaService.BuscarTarefaAsync(_id);
 
-                if (success)
+                if (Sucesso)
                 {
-
                     TarefaAlterarDTO = tarefa;
+
                 }
                 else
                 {
-                    await notificacaoService.MostrarErro(errorMessage);
+                    await notificacaoService.MostrarErro(ErrorMessagem);
                 }
-
             }
             catch (Exception ex)
             {

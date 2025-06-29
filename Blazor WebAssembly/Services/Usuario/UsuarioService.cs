@@ -19,7 +19,7 @@ namespace Blazor_WebAssembly.Services.Usuario
             localStorage = _localStorage;
         }
 
-        public async Task<(bool success, string errorMessage)> LoginAsync(UsuarioLoginDTO _dadosLogin)
+        public async Task<(bool Sucesso, string ErrorMessagem)> LoginAsync(UsuarioLoginDTO _dadosLogin)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Blazor_WebAssembly.Services.Usuario
             }
         }
 
-        public async Task<(bool success, string errorMessage)> CadastrarUsuarioAsync(UsuarioCadastrarDTO _dadosUsuario)
+        public async Task<(bool Sucesso, string ErrorMessagem)> CadastrarUsuarioAsync(UsuarioCadastrarDTO _dadosUsuario)
         {
             try
             {

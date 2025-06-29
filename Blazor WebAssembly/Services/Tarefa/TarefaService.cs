@@ -27,7 +27,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             public int TotalCount { get; set; }
         }
 
-        public async Task<(bool success, string errorMessage, List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int _pageNumber, int _pageSize, string _status)
+        public async Task<(bool Sucesso, string ErrorMessagem, List<TarefaConsultaDTO> Items, int TotalCount)> ObterTarefasPaginadasAsync(int _pageNumber, int _pageSize, string _status)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage)> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
+        public async Task<(bool Sucesso, string ErrorMessagem)> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage)> AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
+        public async Task<(bool Sucesso, string ErrorMessagem)> AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
         {
             try
             {
@@ -163,7 +163,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage, TarefaAlterarDTO)> BuscarTarefaAsync(int _id)
+        public async Task<(bool Sucesso, string ErrorMessagem, TarefaAlterarDTO TarefaAlterarDTO)> BuscarTarefaAsync(int _id)
         {
             try
             {
@@ -209,7 +209,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage)> DeletarTarefaAsync(int _id)
+        public async Task<(bool Sucesso, string ErrorMessagem)> DeletarTarefaAsync(int _id)
         {
             try
             {
@@ -252,7 +252,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage, TarefaQtdStatusDTO)> BuscarQtdStatusTarefaAsync()
+        public async Task<(bool Sucesso, string ErrorMessagem, TarefaQtdStatusDTO TarefaQtdStatusDTO)> BuscarQtdStatusTarefaAsync()
         {
             try
             {
@@ -298,7 +298,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool success, string errorMessage, List<TarefaPrioridadeAltaDTO>)> BuscarTarefasPrioridadeAltaAsync()
+        public async Task<(bool Sucesso, string ErrorMessagem, List<TarefaPrioridadeAltaDTO> ListaTarefaPrioridadeAltaDTO)> BuscarTarefasPrioridadeAltaAsync()
         {
             try
             {

@@ -7,10 +7,4 @@
         public int Concluido { get; set; }
         public decimal PorcentagemConcluidas { get; set; }
     }
-
-    public class TaskModel
-    {
-        public string Title { get; set; }
-        public DateTime DueDate { get; set; }
-    }
 }

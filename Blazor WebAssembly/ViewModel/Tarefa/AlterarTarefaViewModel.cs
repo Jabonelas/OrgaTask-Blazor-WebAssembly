@@ -47,9 +47,16 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                     navigation.NavigateTo("/login");
                 }
 
-                (bool success, string errorMessage, TarefaAlterarDTO tarefa) = await iTarefaService.BuscarTarefaAsync(_id);
+                (bool Sucesso, string ErrorMessagem, TarefaAlterarDTO tarefa) = await iTarefaService.BuscarTarefaAsync(_id);
 
-                TarefaAlterarDTO = tarefa;
+                if (Sucesso)
+                {
+                    TarefaAlterarDTO = tarefa;
+                }
+                else
+                {
+                    await notificacaoService.MostrarErro(ErrorMessagem);
+                }
             }
             catch (Exception ex)
             {
@@ -61,9 +68,9 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             try
             {
-                (bool sucesso, string errorMessage) = await iTarefaService.AlterarTarefaAsync(TarefaAlterarDTO);
+                (bool Sucesso, string ErrorMessagem) = await iTarefaService.AlterarTarefaAsync(TarefaAlterarDTO);
 
-                if (sucesso)
+                if (Sucesso)
                 {
                     await notificacaoService.MostrarSucesso("Dados da tarefa alterada com sucesso!");
 
@@ -73,7 +80,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                 }
                 else
                 {
-                    await notificacaoService.MostrarErro(errorMessage);
+                    await notificacaoService.MostrarErro(ErrorMessagem);
                 }
             }
             catch (Exception ex)

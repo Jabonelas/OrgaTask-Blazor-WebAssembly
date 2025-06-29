@@ -85,14 +85,7 @@
                     </div>
                     <div class="task-meta">
                         <span class="task-date"><i class="far fa-calendar-alt"></i>Criado: @item.Data</span>
-                        @if (@item.Prazo > 0)
-                        {
-                            <span class="task-deadline"><i class="far fa-clock"></i> Prazo: @item.Prazo dia(s) restante(s)</span>
-                        }
-                        else
-                        {
-                            <span class="task-deadline"><i class="far fa-clock"></i> Prazo: @item.Prazo.ToString().Replace("-", "") dia(s) de atraso</span>
-                        }
+                        <span class="task-deadline"><i class="far fa-clock"></i> @item.DescricaoPrazo </span>
                     </div>
                 </div>
             }

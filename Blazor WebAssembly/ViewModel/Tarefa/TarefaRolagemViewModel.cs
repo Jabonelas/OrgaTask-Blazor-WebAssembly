@@ -15,7 +15,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         private readonly AuthenticationStateProvider authenticationStateProvider;
 
         [ObservableProperty]
-        public List<TarefaConsultaDTO> tarefas = new();
+        public List<TarefaConsultaDTO> tarefas = new List<TarefaConsultaDTO>();
 
         [ObservableProperty]
         public string titulo = "";
@@ -82,12 +82,12 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 
             try
             {
-                var (success, errorMessage, items, newTotalCount) =
+                var (Sucesso, ErrorMessagem, items, newTotalCount) =
                     await iTarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize, status);
 
-                Console.WriteLine($"API Response - Success: {success}, Count: {items?.Count}, Total: {newTotalCount}");
+                Console.WriteLine($"API Response - Sucesso: {Sucesso}, Count: {items?.Count}, Total: {newTotalCount}");
 
-                if (success)
+                if (Sucesso)
                 {
                     SentandoTituloPagina();
 
@@ -105,7 +105,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                 }
                 else
                 {
-                    await notificacaoService.MostrarErro(errorMessage ?? "Erro ao carregar tarefas");
+                    await notificacaoService.MostrarErro(ErrorMessagem ?? "Erro ao carregar tarefas");
                 }
             }
             catch (Exception ex)
@@ -125,11 +125,21 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             switch (status)
             {
-                case "todas": titulo = "Todas as Minhas Tarefas"; break;
-                case "Pendente": titulo = "Todas as Minhas Tarefas Pendentes"; break;
-                case "Em Progresso": titulo = "Todas as Minhas Tarefas Em Progresso"; break;
-                case "Concluído": titulo = "Todas as Minhas Tarefas Concluídas"; break;
-                default: titulo = "Minhas Tarefas"; break;
+                case "todas":
+                    titulo = "Todas as Minhas Tarefas";
+                    break;
+                case "Pendente":
+                    titulo = "Todas as Minhas Tarefas Pendentes";
+                    break;
+                case "Em Progresso":
+                    titulo = "Todas as Minhas Tarefas Em Progresso";
+                    break;
+                case "Concluído":
+                    titulo = "Todas as Minhas Tarefas Concluídas";
+                    break;
+                default:
+                    titulo = "Minhas Tarefas";
+                    break;
             }
 
             NotifyStateChanged();
@@ -150,9 +160,12 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             switch (prioridade)
             {
-                case "Alta": return "bi-exclamation-triangle-fill";
-                case "Média": return "bi-exclamation-circle-fill";
-                case "Baixa": return "bi-arrow-down-circle-fill";
+                case "Alta":
+                    return "bi-exclamation-triangle-fill";
+                case "Média":
+                    return "bi-exclamation-circle-fill";
+                case "Baixa":
+                    return "bi-arrow-down-circle-fill";
             }
             return "bi-question-circle";
         }
@@ -161,9 +174,12 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             switch (status)
             {
-                case "Concluído": return "bi-check-circle-fill";
-                case "Em Progresso": return "bi-arrow-repeat";
-                case "Pendente": return "bi-clock";
+                case "Concluído":
+                    return "bi-check-circle-fill";
+                case "Em Progresso":
+                    return "bi-arrow-repeat";
+                case "Pendente":
+                    return "bi-clock";
             }
             return "bi-question-circle";
         }
@@ -172,9 +188,12 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             switch (prioridade)
             {
-                case "Alta": return "prioridade-alta";
-                case "Média": return "prioridade-media";
-                case "Baixa": return "prioridade-baixa";
+                case "Alta":
+                    return "prioridade-alta";
+                case "Média":
+                    return "prioridade-media";
+                case "Baixa":
+                    return "prioridade-baixa";
             }
             return "";
         }
@@ -183,18 +202,33 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             switch (status)
             {
-                case "Concluído": return "status-concluido";
-                case "Em Progresso": return "status-progresso";
-                case "Pendente": return "status-pendente";
+                case "Concluído":
+                    return "status-concluido";
+                case "Em Progresso":
+                    return "status-progresso";
+                case "Pendente":
+                    return "status-pendente";
             }
             return "";
         }
 
         public string FormatandoData(object dateObj)
         {
-            if (dateObj == null) return "-";
-            if (dateObj is DateTime date) return date.ToString("dd/MM/yyyy");
-            if (DateTime.TryParse(dateObj.ToString(), out var parsedDate)) return parsedDate.ToString("dd/MM/yyyy");
+            if (dateObj == null)
+            {
+                return "-";
+            }
+
+            if (dateObj is DateTime date)
+            {
+                return date.ToString("dd/MM/yyyy");
+            }
+
+            if (DateTime.TryParse(dateObj.ToString(), out var parsedDate))
+            {
+                return parsedDate.ToString("dd/MM/yyyy");
+            }
+
             return dateObj.ToString();
         }
 
@@ -227,6 +261,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Erro ao excluir tarefa: {ex.Message}");
+
                     await notificacaoService.MostrarErro("Ocorreu um erro ao excluir a tarefa.");
                 }
             }

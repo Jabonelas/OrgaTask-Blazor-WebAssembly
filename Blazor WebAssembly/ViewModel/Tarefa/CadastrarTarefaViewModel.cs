@@ -51,9 +51,9 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             try
             {
-                var (sucesso, errorMessage) = await iTarefaService.CadastrarTarefaAsync(TarefaCadastrarDTO);
+                var (Sucesso, ErrorMessagem) = await iTarefaService.CadastrarTarefaAsync(TarefaCadastrarDTO);
 
-                if (sucesso)
+                if (Sucesso)
                 {
                     await notificacaoService.MostrarSucesso("Tarefa cadastrada com sucesso!");
 
@@ -61,7 +61,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                 }
                 else
                 {
-                    await notificacaoService.MostrarErro(errorMessage);
+                    await notificacaoService.MostrarErro(ErrorMessagem);
                 }
             }
             catch (Exception ex)
