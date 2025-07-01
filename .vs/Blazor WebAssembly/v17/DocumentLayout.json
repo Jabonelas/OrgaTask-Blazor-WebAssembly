@@ -106,8 +106,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaPrioridadeAltaDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T23:00:19.933Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T23:00:19.933Z"
             },
             {
               "$type": "Document",
@@ -119,8 +118,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Tarefa\\CadastrarTarefaViewModel.cs",
               "ViewState": "AgIAADoAAAAAAAAAAAAgwDwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T03:18:58.299Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T03:18:58.299Z"
             },
             {
               "$type": "Document",
@@ -132,8 +130,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Tarefa\\AlterarTarefaViewModel.cs",
               "ViewState": "AgIAAE0AAAAAAAAAAAAwwDYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T03:16:01.515Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T03:16:01.515Z"
             },
             {
               "$type": "Document",
@@ -145,8 +142,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Tarefa\\TarefaRolagemViewModel.cs",
               "ViewState": "AgIAAOwAAAAAAAAAAADwvwcBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T03:15:27.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T03:15:27.597Z"
             },
             {
               "$type": "Document",
@@ -158,8 +154,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Tarefa\\VisualizarTarefaViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T03:15:21.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T03:15:21.103Z"
             },
             {
               "$type": "Document",
@@ -183,8 +178,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Tarefa\\DashboardTarefasViewModel.cs",
               "ViewState": "AgIAAHkAAAAAAAAAAAAIwE4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T20:25:10.144Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T20:25:10.144Z"
             },
             {
               "$type": "Document",
@@ -218,7 +212,7 @@
               "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaQtdStatusDTO.cs",
               "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\Tarefa\\TarefaQtdStatusDTO.cs",
               "RelativeToolTip": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaQtdStatusDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T15:49:16.264Z",
               "EditorCaption": ""
@@ -233,8 +227,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Usuario\\CadastrarUsuarioViewModel.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAswDIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T21:57:35.836Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T21:57:35.836Z"
             },
             {
               "$type": "Document",
@@ -342,8 +335,7 @@
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Usuario\\LoginViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T21:26:08.586Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-15T21:26:08.586Z"
             }
           ]
         },

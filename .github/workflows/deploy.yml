@@ -8,20 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
-          
+          dotnet-version: "8.0.x"
+
       - name: Publish
         run: |
           dotnet publish -c Release -o publish
           # Copia toda a estrutura wwwroot mantendo as pastas
           cp -r publish/wwwroot/* .
-          
+
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: blazor-app
           path: .
@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: blazor-app
-          
+
       - name: Deploy to Cloudflare
         uses: cloudflare/pages-action@v1
         with:
