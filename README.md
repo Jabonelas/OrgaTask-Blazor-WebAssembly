@@ -72,7 +72,7 @@ dotnet run
 
 <p><em>Interface Dashboard</em></p>
 
-![image](https://github.com/user-attachments/assets/3866f0ab-9589-4e93-ab15-4d6ab71e2290)
+![3](https://github.com/user-attachments/assets/2a0d4a7d-e139-4134-87c9-7f29a5c9feaa)
 > Painel visual com acompanhamento do progresso e status de todas as atividades
 
 <p><em>Interface Tarefas</em></p>
