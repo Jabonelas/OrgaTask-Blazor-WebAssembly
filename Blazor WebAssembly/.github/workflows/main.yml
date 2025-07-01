@@ -1,26 +1,14 @@
-﻿name: Deploy
+name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branchs: ["main"]
-
+    branches: ["main"]
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,23 +21,20 @@ jobs:
       - name: Install .NET Wasm Tools
         run: dotnet workload install wasm-tools
 
-      - name: Restore Dependencies
+      - name: Restore dependencies
         run: dotnet restore
 
       - name: Build
         run: dotnet build -c Release --no-restore
 
-      - name: Publish .NET
-        run: dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o docs --nologo
+      - name: Publish Blazor App
+        run: dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o release --nologo
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          path: "docs/wwwroot"
-
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: OrgaTask-Blazor-WebAssembly
+          directory: release/wwwroot
+          wranglerVersion: 2
