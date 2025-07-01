@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\pages\\tarefas\\cadastrartarefa.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\pages\\tarefas\\cadastrartarefa.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\viewmodel\\tarefa\\alterartarefaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\viewmodel\\tarefa\\alterartarefaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\helpers\\apiroutes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\helpers\\apiroutes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\dtos\\tarefa\\tarefaprioridadealtadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\dtos\\tarefa\\tarefaprioridadealtadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\viewmodel\\tarefa\\alterartarefaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|solutionrelative:blazor webassembly\\viewmodel\\tarefa\\alterartarefaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F68E7A7-B231-418D-BEB5-9D4EFBAC6C31}|Blazor WebAssembly\\Blazor WebAssembly.csproj|c:\\users\\israe\\source\\repos\\blazor webassembly\\blazor webassembly\\viewmodel\\tarefa\\cadastrartarefaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,7 +102,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 18,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -106,7 +110,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "CadastrarTarefa.razor",
+              "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Tarefas\\CadastrarTarefa.razor",
+              "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\Tarefas\\CadastrarTarefa.razor",
+              "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Tarefas\\CadastrarTarefa.razor",
+              "RelativeToolTip": "Blazor WebAssembly\\Pages\\Tarefas\\CadastrarTarefa.razor",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAACsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-01T02:31:32.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Properties\\launchSettings.json",
@@ -114,12 +131,11 @@
               "RelativeToolTip": "Blazor WebAssembly\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-01T01:42:07.562Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T01:42:07.562Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\wwwroot\\index.html",
@@ -127,12 +143,11 @@
               "RelativeToolTip": "Blazor WebAssembly\\wwwroot\\index.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-07-01T01:41:59.269Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T01:41:59.269Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "TarefaPrioridadeAltaDTO.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\Tarefa\\TarefaPrioridadeAltaDTO.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaPrioridadeAltaDTO.cs",
@@ -144,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "CadastrarTarefaViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Tarefa\\CadastrarTarefaViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Tarefa\\CadastrarTarefaViewModel.cs",
@@ -156,19 +171,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "AlterarTarefaViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Tarefa\\AlterarTarefaViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Tarefa\\AlterarTarefaViewModel.cs",
               "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Tarefa\\AlterarTarefaViewModel.cs",
               "RelativeToolTip": "Blazor WebAssembly\\ViewModel\\Tarefa\\AlterarTarefaViewModel.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAwwDYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T03:16:01.515Z"
+              "WhenOpened": "2025-06-29T03:16:01.515Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "TarefaRolagemViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Tarefa\\TarefaRolagemViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Tarefa\\TarefaRolagemViewModel.cs",
@@ -180,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "VisualizarTarefaViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Tarefa\\VisualizarTarefaViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Tarefa\\VisualizarTarefaViewModel.cs",
@@ -192,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "DashboardTarefas.razor",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Tarefas\\DashboardTarefas.razor",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\Tarefas\\DashboardTarefas.razor",
@@ -204,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "DashboardTarefasViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Tarefa\\DashboardTarefasViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Tarefa\\DashboardTarefasViewModel.cs",
@@ -216,7 +232,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "IUsuarioService.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Interfaces\\Usuario\\IUsuarioService.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Interfaces\\Usuario\\IUsuarioService.cs",
@@ -228,7 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "ITarefaService.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Interfaces\\Tarefa\\ITarefaService.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Interfaces\\Tarefa\\ITarefaService.cs",
@@ -240,7 +256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "TarefaQtdStatusDTO.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\Tarefa\\TarefaQtdStatusDTO.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaQtdStatusDTO.cs",
@@ -248,12 +264,11 @@
               "RelativeToolTip": "Blazor WebAssembly\\DTOs\\Tarefa\\TarefaQtdStatusDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T15:49:16.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T15:49:16.264Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "CadastrarUsuarioViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Usuario\\CadastrarUsuarioViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Usuario\\CadastrarUsuarioViewModel.cs",
@@ -265,7 +280,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "UsuarioLoginDTO.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\Usuario\\UsuarioLoginDTO.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\Usuario\\UsuarioLoginDTO.cs",
@@ -277,7 +292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "NotificacaoService.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\DTOs\\NotificacaoService.cs",
@@ -289,7 +304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Login.razor",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Pages\\Usuario\\Login.razor",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Pages\\Usuario\\Login.razor",
@@ -301,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "TarefaService.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Services\\Tarefa\\TarefaService.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Services\\Tarefa\\TarefaService.cs",
@@ -313,20 +328,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "ApiRoutes.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Helpers\\ApiRoutes.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Helpers\\ApiRoutes.cs",
               "ToolTip": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Helpers\\ApiRoutes.cs",
               "RelativeToolTip": "Blazor WebAssembly\\Helpers\\ApiRoutes.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T18:07:17.538Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "UsuarioService.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Services\\Usuario\\UsuarioService.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Services\\Usuario\\UsuarioService.cs",
@@ -338,7 +353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Program.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Program.cs",
@@ -350,7 +365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "InjecaoDependencia.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\Extensions\\InjecaoDependencia.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\Extensions\\InjecaoDependencia.cs",
@@ -362,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "LoginViewModel.cs",
               "DocumentMoniker": "C:\\Users\\israe\\source\\repos\\Blazor WebAssembly\\Blazor WebAssembly\\ViewModel\\Usuario\\LoginViewModel.cs",
               "RelativeDocumentMoniker": "Blazor WebAssembly\\ViewModel\\Usuario\\LoginViewModel.cs",

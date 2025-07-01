@@ -67,5 +67,8 @@
     <ArrayOfString>
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Properties\launchSettings.json</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\Tarefas\CadastrarTarefa.razor</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
