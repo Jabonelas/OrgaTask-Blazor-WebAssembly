@@ -1,44 +1,55 @@
-name: Deploy Blazor to Cloudflare
+﻿name: Deploy
+
 on:
   push:
-    branches: [main]
+    branchs: ["main"]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: 8.0.102
 
-      - name: Publish
-        run: |
-          dotnet publish -c Release -o publish
-          # Copia toda a estrutura wwwroot mantendo as pastas
-          cp -r publish/wwwroot/* .
+      - name: Install .NET Wasm Tools
+        run: dotnet workload install wasm-tools
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release --no-restore
+
+      - name: Publish .NET
+        run: dotnet publish "Blazor WebAssembly/Blazor WebAssembly.csproj" -c Release -o docs --nologo
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: blazor-app
-          path: .
+          path: "docs/wwwroot"
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: blazor-app
-
-      - name: Deploy to Cloudflare
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: "OrgaTask-Blazor-WebAssembly"
-          directory: "."
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
