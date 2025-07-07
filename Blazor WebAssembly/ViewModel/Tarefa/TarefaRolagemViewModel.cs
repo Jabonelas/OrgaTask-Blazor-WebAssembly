@@ -83,7 +83,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             try
             {
                 var (Sucesso, ErrorMessagem, items, newTotalCount) =
-                    await iTarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize, status);
+                    await iTarefaService.ObterTarefasPaginadasAsync(currentPage, pageSize, status.Replace(" ", "_"));
 
                 Console.WriteLine($"API Response - Sucesso: {Sucesso}, Count: {items?.Count}, Total: {newTotalCount}");
 
@@ -128,15 +128,19 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                 case "todas":
                     titulo = "Todas as Minhas Tarefas";
                     break;
+
                 case "Pendente":
                     titulo = "Todas as Minhas Tarefas Pendentes";
                     break;
+
                 case "Em Progresso":
                     titulo = "Todas as Minhas Tarefas Em Progresso";
                     break;
+
                 case "Concluído":
                     titulo = "Todas as Minhas Tarefas Concluídas";
                     break;
+
                 default:
                     titulo = "Minhas Tarefas";
                     break;
@@ -162,8 +166,10 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             {
                 case "Alta":
                     return "bi-exclamation-triangle-fill";
+
                 case "Média":
                     return "bi-exclamation-circle-fill";
+
                 case "Baixa":
                     return "bi-arrow-down-circle-fill";
             }
@@ -176,8 +182,10 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             {
                 case "Concluído":
                     return "bi-check-circle-fill";
+
                 case "Em Progresso":
                     return "bi-arrow-repeat";
+
                 case "Pendente":
                     return "bi-clock";
             }
@@ -190,8 +198,10 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             {
                 case "Alta":
                     return "prioridade-alta";
+
                 case "Média":
                     return "prioridade-media";
+
                 case "Baixa":
                     return "prioridade-baixa";
             }
@@ -204,8 +214,10 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             {
                 case "Concluído":
                     return "status-concluido";
+
                 case "Em Progresso":
                     return "status-progresso";
+
                 case "Pendente":
                     return "status-pendente";
             }

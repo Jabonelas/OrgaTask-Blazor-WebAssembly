@@ -10,9 +10,9 @@ namespace Blazor_WebAssembly.Interfaces.Tarefa
 
         Task<(bool Sucesso, string ErrorMessagem)> AlterarTarefaAsync(TarefaAlterarDTO _dadosTarefa);
 
-        Task<(bool Sucesso, string ErrorMessagem)> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa);
+        Task<(bool Sucesso, string ErrorMessagem)> CadastrarTarefaAsync(TarefaCadastrarDTO _dadosTarefa);
 
-        Task<(bool Sucesso, string ErrorMessagem, TarefaAlterarDTO TarefaAlterarDTO)> BuscarTarefaAsync(int _id);
+        Task<(bool Sucesso, string ErrorMessagem, TarefaConsultaDTO TarefaConsultaDTO)> BuscarTarefaAsync(int _id);
 
         Task<(bool Sucesso, string ErrorMessagem, TarefaQtdStatusDTO TarefaQtdStatusDTO)> BuscarQtdStatusTarefaAsync();
 

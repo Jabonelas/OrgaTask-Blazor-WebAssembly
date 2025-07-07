@@ -53,6 +53,14 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     {
                         var result = JsonConvert.DeserializeObject<PagedResult<TarefaConsultaDTO>>(responseContent);
 
+                        foreach (var VARIABLE in result.Items)
+                        {
+                            Console.WriteLine($" israel {VARIABLE.Descricao}");
+                            Console.WriteLine($" israel {VARIABLE.DataCriacao}");
+                        }
+
+                        Console.WriteLine($" {result}");
+
                         return (true, "", result.Items, result.TotalCount);
                     }
 
@@ -69,7 +77,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool Sucesso, string ErrorMessagem)> CadastrarTarefaAsync(TarefaAlterarDTO _dadosTarefa)
+        public async Task<(bool Sucesso, string ErrorMessagem)> CadastrarTarefaAsync(TarefaCadastrarDTO _dadosTarefa)
         {
             try
             {
@@ -163,7 +171,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
             }
         }
 
-        public async Task<(bool Sucesso, string ErrorMessagem, TarefaAlterarDTO TarefaAlterarDTO)> BuscarTarefaAsync(int _id)
+        public async Task<(bool Sucesso, string ErrorMessagem, TarefaConsultaDTO TarefaConsultaDTO)> BuscarTarefaAsync(int _id)
         {
             try
             {
@@ -191,7 +199,7 @@ namespace Blazor_WebAssembly.Services.Tarefa
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var tarefa = JsonConvert.DeserializeObject<TarefaAlterarDTO>(responseContent);
+                        var tarefa = JsonConvert.DeserializeObject<TarefaConsultaDTO>(responseContent);
 
                         return (true, null, tarefa);
                     }
@@ -345,8 +353,6 @@ namespace Blazor_WebAssembly.Services.Tarefa
         }
 
         #region Métodos privados
-
-
 
         private async Task<UserToken> PegarDadosToken()
         {

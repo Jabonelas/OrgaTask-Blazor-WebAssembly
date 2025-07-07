@@ -510,6 +510,46 @@ body {
     line-height: 1.5;
 }
 
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+.status-card {
+    width: 100%;
+    max-width: 300px;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    .status-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.count {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #009DE0;
+    margin: 0.5rem 0;
+}
+
+.status-card h3 {
+    margin-bottom: 0.5rem;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
     .feature-card {
@@ -810,7 +850,6 @@ body {
 /*Rolagem infinita*/
 /*--------------------------------------*/
 
-
 [tarefa-sentinela] {
     position: relative;
     height: 1px;
@@ -832,60 +871,60 @@ body {
     }
 
 /* Estilos para prioridades */
-.prioridade-alta {
-    border-left-color: #dc3545; /* Vermelho */
-}
+/*.prioridade-alta {
+    border-left-color: #E53935;*/ /* Vermelho */
+/*}
 
 .prioridade-media {
-    border-left-color: #fd7e14; /* Laranja */
-}
+    border-left-color: #FB8C00;*/ /* Laranja */
+/*}
 
 .prioridade-baixa {
-    border-left-color: #28a745; /* Verde */
-}
+    border-left-color: #43A047;*/ /* Verde */
+/*}*/
 
 /* Estilos para status */
-.status-concluido {
-    border-top: 3px solid #28a745; /* Verde */
-}
+/*.status-concluido {
+    border-top: 3px solid #66BB6A;*/ /* Verde Claro*/
+/*}
 
 .status-progresso {
-    border-top: 3px solid #17a2b8; /* Azul claro */
-}
+    border-top: 3px solid #FBC02D;*/ /* Amarelo */
+/*}
 
 .status-pendente {
-    border-top: 3px solid #6c757d; /* Cinza */
-}
+    border-top: 3px solid #D32F2F;*/ /* Vermelho */
+/*}*/
 
 /* Estilos para badges de prioridade */
 .badge.bg-secondary.prioridade-alta {
-    background-color: #dc3545 !important;
+    background-color: #E53935 !important;
     color: white !important;
 }
 
 .badge.bg-secondary.prioridade-media {
-    background-color: #fd7e14 !important;
+    background-color: #FB8C00 !important;
     color: white !important;
 }
 
 .badge.bg-secondary.prioridade-baixa {
-    background-color: #28a745 !important;
+    background-color: #43A047 !important;
     color: white !important;
 }
 
 /* Estilos para badges de status */
 .badge.bg-info.status-concluido {
-    background-color: #28a745 !important;
+    background-color: #66BB6A !important;
     color: white !important;
 }
 
 .badge.bg-info.status-progresso {
-    background-color: #17a2b8 !important;
+    background-color: #FBC02D !important;
     color: white !important;
 }
 
 .badge.bg-info.status-pendente {
-    background-color: #6c757d !important;
+    background-color: #D32F2F !important;
     color: white !important;
 }
 

@@ -2,102 +2,117 @@
 @using Blazor_WebAssembly.ViewModel.Usuario
 @inject CadastrarUsuarioViewModel CadastrarUsuarioViewModel
 
+<div class="container-fluid min-vh-100 p-0" style="background-color: #F4F9FC">
+    <div class="row g-0 min-vh-100">
+        <!-- Painel Esquerdo (Background) -->
+        <div class="col-lg-5 d-none d-lg-block" style="background-color: #009DE0">
+            <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                <div style="max-width: 500px;">
+                    <div class="d-flex align-items-center mb-4">
+                        <h1 class="display-4 mb-4"><i class="bi bi-people-fill"></i> Cadastro de Usuários</h1>
+                    </div>
+                    <p class="lead mb-5" style="color: #E1F5FC">Preencha os campos ao lado para criar sua conta no OrgaTask e transforme a sua produtividade.</p>
 
-<EditForm Model="@CadastrarUsuarioViewModel.usuarioCadastrarDTO" OnValidSubmit="@CadastrarUsuarioViewModel.CadastrarUsuarioAsync">
-    <DataAnnotationsValidator />
-
-    <div class="container-fluid min-vh-100 bg-light p-0">
-        <div class="row g-0 min-vh-100">
-            <!-- Painel Esquerdo (Background) -->
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="h-100" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
-                    <div class="d-flex flex-column justify-content-center align-items-center h-100 text-white p-5">
-                        <div style="max-width: 500px;">
-                            <h1 class="display-4 mb-4"><i class="bi bi-people-fill"></i> Cadastro de Usuários</h1>
-                            <p class="lead">Preencha os campos ao lado para criar sua conta no OrgaTask e transforme sua produtividade.</p>
-                            <div class="mt-5">
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                    <span>Controle de acesso pessoal e seguro</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                    <span>Organize suas tarefas de forma simples</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                    <span>Acompanhe o progresso das suas tarefas</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Controle de acesso pessoal e seguro.</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Organize suas tarefas de forma simples.</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Acompanhe o progresso das suas tarefas.</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Painel Direito (Formulário) -->
-            <div class="col-lg-6 d-flex align-items-center justify-content-center p-4 bg-light">
-                <div class="w-100" style="max-width: 600px;">
-                    <div class="text-center mb-5 d-lg-none">
-                        <h2 class="text-primary"><i class="bi bi-person-plus"></i> Novo Usuário</h2>
-                    </div>
+        <!-- Painel Direito (Formulário) -->
+        <div class="col-lg-7 d-flex align-items-center justify-content-center p-4">
+            <div class="w-100" style="max-width: 500px;">
+                <div class="card shadow-sm border-0" style="border-radius: 15px">
+                    <div class="card-body p-4">
+                        <EditForm Model="@CadastrarUsuarioViewModel.usuarioCadastrarDTO" OnValidSubmit="@CadastrarUsuarioViewModel.CadastrarUsuarioAsync">
+                            <DataAnnotationsValidator />
 
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4">
                             <!-- Nome Completo -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Nome Completo</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Nome Completo</label>
                                 <InputText @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.Nome"
-                                           class="form-control form-control-lg" />
-                                <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Nome)" class="text-danger small" />
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                           placeholder="Digite o nome completo" />
+                                <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Nome)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Nome de Usuário -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Nome de Usuário</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Nome de Usuário</label>
                                 <InputText @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.Login"
-                                           class="form-control form-control-lg" />
-                                <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Login)" class="text-danger small" />
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                           placeholder="Digite o usuário" />
+                                <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Login)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Senha e Confirmar Senha -->
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Senha</label>
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Senha</label>
                                     <div class="input-group">
                                         <InputText type="password" @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.Senha"
-                                                   class="form-control form-control-lg" id="fullPassword" />
-                                        <button class="btn btn-outline-secondary" type="button"
-                                                onclick="togglePassword('fullPassword')">
+                                                   class="form-control"
+                                                   style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                                   placeholder="Digite a senha"
+                                                   id="fullPassword" />
+                                        <button class="btn btn-outline-secondary"
+                                                type="button"
+                                                onclick="togglePassword('fullPassword')"
+                                                style="background-color: #F4F9FC">
                                             <i class="bi bi-eye"></i>
                                         </button>
                                     </div>
-                                    <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Senha)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.Senha)"
+                                                       style="color: #E74C3C" />
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Confirmar Senha</label>
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Confirmar Senha</label>
                                     <div class="input-group">
                                         <InputText type="password" @bind-Value="CadastrarUsuarioViewModel.usuarioCadastrarDTO.ConfirmarSenha"
-                                                   class="form-control form-control-lg" id="fullConfirmPassword" />
-                                        <button class="btn btn-outline-secondary" type="button"
-                                                onclick="togglePassword('fullConfirmPassword')">
+                                                   class="form-control"
+                                                   style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                                   placeholder="Confirme a senha"
+                                                   id="fullConfirmPassword" />
+                                        <button class="btn btn-outline-secondary"
+                                                type="button"
+                                                onclick="togglePassword('fullConfirmPassword')"
+                                                style="background-color: #F4F9FC">
                                             <i class="bi bi-eye"></i>
                                         </button>
                                     </div>
-                                    <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.ConfirmarSenha)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => CadastrarUsuarioViewModel.usuarioCadastrarDTO.ConfirmarSenha)"
+                                                       style="color: #E74C3C" />
                                 </div>
                             </div>
 
                             <!-- Botões -->
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
-                                        class="btn btn-outline-secondary px-4"
+                                        class="btn px-4"
+                                        style="border-color: #009DE0; border-width: 1.5px; background-color: white; color: #009DE0; height: 45px; border-radius: 10px"
                                         @onclick="CadastrarUsuarioViewModel.CancelarCadastroAsync">
-                                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                                    <i class="bi bi-x-lg me-1"></i>
+                                    Cancelar
                                 </button>
 
                                 <button type="submit"
-                                        class="btn btn-primary px-4"
+                                        class="btn px-4"
+                                        style="background-color: #009DE0; color: white; height: 45px; border-radius: 10px"
                                         disabled="@CadastrarUsuarioViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
                                           hidden="@(!CadastrarUsuarioViewModel.isSubmitting)"></span>
@@ -105,21 +120,18 @@
                                     @(CadastrarUsuarioViewModel.isSubmitting ? "Cadastrando..." : "Cadastrar")
                                 </button>
                             </div>
-                        </div>
+                        </EditForm>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</EditForm>
-
-
+</div>
 
 <script>
     function togglePassword(id) {
         const input = document.getElementById(id);
         const icon = input.nextElementSibling.querySelector('i');
-
         if (input.type === 'password') {
             input.type = 'text';
             icon.classList.remove('bi-eye');
@@ -132,8 +144,9 @@
     }
 </script>
 
-
 @code {
-
-
+    protected override async Task OnInitializedAsync()
+    {
+        // Inicialização se necessário
+    }
 }

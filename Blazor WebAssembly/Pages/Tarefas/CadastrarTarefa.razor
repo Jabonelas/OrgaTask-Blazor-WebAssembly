@@ -2,107 +2,122 @@
 @using Blazor_WebAssembly.ViewModel.Tarefa
 @inject CadastrarTarefaViewModel CadastrarTarefaViewModel
 
-
-<EditForm Model="@CadastrarTarefaViewModel.tarefaCadastrarDTO" OnValidSubmit="@CadastrarTarefaViewModel.CadastrarTarefaAsync">
-    <DataAnnotationsValidator />
-
-    <div class="container-fluid min-vh-100 p-0">
-        <div class="row g-0 min-vh-100">
-
-            <!-- Painel Esquerdo (Background) -->
-            <div class="col-lg-5 d-none d-lg-block" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
-                <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
-                    <div style="max-width: 500px;">
+<div class="container-fluid min-vh-100 p-0" style="background-color: #F4F9FC">
+    <div class="row g-0 min-vh-100">
+        <!-- Painel Esquerdo (Background) -->
+        <div class="col-lg-5 d-none d-lg-block" style="background-color: #009DE0">
+            <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                <div style="max-width: 500px;">
+                    <div class="d-flex align-items-center mb-4">
                         <h1 class="display-5 mb-4"><i class="bi bi-plus-circle-fill"></i> Nova Tarefa</h1>
-                        <p class="lead mb-5">Preencha os campos ao lado para criar uma nova tarefa e organizar seu trabalho.</p>
+                    </div>
+                    <p class="lead mb-5" style="color: #E1F5FC">Preencha os campos ao lado para criar uma nova tarefa e organizar seu trabalho.</p>
 
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                            <span>Organize suas atividades por prioridade</span>
-                        </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                            <span>Defina prazos e acompanhe seu progresso</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                            <span>Mantenha seu fluxo de trabalho organizado</span>
-                        </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Organize suas atividades por prioridade.</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Defina prazos e acompanhe seu progresso.</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Mantenha seu fluxo de trabalho organizado.</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Painel Direito (Formulário) -->
-            <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
-                <div class="w-100" style="max-width: 600px;">
-                    <div class="text-center mb-5 d-lg-none">
-                        <h2 class="text-primary"><i class="bi bi-plus-circle-fill"></i> Nova Tarefa</h2>
-                    </div>
+        <!-- Painel Direito (Formulário) -->
+        <div class="col-lg-7 d-flex align-items-center justify-content-center p-4">
+            <div class="w-100" style="max-width: 600px;">
+                <div class="text-center mb-5 d-lg-none">
+                    <h2 style="color: #009DE0">
+                        <img src="adicionar.png" style="width: 24px; height: 24px; margin-right: 8px" />
+                        Nova Tarefa
+                    </h2>
+                </div>
 
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4">
-                            <!-- Títulos -->
+                <div class="card shadow-sm border-0" style="border-radius: 15px">
+                    <div class="card-body p-4">
+                        <EditForm Model="@CadastrarTarefaViewModel.tarefaCadastrarDTO" OnValidSubmit="@CadastrarTarefaViewModel.CadastrarTarefaAsync">
+                            <DataAnnotationsValidator />
+
+                            <!-- Título -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Título</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Título</label>
                                 <InputText @bind-Value="CadastrarTarefaViewModel.tarefaCadastrarDTO.Titulo"
-                                           class="form-control form-control-lg"/>
-                                <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Titulo)" class="text-danger small"/>
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px" />
+                                <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Titulo)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Prioridade e Prazo -->
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Prioridade</label>
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Prioridade</label>
                                     <InputSelect @bind-Value="CadastrarTarefaViewModel.tarefaCadastrarDTO.Prioridade"
-                                                 class="form-select form-select-lg">
+                                                 class="form-select"
+                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px">
                                         <option value=""></option>
                                         <option value="Alta">Alta</option>
                                         <option value="Média">Média</option>
                                         <option value="Baixa">Baixa</option>
                                     </InputSelect>
-                                    <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Prioridade)" class="text-danger small"/>
+                                    <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Prioridade)"
+                                                       style="color: #E74C3C" />
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Prazo (dias)</label>
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Prazo (dias)</label>
                                     <InputNumber @bind-Value="CadastrarTarefaViewModel.tarefaCadastrarDTO.Prazo"
-                                                 class="form-control form-control-lg"/>
-                                    <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Prazo)" class="text-danger small"/>
+                                                 class="form-control"
+                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px" />
+                                    <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Prazo)"
+                                                       style="color: #E74C3C" />
                                 </div>
                             </div>
 
                             <!-- Descrição -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Descrição</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Descrição</label>
                                 <InputTextArea @bind-Value="CadastrarTarefaViewModel.tarefaCadastrarDTO.Descricao"
                                                class="form-control"
-                                               rows="5"/>
-                                <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Descricao)" class="text-danger small"/>
+                                               style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px; min-height: 100px" />
+                                <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Descricao)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Status -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Status</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Status</label>
                                 <InputSelect @bind-Value="CadastrarTarefaViewModel.tarefaCadastrarDTO.Status"
-                                             class="form-select form-select-lg">
+                                             class="form-select"
+                                             style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px">
                                     <option value=""></option>
                                     <option value="Pendente">Pendente</option>
                                     <option value="Em Progresso">Em Progresso</option>
                                     <option value="Concluído">Concluído</option>
                                 </InputSelect>
-                                <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Status)" class="text-danger small"/>
+                                <ValidationMessage For="@(() => CadastrarTarefaViewModel.tarefaCadastrarDTO.Status)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Botões -->
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
-                                        class="btn btn-outline-secondary px-4"
+                                        class="btn px-4"
+                                        style="border-color: #009DE0; border-width: 1.5px; background-color: white; color: #009DE0; height: 45px; border-radius: 10px"
                                         @onclick="CadastrarTarefaViewModel.CancelarAlteracaoAsync">
-                                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                                    <i class="bi bi-x-lg me-1"></i> 
+                                    Cancelar
                                 </button>
 
                                 <button type="submit"
-                                        class="btn btn-primary px-4"
+                                        class="btn px-4"
+                                        style="background-color: #009DE0; color: white; height: 45px; border-radius: 10px"
                                         disabled="@CadastrarTarefaViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
                                           hidden="@(!CadastrarTarefaViewModel.isSubmitting)"></span>
@@ -110,19 +125,19 @@
                                     @(CadastrarTarefaViewModel.isSubmitting ? "Salvando..." : "Salvar Tarefa")
                                 </button>
                             </div>
-                        </div>
+                        </EditForm>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</EditForm>
+</div>
+
+
 
 @code {
-
     protected override async Task OnInitializedAsync()
     {
         await CadastrarTarefaViewModel.VertificarSecaoValidaAsync();
-
     }
 }

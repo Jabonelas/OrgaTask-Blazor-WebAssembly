@@ -4,102 +4,139 @@
 
 <PageTitle>Dashboard de Tarefas</PageTitle>
 
-<h1 class="main-title">Dashboard de Tarefas</h1>
+<div class="container-fluid p-4" style="background-color: #F4F9FC; min-height: 100vh;">
 
-<!-- Cards de Status -->
-<div class="dashboard-container">
-    <div class="status-grid">
+    <h1 class="main-title" style="color: #009DE0">Dashboard de Tarefas</h1>
 
-        <!-- Card Pendentes -->
-        <div class="status-card pending" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Pendente"))">
-            <div class="card-icon">
-                <i class="fas fa-clock"></i>
+    <!-- Cards de Status -->
+    <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <!-- Cabeçalho -->
+            <div class="mb-4">
+                <h2 style="color: #009DE0; margin-bottom: 0.5rem;">
+                    <i class="fas fa-chart-pie" style="color: #009DE0; margin-right: 10px;"></i>Status das Tarefas
+                </h2>
+                <small class="text-muted" style="font-size: 0.8rem; display: block;">
+                    Clique em um card para filtrar as tarefas por status
+                </small>
             </div>
-            <div class="card-content" style="color: #000; display: flex; flex-direction: column; align-items: center;" >
-                <h3>Pendentes</h3>
-                <div class="count">@DashboardTarefasViewModel.pendenteCount</div>
-                <div class="card-footer">Atualizado agora</div>
-            </div>
-        </div>
 
-        <!-- Card Em Progresso -->
-        <div class="status-card in-progress" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Em Progresso"))">
-            <div class="card-icon">
-                <i class="fas fa-tasks"></i>
-            </div>
-            <div class="card-content" style="color: #000; display: flex; flex-direction: column; align-items: center;">
-                <h3>Em Progresso</h3>
-                <div class="count">@DashboardTarefasViewModel.emProgressoCount</div>
-                <div class="card-footer">Atualizado agora</div>
-            </div>
-        </div>
+            <!-- Grid de Cards -->
+            <div class="status-grid">
+                <!-- Card Pendentes -->
+                <div class="status-card pending" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Pendente"))">
+                    <div class="card-icon" style="color: #E74C3C;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="color: #0A2C44;">Pendentes</h3>
+                        <div class="count" style="color: #000;">@DashboardTarefasViewModel.pendenteCount</div>
+                    </div>
+                </div>
 
-        <!-- Card Concluídas -->
-        <div class="status-card completed" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Concluído"))">
-            <div class="card-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="card-content" style="color: #000; display: flex; flex-direction: column; align-items: center;">
-                <h3>Concluídas</h3>
-                <div class="count">@DashboardTarefasViewModel.concluidoCount</div>
-                <div class="card-footer">Atualizado agora</div>
+                <!-- Card Em Progresso -->
+                <div class="status-card in-progress" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Em Progresso"))">
+                    <div class="card-icon" style="color: #F39C12;">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="color: #0A2C44;">Em Progresso</h3>
+                        <div class="count" style="color: #000;">@DashboardTarefasViewModel.emProgressoCount</div>
+                    </div>
+                </div>
+
+                <!-- Card Concluídas -->
+                <div class="status-card completed" @onclick="@(() => DashboardTarefasViewModel.TarefasPendentes("Concluído"))">
+                    <div class="card-icon" style="color: #2ECC71;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="color: #0A2C44;">Concluídas</h3>
+                        <div class="count" style="color: #000;">@DashboardTarefasViewModel.concluidoCount</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-
     <!-- Progresso Total -->
-    <div class="progress-section">
-        <div class="section-header">
-            <h2><i class="fas fa-chart-line"></i> Progresso Total</h2>
-        </div>
+    <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <h2 style="color: #009DE0"><i class="fas fa-chart-line" style="color: #009DE0"></i> Progresso Total</h2>
+            </div>
 
-        <div class="progress-container">
-            <div class="progress-labels">
-                <span>Progresso</span>
-                <span>@DashboardTarefasViewModel.porcentagemTarefasConcluidas%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: @DashboardTarefasViewModel.porcentagemTarefasConcluidas%"></div>
-            </div>
-            <div class="progress-description">
-                <i class="fas fa-info-circle"></i> Você completou @DashboardTarefasViewModel.porcentagemTarefasConcluidas% das tarefas cadastradas
+            <div class="progress-container">
+                <div class="d-flex justify-content-between mb-2">
+                    <span style="color: #0A2C44;">Progresso</span>
+                    <span style="color: #009DE0; font-weight: bold;">@DashboardTarefasViewModel.porcentagemTarefasConcluidas%</span>
+                </div>
+                <div class="progress" style="height: 10px; border-radius: 5px; background-color: #E1F5FC;">
+                    <div class="progress-bar" role="progressbar"
+                         style="width: @DashboardTarefasViewModel.porcentagemTarefasConcluidas%; background-color: #009DE0; border-radius: 5px;"></div>
+                </div>
+                <div class="mt-2 small" style="color: #A0A0A0;">
+                    <i class="fas fa-info-circle" style="color: #009DE0"></i>
+                    Você completou @DashboardTarefasViewModel.porcentagemTarefasConcluidas% das tarefas cadastradas
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Tarefas Prioritárias -->
-    <div class="priority-section">
-        <div class="section-header">
-            <h2><i class="fas fa-exclamation-triangle"></i> Tarefas Prioritárias</h2>
-            <span class="badge">@DashboardTarefasViewModel.listaTarefasPrioridadeAlta.Count itens</span>
-        </div>
-
-        <div class="priority-list">
-            @foreach (var item in DashboardTarefasViewModel.listaTarefasPrioridadeAlta)
-            {
-                <div class="priority-item">
-                    <div class="task-info">
-                        <span class="task-title">@item.Titulo</span>
-                        <span class="task-status @item.Status.ToLower()">@item.Status</span>
-                    </div>
-                    <div class="task-meta">
-                        <span class="task-date"><i class="far fa-calendar-alt"></i>Criado: @item.Data</span>
-                        <span class="task-deadline"><i class="far fa-clock"></i> @item.DescricaoPrazo </span>
-                    </div>
+    <div class="card shadow-sm border-0" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-exclamation-triangle" style="color: #009DE0; font-size: 1.4rem; margin-right: 10px;"></i>
+                    <h2 style="color: #009DE0; font-weight:  margin-bottom: 0;">Tarefas Prioritárias</h2>
                 </div>
-            }
+                <span class="badge" style="background-color: #009DE0; color: white; border-radius: 10px; padding: 5px 10px;">
+                    @DashboardTarefasViewModel.listaTarefasPrioridadeAlta.Count itens
+                </span>
+            </div>
+
+            <div class="priority-list">
+                @foreach (var item in DashboardTarefasViewModel.listaTarefasPrioridadeAlta)
+                {
+                    <div class="priority-item mb-2 p-3" style="border-radius: 10px; background-color: #fff0f5;">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span style="color: #0A2C44; font-weight: bold;">@item.Titulo</span>
+                            <span class="badge" style="background-color: @GetStatusColor(item.Status); color: white; border-radius: 10px; padding: 3px 8px;">
+                                @item.Status
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small style="color: #A0A0A0;">
+                                <i class="far fa-calendar-alt" style="margin-right: 5px;"></i>
+                                Criado: @item.Data
+                            </small>
+                            <small style="color: #A0A0A0;">
+                                <i class="far fa-clock" style="margin-right: 5px;"></i>
+                                @item.DescricaoPrazo
+                            </small>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-
-
 </div>
 
-
 @code {
-
     protected override async Task OnInitializedAsync()
     {
-       await DashboardTarefasViewModel.CarregarInformacoes();
+        await DashboardTarefasViewModel.CarregarInformacoes();
+    }
+
+    private string GetStatusColor(string status)
+    {
+        return status switch
+        {
+            "Pendente" => "#E74C3C",
+            "Em Progresso" => "#F39C12",
+            "Concluído" => "#2ECC71",
+            _ => "#009DE0"
+        };
     }
 }

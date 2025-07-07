@@ -1,121 +1,123 @@
 ﻿@page "/editar-tarefa/{id:int}"
-@using Blazor_WebAssembly.DTOs
-@using Blazor_WebAssembly.DTOs.Tarefa
-@using Blazor_WebAssembly.Interfaces
-@using Blazor_WebAssembly.Interfaces.Tarefa
-@using Microsoft.AspNetCore.Components.Authorization
-@using Newtonsoft.Json
-@using System.Text
 @using Blazor_WebAssembly.ViewModel.Tarefa
-@inject NavigationManager Navigation
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject HttpClient Http
-@inject ITarefaService ITarefaService
-@inject IJSRuntime JS
-@inject NotificacaoService notificacaoService
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AlterarTarefaViewModel AlterarTarefaViewModel
 
-<EditForm Model="@AlterarTarefaViewModel.tarefaAlterarDTO" OnValidSubmit="@AlterarTarefaViewModel.AlterarTarefaAsync">
-    <DataAnnotationsValidator />
-
-    <div class="container-fluid min-vh-100 p-0">
-        <div class="row g-0 min-vh-100">
-            <!-- Painel Esquerdo (Background) -->
-            <div class="col-lg-5 d-none d-lg-block bg-gradient-primary">
-                @* <div class="h-100 d-flex flex-column justify-content-center text-white p-5" > *@
-                <div class="h-100 d-flex flex-column justify-content-center text-white p-5" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
-                    <div style="max-width: 500px;">
+<div class="container-fluid min-vh-100 p-0" style="background-color: #F4F9FC">
+    <div class="row g-0 min-vh-100">
+        <!-- Painel Esquerdo (Background) -->
+        <div class="col-lg-5 d-none d-lg-block" style="background-color: #009DE0">
+            <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                <div style="max-width: 500px;">
+                    <div class="d-flex align-items-center mb-4">
                         <h1 class="display-5 mb-4"><i class="bi bi-pencil-square"></i> Editar Tarefa</h1>
-                        <p class="lead mb-5">Atualize os detalhes da sua tarefa para manter sua produtividade em dia.</p>
+                    </div>
+                    <p class="lead mb-5" style="color: #E1F5FC">Atualize os detalhes da sua tarefa para manter sua produtividade em dia.</p>
 
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                            <span>Organize suas prioridades de forma eficiente</span>
-                        </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                            <span>Acompanhe prazos e progressos</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                            <span>Mantenha seu fluxo de trabalho organizado</span>
-                        </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Organize suas prioridades de forma eficiente.</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Acompanhe prazos e progressos.</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Mantenha seu fluxo de trabalho organizado.</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Painel Direito (Formulário) -->
-            <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
-                <div class="w-100" style="max-width: 600px;">
-                    <div class="text-center mb-5 d-lg-none">
-                        <h2 class="text-primary"><i class="bi bi-pencil-square"></i> Editar Tarefa</h2>
-                    </div>
+        <!-- Painel Direito (Formulário) -->
+        <div class="col-lg-7 d-flex align-items-center justify-content-center p-4">
+            <div class="w-100" style="max-width: 600px;">
+                <div class="text-center mb-5 d-lg-none">
+                    <h2 style="color: #009DE0">
+                        <img src="editar.png" style="width: 24px; height: 24px; margin-right: 8px" />
+                        Editar Tarefa
+                    </h2>
+                </div>
 
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4">
+                <div class="card shadow-sm border-0" style="border-radius: 15px">
+                    <div class="card-body p-4">
+                        <EditForm Model="@AlterarTarefaViewModel.tarefaAlterarDTO" OnValidSubmit="@AlterarTarefaViewModel.AlterarTarefaAsync">
+                            <DataAnnotationsValidator />
+
                             <!-- Título -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Título da Tarefa</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Título da Tarefa</label>
                                 <InputText @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Titulo"
-                                           class="form-control form-control-lg" />
-                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Titulo)" class="text-danger small" />
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px" />
+                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Titulo)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Prioridade e Prazo -->
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Prioridade</label>
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Prioridade</label>
                                     <InputSelect @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Prioridade"
-                                                 class="form-select form-select-lg">
+                                                 class="form-select"
+                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px">
                                         <option value=""></option>
                                         <option value="Alta">Alta</option>
                                         <option value="Média">Média</option>
                                         <option value="Baixa">Baixa</option>
                                     </InputSelect>
-                                    <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prioridade)" class="text-danger small" />
+                                    <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prioridade)"
+                                                       style="color: #E74C3C" />
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Prazo (dias)</label>
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Prazo (dias)</label>
                                     <InputNumber @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Prazo"
-                                                 class="form-control form-control-lg" />
-                                    <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prazo)" class="text-danger small" />
+                                                 class="form-control"
+                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px" />
+                                    <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prazo)"
+                                                       style="color: #E74C3C" />
                                 </div>
                             </div>
 
                             <!-- Descrição -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Descrição</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Descrição</label>
                                 <InputTextArea @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Descricao"
                                                class="form-control"
-                                               rows="5" />
-                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Descricao)" class="text-danger small" />
+                                               style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px; min-height: 100px" />
+                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Descricao)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Status -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Status</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Status</label>
                                 <InputSelect @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Status"
-                                             class="form-select form-select-lg">
+                                             class="form-select"
+                                             style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px">
                                     <option value=""></option>
                                     <option value="Pendente">Pendente</option>
                                     <option value="Em Progresso">Em Progresso</option>
                                     <option value="Concluído">Concluído</option>
                                 </InputSelect>
-                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Status)" class="text-danger small" />
+                                <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Status)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Botões -->
                             <div class="d-flex justify-content-between pt-3">
                                 <button type="button"
-                                        class="btn btn-outline-secondary px-4"
+                                        class="btn px-4"
+                                        style="border-color: #009DE0; border-width: 1.5px; background-color: white; color: #009DE0; height: 45px; border-radius: 10px"
                                         @onclick="AlterarTarefaViewModel.CancelarAlteracaoAsync">
-                                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                                    <i class="bi bi-x-lg me-1"></i>
+                                    Cancelar
                                 </button>
 
                                 <button type="submit"
-                                        class="btn btn-primary px-4"
+                                        class="btn px-4"
+                                        style="background-color: #009DE0; color: white; height: 45px; border-radius: 10px"
                                         disabled="@AlterarTarefaViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
                                           hidden="@(!AlterarTarefaViewModel.isSubmitting)"></span>
@@ -123,17 +125,16 @@
                                     @(AlterarTarefaViewModel.isSubmitting ? "Salvando..." : "Salvar Alterações")
                                 </button>
                             </div>
-                        </div>
+                        </EditForm>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</EditForm>
+</div>
 
 
 @code {
-
     [Parameter]
     public int id { get; set; }
 

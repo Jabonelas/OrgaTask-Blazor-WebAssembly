@@ -17,7 +17,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         public bool isSubmitting = false;
 
         [ObservableProperty]
-        public TarefaAlterarDTO tarefaCadastrarDTO = new TarefaAlterarDTO();
+        public TarefaCadastrarDTO tarefaCadastrarDTO = new TarefaCadastrarDTO();
 
         public CadastrarTarefaViewModel(
             ITarefaService _iTarefaService,
@@ -43,7 +43,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 
                 navigation.NavigateTo("/login");
                 //navigation.NavigateTo("/", forceLoad: true);
-
             }
         }
 
@@ -70,8 +69,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 
                 await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
             }
-
-
         }
 
         private void LimparCampos()

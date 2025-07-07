@@ -6,21 +6,23 @@
 
 
 
-
-
-<div class="top-row ps-3 navbar navbar-dark">
+<!-- Top Row (cabeçalho do menu) -->
+<div class="top-row ps-3 navbar navbar-dark" 
+     style="background-image: linear-gradient(to right, #0077b6, #009de0)">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">OrgaTask </a>
+        <a class="navbar-brand" href="">
+            <img src="images/IconeOrgaTask.png" alt="Logo" class="me-2" style="height: 30px;">
+            OrgaTask
+        </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu"
+     style="background-image: linear-gradient(to bottom, #009de0, #69d3ff)">
     <nav class="flex-column">
-
-
 
         @if (usuarioLogado)
         {

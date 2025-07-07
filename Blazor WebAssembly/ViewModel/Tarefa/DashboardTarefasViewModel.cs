@@ -7,7 +7,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 {
     public partial class DashboardTarefasViewModel : ObservableObject
     {
-
         private readonly ITarefaService iTarefaService;
         private readonly NotificacaoService notificacaoService;
         private readonly NavigationManager navigation;
@@ -26,9 +25,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         public decimal porcentagemTarefasConcluidas = 0;
 
         [ObservableProperty]
-
         public List<TarefaPrioridadeAlta> listaTarefasPrioridadeAlta = new List<TarefaPrioridadeAlta>();
-
 
         public DashboardTarefasViewModel(
             ITarefaService _iTarefaService,
@@ -42,7 +39,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             authenticationStateProvider = _authenticationStateProvider;
         }
 
-
         public async Task CarregarInformacoes()
         {
             var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
@@ -55,7 +51,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 
                 navigation.NavigateTo("/login");
                 //navigation.NavigateTo("/", forceLoad: true);
-
             }
 
             await CarregarInformacoesStatusAsync();
@@ -75,7 +70,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                     emProgressoCount = TarefaQtdStatus.EmProgresso;
                     concluidoCount = TarefaQtdStatus.Concluido;
                     porcentagemTarefasConcluidas = TarefaQtdStatus.PorcentagemConcluidas;
-
                 }
                 else
                 {
@@ -84,7 +78,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine($"Erro ao buscar quantidade status tarefa: {ex.Message}");
 
                 await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");
@@ -99,7 +92,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
 
                 if (Sucesso && ListaTarefaPrioridadeAlta != null)
                 {
-
                     listaTarefasPrioridadeAlta.Clear();
 
                     string descricaoPrazo = string.Empty;
@@ -138,7 +130,6 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
             public int Prazo { get; set; }
             public string DescricaoPrazo { get; set; }
             public string Status { get; set; }
-
         }
 
         public void TarefasPendentes(string status)

@@ -25,5 +25,16 @@ namespace Blazor_WebAssembly.DTOs.Tarefa
         [Required(ErrorMessage = "O status é obrigatório!")]
         [MaxLength(50, ErrorMessage = "O status deve ter no máximo 50 caracteres.")]
         public string Status { get; set; }
+
+        public static implicit operator TarefaAlterarDTO(TarefaConsultaDTO _dadosTarefaCadastro) =>
+            new()
+            {
+                Id = _dadosTarefaCadastro.Id,
+                Titulo = _dadosTarefaCadastro.Titulo,
+                Descricao = _dadosTarefaCadastro.Descricao,
+                Prioridade = _dadosTarefaCadastro.Prioridade,
+                Prazo = _dadosTarefaCadastro.Prazo,
+                Status = _dadosTarefaCadastro.Status,
+            };
     }
 }

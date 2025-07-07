@@ -5,7 +5,6 @@ using Blazor_WebAssembly.Services.Usuario;
 using Blazor_WebAssembly.ViewModel.Tarefa;
 using Blazor_WebAssembly.ViewModel.Usuario;
 
-
 namespace Blazor_WebAssembly.Extensions
 {
     public static class InjecaoDependencia

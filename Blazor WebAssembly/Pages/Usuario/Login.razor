@@ -2,78 +2,78 @@
 @using Blazor_WebAssembly.ViewModel.Usuario
 @inject LoginViewModel LoginViewModel
 
-
-
-<div class="container-fluid min-vh-100 p-0">
+<div class="container-fluid min-vh-100 p-0" style="background-color: #F4F9FC">
     <div class="row g-0 min-vh-100">
         <!-- Painel Esquerdo (Background) -->
-        <div class="col-lg-5 d-none d-lg-block" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+        <div class="col-lg-5 d-none d-lg-block" style="background-color: #009DE0">
             <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
                 <div style="max-width: 500px;">
-                    <h1 class="display-5 mb-4"><i class="bi bi-shield-lock"></i> Bem-vindo ao OrgaTask</h1>
-                    <p class="lead mb-5">Acesse sua conta para gerenciar suas tarefas e aumentar sua produtividade.</p>
+                    <div class="d-flex align-items-center mb-4">
+                        <h1 class="display-5 mb-4"><i class="bi bi-shield-lock"></i> Bem-vindo ao OrgaTask</h1>
+                    </div>
+                    <p class="lead mb-5" style="color: #E1F5FC">Acesse sua conta para gerenciar suas tarefas e aumentar sua produtividade.</p>
 
                     <div class="d-flex align-items-center mb-3">
                         <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                        <span>Controle suas tarefas de forma eficiente</span>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Controle suas tarefas de forma eficiente.</span>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                        <span>Organize por prioridades e prazos</span>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Organize por prioridades e prazos.</span>
                     </div>
                     <div class="d-flex align-items-center">
                         <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                        <span>Acompanhe seu progresso diário</span>
+                        <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Acompanhe seu progresso diário.</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Painel Direito (Formulário) -->
-        <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
+        <div class="col-lg-7 d-flex align-items-center justify-content-center p-4">
             <div class="w-100" style="max-width: 400px;">
-                <div class="card shadow-sm border-0">
+                <div class="card shadow-sm border-0" style="border-radius: 15px">
                     <div class="card-body p-4">
-                        <h3 class="text-center mb-4"><i class="bi bi-box-arrow-in-right"></i> Acesse sua conta</h3>
-
                         <EditForm Model="@LoginViewModel.usuarioLogin" OnValidSubmit="@LoginViewModel.RealizarLoginAsync">
                             <DataAnnotationsValidator />
 
                             <!-- Usuário -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Usuário</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
-                                    <InputText @bind-Value="@LoginViewModel.usuarioLogin.Login"
-                                               class="form-control form-control-lg"
-                                               placeholder="Digite seu usuário" />
-                                </div>
-                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.Login)" class="text-danger small" />
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Usuário</label>
+                                <InputText @bind-Value="@LoginViewModel.usuarioLogin.Login"
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                           placeholder="Digite seu usuário" />
+                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.Login)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Senha com botão para mostrar/esconder -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Senha</label>
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Senha</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
                                     <InputText @bind-Value="LoginViewModel.usuarioLogin.Senha"
                                                type="password"
-                                               class="form-control form-control-lg"
+                                               class="form-control"
+                                               style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
                                                placeholder="Digite sua senha"
                                                id="passwordField" />
                                     <button class="btn btn-outline-secondary"
                                             type="button"
-                                            onclick="togglePassword('passwordField')">
+                                            onclick="togglePassword('passwordField')"
+                                            style="background-color: #F4F9FC">
                                         <i class="bi bi-eye"></i>
                                     </button>
                                 </div>
-                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.Senha)" class="text-danger small" />
+                                <ValidationMessage For="@(() => LoginViewModel.usuarioLogin.Senha)"
+                                                   style="color: #E74C3C" />
                             </div>
 
                             <!-- Botão Entrar -->
                             <div class="d-grid mb-3">
                                 <button type="submit"
-                                        class="btn btn-primary btn-lg"
+                                        class="btn btn-primary"
+                                        style="background-color: #009DE0; color: white; height: 45px; border-radius: 10px"
                                         disabled="@LoginViewModel.isSubmitting">
                                     <span class="spinner-border spinner-border-sm me-1"
                                           hidden="@(!LoginViewModel.isSubmitting)"></span>
@@ -85,7 +85,8 @@
                             <!-- Botão Criar Conta -->
                             <div class="d-grid">
                                 <button type="button"
-                                        class="btn btn-outline-secondary btn-lg"
+                                        class="btn btn-outline-secondary"
+                                        style="border-color: #009DE0; border-width: 1.5px; background-color: white; color: #009DE0; height: 45px; border-radius: 10px"
                                         @onclick="LoginViewModel.CriarConta">
                                     <i class="bi bi-person-plus me-1"></i> Criar uma conta
                                 </button>
@@ -98,32 +99,29 @@
     </div>
 </div>
 
+
+
 <script>
     function togglePassword(id) {
         const input = document.getElementById(id);
         const icon = input.nextElementSibling.querySelector('i');
-        if (input.type === 'password')
-
-    {
-        input .type = 'text';
-        icon .classList.remove('bi-eye');
-        icon .classList.add('bi-eye-slash');
-    }
-
-    else {
-        input .type = 'password';
-        icon .classList.remove('bi-eye-slash');
-        icon .classList.add('bi-eye');
-    }
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
     }
 </script>
 
 @code {
-
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("OnInitializedAsync iniciado");
         await LoginViewModel.PegarUsuarioLogadoAsync();
-        Console.WriteLine("OnInitializedAsync iniciado12"); 
+        Console.WriteLine("OnInitializedAsync iniciado12");
     }
 }

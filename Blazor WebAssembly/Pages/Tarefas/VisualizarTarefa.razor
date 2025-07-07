@@ -2,103 +2,109 @@
 @using Blazor_WebAssembly.ViewModel.Tarefa
 @inject VisualizarTarefaViewModel VisualizarTarefaViewModel
 
-
-
-<EditForm Model="@VisualizarTarefaViewModel.tarefaAlterarDTO">
-    <DataAnnotationsValidator />
-
-    @if (VisualizarTarefaViewModel.tarefaAlterarDTO.Titulo == null)
+<div class="container-fluid min-vh-100 p-0" style="background-color: #F4F9FC">
+    @if (VisualizarTarefaViewModel.tarefaConsultaDTO.Titulo == null)
     {
-        <div class="alert alert-info text-center py-4 my-4">
-            <i class="bi bi-info-circle-fill me-2"></i> Nenhuma tarefa encontrada
+        <div class="alert alert-info text-center py-4 my-4" style="background-color: #E1F5FC; color: #0A2C44; border-color: #009DE0">
+            <img src="info.png" style="width: 20px; height: 20px; margin-right: 8px" />
+            Nenhuma tarefa encontrada
         </div>
     }
     else
     {
-        <div class="container-fluid min-vh-100 p-0">
-            <div class="row g-0 min-vh-100">
-                <!-- Painel Esquerdo (Background) -->
-                <div class="col-lg-5 d-none d-lg-block" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
-                    <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
-                        <div style="max-width: 500px;">
+        <div class="row g-0 min-vh-100">
+            <!-- Painel Esquerdo (Background) -->
+            <div class="col-lg-5 d-none d-lg-block" style="background-color: #009DE0">
+                <div class="h-100 d-flex flex-column justify-content-center text-white p-5">
+                    <div style="max-width: 500px;">
+                        <div class="d-flex align-items-center mb-4">
                             <h1 class="display-5 mb-4"><i class="bi bi-card-checklist"></i> Detalhes da Tarefa</h1>
-                            <p class="lead mb-5">Visualize todos os detalhes desta tarefa.</p>
+                        </div>
+                        <p class="lead mb-5" style="color: #E1F5FC">Visualize todos os detalhes desta tarefa.</p>
 
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                <span>Detalhes completos da tarefa</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                <span>Prioridade e status claros</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
-                                <span>Prazo e descrição detalhados</span>
-                            </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="aceitar.png" style="width: 20px; height: 20px" />
+                            <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Detalhes completos da tarefa.</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Prioridade e status claros.</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                            <span style="color: #E1F5FC; font-size: 12px; margin-left: 8px">Prazo e descrição detalhados.</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Painel Direito (Visualização) -->
-                <div class="col-lg-7 d-flex align-items-center justify-content-center p-4 bg-light">
-                    <div class="w-100" style="max-width: 600px;">
-                        <div class="text-center mb-5 d-lg-none">
-                            <h2 class="text-primary"><i class="bi bi-card-checklist"></i> Detalhes da Tarefa</h2>
-                        </div>
+            <!-- Painel Direito (Visualização) -->
+            <div class="col-lg-7 d-flex align-items-center justify-content-center p-4">
+                <div class="w-100" style="max-width: 600px;">
+                    <div class="text-center mb-5 d-lg-none">
+                        <h2 style="color: #009DE0">
+                            <img src="card-checklist.png" style="width: 24px; height: 24px; margin-right: 8px" />
+                            Detalhes da Tarefa
+                        </h2>
+                    </div>
 
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body p-4">
-                                <!-- Título -->
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">Título da Tarefa</label>
-                                    <InputText @bind-Value="VisualizarTarefaViewModel.tarefaAlterarDTO.Titulo"
-                                               class="form-control form-control-lg bg-light"
+                    <div class="card shadow-sm border-0" style="border-radius: 15px">
+                        <div class="card-body p-4">
+                            <!-- Título -->
+                            <div class="mb-4">
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Título da Tarefa</label>
+                                <InputText @bind-Value="VisualizarTarefaViewModel.tarefaConsultaDTO.Titulo"
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                           disabled />
+                            </div>
+
+                            <!-- Prioridade e Prazo -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Prioridade</label>
+                                    <InputText @bind-Value="VisualizarTarefaViewModel.tarefaConsultaDTO.Prioridade"
+                                               class="form-control"
+                                               style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
                                                disabled />
                                 </div>
 
-                                <!-- Prioridade e Prazo -->
-                                <div class="row g-3 mb-4">
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-bold">Prioridade</label>
-                                        <InputText @bind-Value="VisualizarTarefaViewModel.tarefaAlterarDTO.Prioridade"
-                                                   class="form-control form-control-lg bg-light"
-                                                   disabled />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-bold">Prazo (dias)</label>
-                                        <InputNumber @bind-Value="VisualizarTarefaViewModel.tarefaAlterarDTO.Prazo"
-                                                     class="form-control form-control-lg bg-light"
-                                                     disabled />
-                                    </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" style="color: #0A2C44; font-weight: bold">Prazo (dias)</label>
+                                    <InputNumber @bind-Value="VisualizarTarefaViewModel.tarefaConsultaDTO.Prazo"
+                                                 class="form-control"
+                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                                 disabled />
                                 </div>
+                            </div>
 
-                                <!-- Descrição -->
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">Descrição</label>
-                                    <InputTextArea @bind-Value="VisualizarTarefaViewModel.tarefaAlterarDTO.Descricao"
-                                                   class="form-control bg-light"
-                                                   rows="5"
-                                                   disabled />
-                                </div>
-
-                                <!-- Status -->
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">Status</label>
-                                    <InputText @bind-Value="VisualizarTarefaViewModel.tarefaAlterarDTO.Status"
-                                               class="form-control form-control-lg bg-light"
+                            <!-- Descrição -->
+                            <div class="mb-4">
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Descrição</label>
+                                <InputTextArea @bind-Value="VisualizarTarefaViewModel.tarefaConsultaDTO.Descricao"
+                                               class="form-control"
+                                               style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px; min-height: 100px"
                                                disabled />
-                                </div>
+                            </div>
 
-                                <!-- Botão Voltar -->
-                                <div class="d-flex justify-content-end pt-3">
-                                    <button type="button"
-                                            class="btn btn-outline-secondary px-4"
-                                            @onclick="VisualizarTarefaViewModel.VoltarPaginaTarefas">
-                                        <i class="bi bi-arrow-left me-1"></i> Voltar
-                                    </button>
-                                </div>
+                            <!-- Status -->
+                            <div class="mb-4">
+                                <label class="form-label" style="color: #0A2C44; font-weight: bold">Status</label>
+                                <InputText @bind-Value="VisualizarTarefaViewModel.tarefaConsultaDTO.Status"
+                                           class="form-control"
+                                           style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"
+                                           disabled />
+                            </div>
+
+                            <!-- Botão Voltar -->
+                            <div class="d-flex justify-content-end pt-3">
+                                <button type="button"
+                                        class="btn px-4"
+                                        style="border-color: #009DE0; border-width: 1.5px; background-color: white; color: #009DE0; height: 45px; border-radius: 10px"
+                                        @onclick="VisualizarTarefaViewModel.VoltarPaginaTarefas">
+                                    <i class="bi bi-arrow-left me-1"></i>
+                                    Voltar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -106,20 +112,16 @@
             </div>
         </div>
     }
-</EditForm>
+</div>
 
 
 
-
-
- @code {
-
+@code {
     [Parameter]
     public int id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await VisualizarTarefaViewModel.BuscarTarefaAsync(id);
-
     }
 }

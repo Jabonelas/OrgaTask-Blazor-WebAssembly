@@ -55,7 +55,6 @@ namespace Blazor_WebAssembly.ViewModel.Usuario
                     LimparCampos();
 
                     navigation.NavigateTo("/", forceLoad: true);
-
                 }
                 else
                 {
@@ -64,7 +63,6 @@ namespace Blazor_WebAssembly.ViewModel.Usuario
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine($"Erro ao cadastrar usuario: {ex.Message}");
 
                 await notificacaoService.MostrarErro($"Ocorreu um erro interno. Nossa equipe já foi notificada.");

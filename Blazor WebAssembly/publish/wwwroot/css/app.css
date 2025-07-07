@@ -810,7 +810,6 @@ body {
 /*Rolagem infinita*/
 /*--------------------------------------*/
 
-
 [tarefa-sentinela] {
     position: relative;
     height: 1px;
@@ -845,17 +844,17 @@ body {
 }
 
 /* Estilos para status */
-.status-concluido {
-    border-top: 3px solid #28a745; /* Verde */
-}
+/*.status-concluido {
+    border-top: 3px solid #28a745;*/ /* Verde */
+/*}
 
 .status-progresso {
-    border-top: 3px solid #17a2b8; /* Azul claro */
-}
+    border-top: 3px solid #17a2b8;*/ /* Azul claro */
+/*}
 
 .status-pendente {
-    border-top: 3px solid #6c757d; /* Cinza */
-}
+    border-top: 3px solid #6c757d;*/ /* Cinza */
+/*}*/
 
 /* Estilos para badges de prioridade */
 .badge.bg-secondary.prioridade-alta {

@@ -14,7 +14,7 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         private readonly AuthenticationStateProvider authenticationStateProvider;
 
         [ObservableProperty]
-        public TarefaAlterarDTO tarefaAlterarDTO = new TarefaAlterarDTO();
+        public TarefaConsultaDTO tarefaConsultaDTO = new TarefaConsultaDTO();
 
         public VisualizarTarefaViewModel(
             ITarefaService _iTarefaService,
@@ -43,12 +43,11 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
                     navigation.NavigateTo("/login");
                 }
 
-                (bool Sucesso, string ErrorMessagem, TarefaAlterarDTO tarefa) = await iTarefaService.BuscarTarefaAsync(_id);
+                (bool Sucesso, string ErrorMessagem, TarefaConsultaDTO tarefa) = await iTarefaService.BuscarTarefaAsync(_id);
 
                 if (Sucesso)
                 {
-                    TarefaAlterarDTO = tarefa;
-
+                    TarefaConsultaDTO = tarefa;
                 }
                 else
                 {
@@ -67,6 +66,5 @@ namespace Blazor_WebAssembly.ViewModel.Tarefa
         {
             navigation.NavigateTo($"/tarefa-rolagem/todas");
         }
-
     }
 }
