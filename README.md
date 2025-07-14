@@ -25,6 +25,7 @@ OrgaTask Blazor WebAssembly é uma aplicação web single-page (SPA) que consome
 - Gerenciamento de tarefas (listar, criar, editar, excluir)
 - Interface responsiva e interativa
 - Tratamento de erros e feedback visual
+- Sincronização com API: Atualização em tempo real com a OrgaTask API.
 
 ## Pré-requisitos
 
