@@ -73,12 +73,14 @@ dotnet run
 
 <p><em>Interface Dashboard</em></p>
 
-![3](https://github.com/user-attachments/assets/2a0d4a7d-e139-4134-87c9-7f29a5c9feaa)
+<img width="1497" height="1302" alt="image" src="https://github.com/user-attachments/assets/54b4db61-5f04-4b01-ae63-bbc9e7db12f2" />
+
 > Painel visual com acompanhamento do progresso e status de todas as atividades
 
 <p><em>Interface Tarefas</em></p>
 
-![image](https://github.com/user-attachments/assets/5f193776-f492-4dcb-981c-cdf942224c3a)
+<img width="1513" height="1299" alt="image" src="https://github.com/user-attachments/assets/7784932f-547f-4e31-8bd0-e1644051ba79" />
+
 > Visualização integrada de todas as tarefas registradas
 
 Contribuições
