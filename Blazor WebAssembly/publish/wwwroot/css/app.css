@@ -1049,3 +1049,27 @@ body {
 .input-group-text {
     background-color: #f8f9fa;
 }
+
+/*Demonstracao Desktop e Mobile*/
+/*--------------------------------------------*/
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+    .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
