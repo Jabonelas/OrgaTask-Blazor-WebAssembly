@@ -1,0 +1,167 @@
+﻿@page "/demonstracao-mobile"
+@inject NavigationManager Navigation
+@inject NotificacaoService notificacaoService
+
+<PageTitle>OrgaTask - Demonstração Mobile</PageTitle>
+
+<div class="container-fluid p-4" style="background-color: #F4F9FC; min-height: 100vh;">
+
+    <h1 class="main-title" style="color: #009DE0">
+        <i class="fas fa-mobile-alt mr-2"></i> Demonstração da Versão Mobile
+    </h1>
+
+    <!-- Seção do Vídeo -->
+    <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <div class="mb-4">
+                <h2 style="color: #009DE0; margin-bottom: 0.5rem;">
+                    <i class="fas fa-play-circle" style="color: #009DE0; margin-right: 10px;"></i>Vídeo Demonstrativo
+                </h2>
+                <small class="text-muted" style="font-size: 0.8rem; display: block;">
+                    Veja o OrgaTask em ação na versão MAUI para dispositivos móveis
+                </small>
+            </div>
+
+            <div class="video-container" style="border-radius: 10px; overflow: hidden;">
+                <video controls style="width: 100%; background-color: #000;">
+                    <source src="@($"{Navigation.BaseUri}video/orgatask-demo.mp4")" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recursos Específicos Mobile -->
+    <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <div class="mb-4">
+                <h2 style="color: #009DE0; margin-bottom: 0.5rem;">
+                    <i class="fas fa-mobile" style="color: #009DE0; margin-right: 10px;"></i>Recursos Mobile
+                </h2>
+                <small class="text-muted" style="font-size: 0.8rem; display: block;">
+                    Funcionalidades exclusivas da versão para smartphones
+                </small>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; justify-items: center;">
+                <!-- Card Sincronização -->
+                <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="card-icon text-center mb-3" style="color: #E74C3C;">
+                        <i class="fas fa-sync-alt" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-content text-center">
+                        <h3 style="color: #0A2C44;">Sincronização</h3>
+                        <p style="color: #666;">Dados atualizados em todos seus dispositivos</p>
+                    </div>
+                </div>
+
+                <!-- Card Criação de tarefas -->
+                <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="card-icon text-center mb-3" style="color: #F39C12;">
+                        <i class="fas fa-clipboard-list" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-content text-center">
+                        <h3 style="color: #0A2C44;">Criação e edição de tarefas</h3>
+                        <p style="color: #666;">Interface completa para gerenciamento de atividades</p>
+                    </div>
+                </div>
+
+                <!-- Card Disponivel -->
+                <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="card-icon text-center mb-3" style="color: #2ECC71;">
+                        <i class="fas fa-globe-americas" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-content text-center">
+                        <h3 style="color: #0A2C44;">Disponível onde você estiver</h3>
+                        <p style="color: #666;">Leve suas tarefas no bolso com nosso aplicativo móvel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-mobile-alt" style="color: #009DE0; font-size: 1.5rem; margin-right: 12px;"></i>
+                    <h2 style="color: #009DE0; font-weight: 600; margin-bottom: 0;">Obter o Aplicativo</h2>
+                </div>
+                <span class="badge" style="background-color: #009DE0; color: white; border-radius: 10px; padding: 6px 12px; font-size: 0.9rem;">
+                    .NET MAUI
+                </span>
+            </div>
+
+            <!-- Seção de Download Principal -->
+            <div class="download-platforms mb-4" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+                <!-- Card de Download Mobile -->
+                <div style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-download" style="color: #009DE0; font-size: 1.5rem;"></i>
+                        <div>
+                            <h3 style="color: #0A2C44; margin: 0 0 5px 0;">Versão Mobile</h3>
+                            <p style="color: #666; margin: 0;">Disponível para Android e iOS</p>
+                        </div>
+                    </div>
+                    <button @onclick="BaixarVersaoDesktopAsync"
+                            style="background-color: #009DE0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-weight: 500; cursor: pointer; transition: all 0.3s;"
+                            onmouseover="this.style.opacity='0.9'"
+                            onmouseout="this.style.opacity='1'">
+                        <i class="fas fa-download mr-2"></i> Baixar
+                    </button>
+                </div>
+
+                <!-- Card de Código Fonte -->
+                <div style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-code" style="color: #009DE0; font-size: 1.5rem;"></i>
+                        <div>
+                            <h3 style="color: #0A2C44; margin: 0 0 5px 0;">Código Fonte</h3>
+                            <p style="color: #666; margin: 0;">Explore o projeto no GitHub</p>
+                        </div>
+                    </div>
+                    <a href="https://github.com/Jabonelas/OrgaTask-Maui"
+                       style="background-color: #009DE0; color: white; border: none; border-radius: 6px; padding: 10px 20px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; transition: all 0.3s;"
+                       onmouseover="this.style.opacity='0.9'"
+                       onmouseout="this.style.opacity='1'"
+                       target="_blank">
+                        <i class="fab fa-github mr-2"></i>  Ver Código
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mensagem Adicional -->
+            <div style="background-color: #E1F5FE; border-radius: 8px; padding: 15px; text-align: center;">
+                <p style="color: #0A2C44; margin: 0; font-size: 0.95rem;">
+                    <i class="fas fa-mobile-alt" style="color: #009DE0;"></i>
+                    Versão completa para uso no celular com todos os recursos
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    private string GetVideoPath(string videoName)
+    {
+        return $"{Navigation.BaseUri}media/{videoName}";
+    }
+
+    private async Task BaixarVersaoDesktopAsync()
+    {
+
+        bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!",
+
+            "Deseja baixar a versão para mobile do OrgaTask?");
+
+
+
+        if (confirmado)
+        {
+            Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Windows-Forms/releases/download/v1.0.0/OrgaTask.Setup.exe", true);
+        }
+    }
+}

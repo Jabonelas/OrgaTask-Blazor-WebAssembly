@@ -1,10 +1,7 @@
 ﻿@page "/"
-@using Blazor_WebAssembly.Interfaces
-@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@inject NavigationManager Navigation
-@inject NotificacaoService notificacaoService
+@inject IJSRuntime JSRuntime
 
 
 <!DOCTYPE html>
@@ -47,7 +44,7 @@
                             @if (!usuarioLogado)
 
                             {
-                                <a @onclick="() => BaixarVersaoDesktopAsync()" class="cta-button" style="background-color: #009de0; color: white;">Download agora</a>
+                                <a href="demonstracao-desktop" class="cta-button" style="background-color: #009de0; color: white;">Conheça a Versão Desktop</a>
                             }
                         </div>
 
@@ -66,11 +63,11 @@
                     <div class="hero-section">
                         <div class="hero-content">
                             <h1>Produtividade que vai além do navegador</h1>
-                            <p> Prepare-se! Nosso app para Android será lançado em breve.</p>
+                            <p>Leve sua organização para qualquer lugar com nosso app mobile e tenha todos os dados sincronizados automaticamente com a versão web.</p>
                             @if (!usuarioLogado)
 
                             {
-                                <a @onclick="() => BaixarVersaoMobileAsync()" class="cta-button" style="background-color: #009de0; color: white;">Em breve!</a>
+                                <a href="demonstracao-mobile" class="cta-button" style="background-color: #009de0; color: white;">Conheça a Versão Mobile</a>
                             }
                         </div>
 
@@ -101,43 +98,62 @@
 <div class="features-section">
 
         <h2>Sua ferramenta ideal de produtividade</h2>
-        <p>Trabalhe com flexibilidade: escolha entre a versão web ou desktop, com sincronização automática entre todos os seus dispositivos.</p>
+        <p>Trabalhe com flexibilidade: escolha entre a versão web, desktop ou mobile, com sincronização automática entre todos os seus dispositivos.</p>
 
     <div class="features-section">
-
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">📝</div>
-            <h3>Criação de Tarefas</h3>
-            <p>Adicione novas tarefas com prazos e prioridades.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">📈</div>
-            <h3>Acompanhamento</h3>
-            <p>Visualize o andamento em tempo real.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3>Atualizações</h3>
-            <p>Modifique status com poucos cliques.</p>
-        </div>
-    </div>
-</div>
-
-    <!-- Novo bloco de download -->
-    <div class="download-cta">
-        <div class="download-content">
-            <i class="fas fa-download" style="color: #009de0;"></i>
-            <div>
-                <h3>Quer ainda mais flexibilidade?</h3>
-                <p>Experimente também a versão desktop para seu computador</p>
+  
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="color: #E74C3C;">
+                    <i class="fas fa-tasks" style="font-size: 2rem;"></i>
+                </div>
+                <h3>Criação de Tarefas</h3>
+                <p>Adicione novas tarefas com prazos e prioridades.</p>
+            </div>
+    
+            <div class="feature-card">
+                <div class="feature-icon" style="color: #F39C12;">
+                    <i class="fas fa-chart-line" style="font-size: 2rem;"></i>
+                </div>
+                <h3>Acompanhamento</h3>
+                <p>Visualize o andamento em tempo real.</p>
+            </div>
+    
+            <div class="feature-card">
+                <div class="feature-icon" style="color: #2ECC71;">
+                    <i class="fas fa-bolt" style="font-size: 2rem;"></i>
+                </div>
+                <h3>Atualizações</h3>
+                <p>Modifique status com poucos cliques.</p>
             </div>
         </div>
-        <button @onclick="BaixarVersaoDesktopAsync" class="download-button" style="background-color: #009de0; color: white;" >
-            Baixar para Desktop
-        </button>
+</div>
+
+
+    <div class="download-cta" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+   
+        <div class="download-content" style="display: flex; align-items: center; gap: 15px;">
+            <div>
+                <i class="fas fa-desktop mr-2" style="color: #009de0; font-size: 1.5rem;"></i>
+                <i class="fas fa-mobile-alt" style="color: #009de0; font-size: 1.5rem;"></i>
+                <h3 style="color: #0A2C44; margin: 0 0 5px 0;">Multiplataforma completa</h3>
+                <p style="color: #666; margin: 0;">Use o OrgaTask no seu computador ou celular, com sincronização automática entre dispositivos</p>
+            </div>
+        </div>
+    
+        <div class="download-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button href="demonstracao-desktop"
+                    class="download-button" 
+                    style="background-color: #009de0; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer; font-weight: 500; flex: 1; min-width: 150px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fas fa-desktop"></i> Versão Desktop
+            </button>
+        
+            <button href="demonstracao-mobile"
+                    class="download-button" 
+                    style="background-color: #009de0; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer; font-weight: 500; flex: 1; min-width: 150px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fas fa-mobile-alt"></i> Versão Mobile
+            </button>
+        </div>
     </div>
 
 </div>
@@ -156,47 +172,54 @@
 
 
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.getElementById('slides');
-        const dots = document.querySelectorAll('.dot');
-        const totalSlides = 3;
+<script>
+    window.carousel = {
+            init: function () {
+                let currentSlide = 0;
+                const slides = document.getElementById('slides');
+                const dots = document.querySelectorAll('.dot');
+                const totalSlides = 3;
 
-        function updateCarousel() {
-            slides.style.transform = `translateX(-${currentSlide * 33.33}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
+                function updateCarousel() {
+                    slides.style.transform = `translateX(-${currentSlide * 33.33}%)`;
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentSlide);
+                    });
+                }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
-        }
+                window.nextSlide = function () {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    updateCarousel();
+                };
 
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
+                window.prevSlide = function () {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    updateCarousel();
+                };
 
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
+                window.goToSlide = function (index) {
+                    currentSlide = index;
+                    updateCarousel();
+                };
 
-        // Auto-rotate (opcional)
-        let autoSlide = setInterval(nextSlide, 5000);
-        
-        // Pausa o auto-rotate quando o mouse está sobre o carrossel
-        document.querySelector('.hero-carousel').addEventListener('mouseenter', () => {
-            clearInterval(autoSlide);
-        });
-        
-        // Retoma o auto-rotate quando o mouse sai
-        document.querySelector('.hero-carousel').addEventListener('mouseleave', () => {
-            autoSlide = setInterval(nextSlide, 5000);
-        });
-    </script>
+                // Auto-rotate
+                let autoSlide = setInterval(window.nextSlide, 5000);
+
+                // Pausar auto-rotate quando o mouse entra
+                document.querySelector('.hero-carousel').addEventListener('mouseenter', () => {
+                    clearInterval(autoSlide);
+                });
+
+                // Retomar auto-rotate quando o mouse sai
+                document.querySelector('.hero-carousel').addEventListener('mouseleave', () => {
+                    autoSlide = setInterval(window.nextSlide, 5000);
+                });
+
+                // Inicializar o carrossel
+                updateCarousel();
+            }
+        };
+</script>
 
 
     @code {
@@ -214,33 +237,11 @@
             }
         }
 
-    private async Task BaixarVersaoDesktopAsync()
-    {
-
-           bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!",
-
-            "Deseja baixar a versão para desktop do OrgaTask?");
-
-
-
-        if (confirmado)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-             Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Windows-Forms/releases/download/v1.0.0/OrgaTask.Setup.exe", true);
-        }
-    }
-
-        private async Task BaixarVersaoMobileAsync()
-        {
-
-            // bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!",
-
-            //     "Deseja baixar a versão para desktop do OrgaTask?");
-
-
-
-            // if (confirmado)
-            // {
-            //     Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Windows-Forms/releases/download/v1.0.0/OrgaTask.Setup.exe", true);
-            // }
+            if (firstRender)
+            {
+                await JSRuntime.InvokeVoidAsync("carousel.init");
+            }
         }
 }

@@ -16,5 +16,23 @@
     <ArrayOfString>
       <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Layout\NavMenu.razor</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Layout\MainLayout.razor</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\DemonstracaoDesktop.razor</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\Pages\DemonstracaoMobile.razor</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\js\carrossel.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\wwwroot\index.html</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\israe\source\repos\Blazor WebAssembly\Blazor WebAssembly\ViewModel\Tarefa\TarefaRolagemViewModel.cs</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
