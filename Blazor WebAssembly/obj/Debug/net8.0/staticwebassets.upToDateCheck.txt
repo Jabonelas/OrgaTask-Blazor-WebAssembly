@@ -7,6 +7,7 @@ wwwroot\icon-192.png
 wwwroot\IconeOrgaTask48.ico
 wwwroot\images\IconeOrgaTask.png
 wwwroot\images\TelaDesktop1.png
+wwwroot\images\TelaDesktop2.png
 wwwroot\images\TelaMobile.png
 wwwroot\images\TelaWeb.png
 wwwroot\images\TelaWeb1.png
@@ -14,4 +15,3 @@ wwwroot\index.html
 wwwroot\js\infiniteScroll.js
 wwwroot\sample-data\weather.json
 wwwroot\_headers
-wwwroot\images\TelaDesktop2.png
