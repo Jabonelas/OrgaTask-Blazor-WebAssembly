@@ -24,9 +24,36 @@
 
             <div class="video-container" style="border-radius: 10px; overflow: hidden;">
                 <video controls style="width: 100%; background-color: #000;">
-                    <source src="@($"{Navigation.BaseUri}video/orgatask-demo.mp4")" type="video/mp4">
+                    <source src="@($"{Navigation.BaseUri}video/Demonstracao_mobile.mp4")" type="video/mp4">
                     Seu navegador não suporta vídeos HTML5.
                 </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galeria de Telas Mobile -->
+    <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
+        <div class="card-body">
+            <div class="mb-4">
+                <h2 style="color: #009DE0; margin-bottom: 0.5rem;">
+                    <i class="fas fa-mobile-screen" style="color: #009DE0; margin-right: 10px;"></i>Galeria de Telas
+                </h2>
+                <small class="text-muted" style="font-size: 0.8rem; display: block;">
+                    Clique em qualquer imagem para ampliar
+                </small>
+            </div>
+
+            <div class="gallery-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px;">
+                @foreach (var image in mobileGalleryImages)
+                {
+                    <div class="gallery-item" @onclick="() => ShowImage(image.FullSizeUrl, image.Caption)">
+                        <img src="@image.ThumbnailUrl" alt="@image.Caption"
+                             style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: all 0.3s;"
+                             @onmouseover="() => hoveredImage = image.Id"
+                             @onmouseout="() => hoveredImage = null">
+                        <p class="text-center mt-2" style="color: #666; font-size: 0.9rem;">@image.Caption</p>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -36,7 +63,7 @@
         <div class="card-body">
             <div class="mb-4">
                 <h2 style="color: #009DE0; margin-bottom: 0.5rem;">
-                    <i class="fas fa-mobile" style="color: #009DE0; margin-right: 10px;"></i>Recursos Mobile
+                    <i class="fas fa-star" style="color: #009DE0; margin-right: 10px;"></i>Recursos Mobile
                 </h2>
                 <small class="text-muted" style="font-size: 0.8rem; display: block;">
                     Funcionalidades exclusivas da versão para smartphones
@@ -44,45 +71,25 @@
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; justify-items: center;">
-                <!-- Card Sincronização -->
-                <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
-                    <div class="card-icon text-center mb-3" style="color: #E74C3C;">
-                        <i class="fas fa-sync-alt" style="font-size: 2rem;"></i>
+                @foreach (var feature in mobileFeatures)
+                {
+                    <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-icon text-center mb-3" style="color: @feature.IconColor;">
+                            <i class="@feature.Icon" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="card-content text-center">
+                            <h3 style="color: #0A2C44;">@feature.Title</h3>
+                            <p style="color: #666;">@feature.Description</p>
+                        </div>
                     </div>
-                    <div class="card-content text-center">
-                        <h3 style="color: #0A2C44;">Sincronização</h3>
-                        <p style="color: #666;">Dados atualizados em todos seus dispositivos</p>
-                    </div>
-                </div>
-
-                <!-- Card Criação de tarefas -->
-                <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
-                    <div class="card-icon text-center mb-3" style="color: #F39C12;">
-                        <i class="fas fa-clipboard-list" style="font-size: 2rem;"></i>
-                    </div>
-                    <div class="card-content text-center">
-                        <h3 style="color: #0A2C44;">Criação e edição de tarefas</h3>
-                        <p style="color: #666;">Interface completa para gerenciamento de atividades</p>
-                    </div>
-                </div>
-
-                <!-- Card Disponivel -->
-                <div class="feature-card" style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
-                    <div class="card-icon text-center mb-3" style="color: #2ECC71;">
-                        <i class="fas fa-globe-americas" style="font-size: 2rem;"></i>
-                    </div>
-                    <div class="card-content text-center">
-                        <h3 style="color: #0A2C44;">Disponível onde você estiver</h3>
-                        <p style="color: #666;">Leve suas tarefas no bolso com nosso aplicativo móvel</p>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
 
+    <!-- Seção de Download -->
     <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background-color: white;">
         <div class="card-body">
-            <!-- Cabeçalho -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-mobile-alt" style="color: #009DE0; font-size: 1.5rem; margin-right: 12px;"></i>
@@ -93,7 +100,6 @@
                 </span>
             </div>
 
-            <!-- Seção de Download Principal -->
             <div class="download-platforms mb-4" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
                 <!-- Card de Download Mobile -->
                 <div style="background-color: #F8F9FA; border-radius: 10px; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
@@ -104,10 +110,10 @@
                             <p style="color: #666; margin: 0;">Disponível para Android e iOS</p>
                         </div>
                     </div>
-                    <button @onclick="BaixarVersaoDesktopAsync"
+                    <button @onclick="BaixarVersaoMobileAsync"
                             style="background-color: #009DE0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-weight: 500; cursor: pointer; transition: all 0.3s;"
-                            onmouseover="this.style.opacity='0.9'"
-                            onmouseout="this.style.opacity='1'">
+                            @onmouseover='() => buttonOpacity = "0.9"'
+                            @onmouseout='() => buttonOpacity = "1"'>
                         <i class="fas fa-download mr-2"></i> Baixar
                     </button>
                 </div>
@@ -123,10 +129,10 @@
                     </div>
                     <a href="https://github.com/Jabonelas/OrgaTask-Maui"
                        style="background-color: #009DE0; color: white; border: none; border-radius: 6px; padding: 10px 20px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; transition: all 0.3s;"
-                       onmouseover="this.style.opacity='0.9'"
-                       onmouseout="this.style.opacity='1'"
-                       target="_blank">
-                        <i class="fab fa-github mr-2"></i>  Ver Código
+                       target="_blank"
+                       @onmouseover='() => linkOpacity = "0.9"'
+                       @onmouseout='() => linkOpacity = "1"'>
+                        <i class="fab fa-github mr-2"></i> Ver Código
                     </a>
                 </div>
             </div>
@@ -134,7 +140,7 @@
             <!-- Mensagem Adicional -->
             <div style="background-color: #E1F5FE; border-radius: 8px; padding: 15px; text-align: center;">
                 <p style="color: #0A2C44; margin: 0; font-size: 0.95rem;">
-                    <i class="fas fa-mobile-alt" style="color: #009DE0;"></i>
+                    <i class="fas fa-mobile-alt mr-2" style="color: #009DE0;"></i>
                     Versão completa para uso no celular com todos os recursos
                 </p>
             </div>
@@ -142,26 +148,179 @@
     </div>
 </div>
 
+<!-- Image Modal -->
+@if (showModal)
+{
+    <div class="modal-backdrop"
+         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background-color: rgba(0,0,0,0.8); z-index: 1050;
+                    display: flex; justify-content: center; align-items: center;"
+         @onclick="CloseModal">
 
+        <div class="modal-content"
+             style="position: relative;
+                        width: auto;
+                        max-width: 90vw;
+                        max-height: 90vh;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        background: transparent;">
+
+            <button @onclick="CloseModal"
+                    style="position: absolute; top: -40px; right: 0;
+                               background: none; border: none;
+                               color: white; font-size: 1.5rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div style="display: flex; justify-content: center; align-items: center;
+                            max-width: 100%; max-height: calc(90vh - 50px);
+                            overflow: auto;">
+                <img src="@currentImage"
+                     style="display: block;
+                                max-width: 100%;
+                                max-height: calc(90vh - 50px);
+                                width: auto;
+                                height: auto;
+                                object-fit: contain;
+                                border-radius: 8px;
+                                box-shadow: 0 5px 15px rgba(0,0,0,0.3);"
+                     alt="@currentImageCaption" />
+            </div>
+
+            <p class="text-center mt-2" style="color: white; background: transparent;">
+                @currentImageCaption
+            </p>
+        </div>
+    </div>
+}
 
 @code {
-    private string GetVideoPath(string videoName)
+    // Modal variables
+    private bool showModal = false;
+    private string currentImage = "";
+    private string currentImageCaption = "";
+    private string hoveredImage = null;
+    private string buttonOpacity = "1";
+    private string linkOpacity = "1";
+
+    // Mobile gallery images
+    private List<GalleryImage> mobileGalleryImages = new()
     {
-        return $"{Navigation.BaseUri}media/{videoName}";
+        new GalleryImage
+        {
+            Id = "1",
+            FullSizeUrl = "/images/Login_mobile.png",
+            ThumbnailUrl = "/images/Login_mobile.png",
+            Caption = "Login"
+        },
+        new GalleryImage
+        {
+            Id = "2",
+            FullSizeUrl = "/images/Cadastrar_usuario_mobile.png",
+            ThumbnailUrl = "/images/Cadastrar_usuario_mobile.png",
+            Caption = "Cadastrar Usuário"
+        },
+        new GalleryImage
+        {
+            Id = "3",
+            FullSizeUrl = "images/Dashboard_mobile.png",
+            ThumbnailUrl = "images/Dashboard_mobile.png",
+            Caption = "Dashboard"
+        },
+        new GalleryImage
+        {
+            Id = "4",
+            FullSizeUrl = "images/Nova_tarefa_mobile.png",
+            ThumbnailUrl = "images/Nova_tarefa_mobile.png",
+            Caption = "Nova Tarefa"
+        },
+        new GalleryImage
+        {
+            Id = "5",
+            FullSizeUrl = "images/Todas_tarefas_mobile.png",
+            ThumbnailUrl = "images/Todas_tarefas_mobile.png",
+            Caption = "Todas Tarefas"
+        },
+        new GalleryImage
+        {
+            Id = "6",
+            FullSizeUrl = "images/Editar_tarefa_mobile.png",
+            ThumbnailUrl = "images/Editar_tarefa_mobile.png",
+            Caption = "Editar Tarefas"
+        },
+        new GalleryImage
+        {
+            Id = "7",
+            FullSizeUrl = "images/Detalhes_tarefa_mobile.png",
+            ThumbnailUrl = "images/Detalhes_tarefa_mobile.png",
+            Caption = "Detalhes da Tarefa"
+        }
+    };
+
+    // Mobile features
+    private List<Feature> mobileFeatures = new()
+    {
+        new Feature
+        {
+            Icon = "fas fa-sync-alt",
+            IconColor = "#E74C3C",
+            Title = "Sincronização em Tempo Real",
+            Description = "Dados atualizados instantaneamente em todos seus dispositivos"
+        },
+        new Feature
+        {
+            Icon = "fas fa-clipboard-list",
+            IconColor = "#F39C12",
+            Title = "Gestão Completa de Tarefas",
+            Description = "Crie, edite e organize tarefas com interface otimizada para touch"
+        },
+        new Feature
+        {
+            Icon = "fas fa-globe-americas",
+            IconColor = "#2ECC71",
+            Title = "Disponível onde você estiver",
+            Description = "Leve suas tarefas no bolso com nosso aplicativo móvel"
+        }
+    };
+
+    private void ShowImage(string imageUrl, string caption)
+    {
+        currentImage = imageUrl;
+        currentImageCaption = caption;
+        showModal = true;
     }
 
-    private async Task BaixarVersaoDesktopAsync()
+    private void CloseModal()
     {
+        showModal = false;
+    }
 
+    private async Task BaixarVersaoMobileAsync()
+    {
         bool confirmado = await notificacaoService.MostrarConfirmacao("Atenção!",
-
             "Deseja baixar a versão para mobile do OrgaTask?");
-
-
 
         if (confirmado)
         {
-            Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Windows-Forms/releases/download/v1.0.0/OrgaTask.Setup.exe", true);
+            Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Maui/releases/latest", true);
         }
+    }
+
+    private class GalleryImage
+    {
+        public string Id { get; set; }
+        public string FullSizeUrl { get; set; }
+        public string ThumbnailUrl { get; set; }
+        public string Caption { get; set; }
+    }
+
+    private class Feature
+    {
+        public string Icon { get; set; }
+        public string IconColor { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 }
