@@ -106,15 +106,16 @@
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <i class="fas fa-download" style="color: #009DE0; font-size: 1.5rem;"></i>
                         <div>
-                            <h3 style="color: #0A2C44; margin: 0 0 5px 0;">Versão Mobile</h3>
-                            <p style="color: #666; margin: 0;">Disponível para Android e iOS</p>
+                            <h3 style="color: #0A2C44; margin: 0 0 5px 0;">Versão Mobile (APK)</h3>
+                            <p style="color: #666; margin: 0;">Arquivo APK para instalação em dispositivos Android</p>
                         </div>
                     </div>
                     <button @onclick="BaixarVersaoMobileAsync"
                             style="background-color: #009DE0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-weight: 500; cursor: pointer; transition: all 0.3s;"
+                            title="Baixar arquivo APK para instalação manual"
                             @onmouseover='() => buttonOpacity = "0.9"'
                             @onmouseout='() => buttonOpacity = "1"'>
-                        <i class="fas fa-download mr-2"></i> Baixar
+                        <i class="fas fa-download mr-2"></i> Baixar APK
                     </button>
                 </div>
 
@@ -304,7 +305,7 @@
 
         if (confirmado)
         {
-            Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Maui/releases/latest", true);
+            Navigation.NavigateTo("https://github.com/Jabonelas/OrgaTask-Maui/releases/download/v1.0.0/com.companyname.maui-Signed.apk", true);
         }
     }
 
