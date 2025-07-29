@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-OrgaTask Blazor WebAssembly é uma aplicação web single-page (SPA) que consome a OrgaTask API para gerenciar tarefas de forma interativa. Construída com Blazor WASM, a aplicação utiliza uma arquitetura MVVM adaptada, proporcionando uma experiência de usuário fluida e responsiva.
+OrgaTask Blazor WebAssembly é uma aplicação web que consome a OrgaTask API para gerenciar tarefas de forma interativa. Construída com Blazor WASM, a aplicação utiliza uma arquitetura MVVM adaptada, proporcionando uma experiência de usuário fluida e responsiva.
 
 ## Tecnologias Utilizadas
 
