@@ -88,10 +88,14 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido");
                 }
 
-                var json = JsonConvert.SerializeObject(_dadosTarefa);
+                TarefaCadastrarDTOAPI dadosTarefa = _dadosTarefa;
+                string prioridade = _dadosTarefa.Prioridade;
+                string status = _dadosTarefa.Status;
+
+                var json = JsonConvert.SerializeObject(dadosTarefa);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas?prioridade={prioridade}&status={status.Replace(" ", "_")}");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                 {
@@ -135,10 +139,14 @@ namespace Blazor_WebAssembly.Services.Tarefa
                     return (false, "Token de autenticação inválido");
                 }
 
-                var json = JsonConvert.SerializeObject(_dadosTarefa);
+                TarefaAlterarDTOAPI dadosTarefa = _dadosTarefa;
+                string prioridade = _dadosTarefa.Prioridade;
+                string status = _dadosTarefa.Status;
+
+                var json = JsonConvert.SerializeObject(dadosTarefa);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas");
+                var endpoint = ApiRoutes.SetandoEndPoint($"api/tarefas?prioridade={prioridade}&status={status.Replace(" ", "_")}");
 
                 using (var request = new HttpRequestMessage(HttpMethod.Put, endpoint))
                 {

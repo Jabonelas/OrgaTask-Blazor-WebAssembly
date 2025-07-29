@@ -74,7 +74,7 @@
                                     <label class="form-label" style="color: #0A2C44; font-weight: bold">Prazo (dias)</label>
                                     <InputNumber @bind-Value="AlterarTarefaViewModel.tarefaAlterarDTO.Prazo"
                                                  class="form-control"
-                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px" />
+                                                 style="background-color: #F4F9FC; color: #0A2C44; border-radius: 5px"  min="1" max="999"/>
                                     <ValidationMessage For="@(() => AlterarTarefaViewModel.tarefaAlterarDTO.Prazo)"
                                                        style="color: #E74C3C" />
                                 </div>
