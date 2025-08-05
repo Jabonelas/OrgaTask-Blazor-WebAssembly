@@ -1,9 +1,0 @@
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\build\web.config
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\build\Blazor WebAssembly.staticwebassets.endpoints.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\build\emcc-props.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\build\package-lock.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\build\wwwroot\sample-data\weather.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\build\wwwroot\_framework\blazor.boot.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\package-lock.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\emcc-props.json
-C:\Users\israe\source\repos\Blazor WebAssembly\publish\web.config
